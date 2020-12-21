@@ -1,0 +1,10 @@
+spring:
+  profiles:
+    active: dev
+#comment.avatar: /images/avatar.jpg
+
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql

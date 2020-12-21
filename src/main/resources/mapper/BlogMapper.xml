@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bigff.blog.mapper.BlogMapper" >
+    <resultMap id="blogMap" type="com.bigff.blog.entity.Blog">
+        <id property="id" column="id" />
+        <result property="title" column="title"></result>
+        <result property = "appreciation" column = "appreciation"></result>
+        <result property = "commentabled" column = "commentabled"></result>
+        <result property = "content" column = "content"></result>
+        <result property = "create_time" column = "create_time"></result>
+        <result property = "first_picture" column = "first_picture"></result>
+        <result property = "flag" column = "flag"></result>
+        <result property = "published" column = "published"></result>
+        <result property = "recommend" column = "recommend"></result>
+        <result property = "share_statement" column = "share_statement"></result>
+        <result property = "update_time" column = "update_time"></result>
+        <result property = "views" column = "views"></result>
+        <result property = "type_id" column = "type_id"></result>
+        <result property = "user_id" column = "user_id"></result>
+        <result property = "description" column = "description"></result>
+        <collection property="tags" ofType="com.bigff.blog.entity.Tag">
+            <id property="id" column="tags_id"></id>
+            <result property="name" column="name"></result>
+        </collection>
+        <collection property="type" ofType="com.bigff.blog.entity.Type">
+            <id property="id" column="type_id"></id>
+            <result property="typename" column="typename"></result>
+        </collection>
+        <collection property="user" ofType="com.bigff.blog.entity.User">
+            <id property="id" column="user_id"></id>
+            <result property="username" column="username"></result>
+            <result property="avatar" column="avatar"></result>
+        </collection>
+    </resultMap>
+
+    <resultMap id="homeBlogMap" type="com.bigff.blog.entity.Blog">
+        <id property="id" column="id" />
+        <result property="title" column="title"></result>
+        <result property = "appreciation" column = "appreciation"></result>
+        <result property = "commentabled" column = "commentabled"></result>
+        <result property = "content" column = "content"></result>
+        <result property = "create_time" column = "create_time"></result>
+        <result property = "first_picture" column = "first_picture"></result>
+        <result property = "flag" column = "flag"></result>
+        <result property = "published" column = "published"></result>
+        <result property = "recommend" column = "recommend"></result>
+        <result property = "share_statement" column = "share_statement"></result>
+        <result property = "update_time" column = "update_time"></result>
+        <result property = "views" column = "views"></result>
+        <result property = "type_id" column = "type_id"></result>
+        <result property = "user_id" column = "user_id"></result>
+        <result property = "description" column = "description"></result>
+        <collection property="type" ofType="com.bigff.blog.entity.Type">
+            <id property="typeId" column="type_id"></id>
+            <result property="typeName" column="typename"></result>
+        </collection>
+        <collection property="user" ofType="com.bigff.blog.entity.User">
+            <id property="userId" column="user_id"></id>
+            <result property="username" column="username"></result>
+            <result property="avatar" column="avatar"></result>
+        </collection>
+        <collection property="tags" ofType="com.bigff.blog.entity.Tag">
+            <id property="tagId" column="tagid"></id>
+            <result property="tagName" column="tagname"></result>
+
+        </collection>
+    </resultMap>
+    <select id="getBlogList" resultMap="homeBlogMap">
+       SELECT b.*,t.*,ty.*,u.userid,u.username,u.avatar FROM
+            t_blog  b INNER JOIN
+            t_blog_tags bt on
+             b.id = bt.blogs_id  INNER JOIN
+             t_tag  t on
+             bt.tags_id = t.tagid  INNER JOIN
+             t_user  u on
+             b.user_id = u.userid  INNER JOIN
+             t_type ty ON
+             b.type_id = ty.typeid
+
+    </select>
+
+
+
+    <select id="findBlogById" resultMap="blogMap">
+   SELECT * FROM
+        t_blog  b INNER JOIN
+         t_blog_tags bt on
+         b.id = bt.blogs_id  INNER JOIN
+         t_tag  t on
+         bt.tags_id = t.id  INNER JOIN
+         t_user  u on
+         b.user_id = u.id  INNER JOIN
+         t_type ty ON
+         b.type_id = ty.id
+         where id = #{id}
+--          GROUP BY b.update_time desc,b.id desc
+    </select>
+
+</mapper>
