@@ -1,7 +1,7 @@
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/blog?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    url: jdbc:mysql://localhost:3306/blog??useUnicode=true&amp;characterEncoding=UTF-8
     username: root
     password: bigff
 
@@ -18,3 +18,9 @@ server:
 mybatis:
   type-aliases-package: com.bigff.blog.entity
   mapper-locations: classpath*:mapper/*.xml
+
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql

@@ -1,947 +1,208 @@
-2020-12-21 10:30:49.521  INFO 908 --- [main] com.bigff.blog.BlogApplication           : Starting BlogApplication using Java 1.8.0_261 on DESKTOP-UE5H5T5 with PID 908 (D:\项目\blog前后端分离\blog\target\classes started by bigff in D:\项目\blog前后端分离\blog)
-2020-12-21 10:30:49.526 DEBUG 908 --- [main] com.bigff.blog.BlogApplication           : Running with Spring Boot v2.4.1, Spring v5.3.2
-2020-12-21 10:30:49.526  INFO 908 --- [main] com.bigff.blog.BlogApplication           : The following profiles are active: dev
-2020-12-21 10:30:53.390  INFO 908 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8888 (http)
-2020-12-21 10:30:53.399  INFO 908 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2020-12-21 10:30:53.400  INFO 908 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.41]
-2020-12-21 10:30:53.471  INFO 908 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2020-12-21 10:30:53.471  INFO 908 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3454 ms
-2020-12-21 10:30:53.965  INFO 908 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
-2020-12-21 10:30:54.258  INFO 908 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8888 (http) with context path ''
-2020-12-21 10:30:54.266  INFO 908 --- [main] com.bigff.blog.BlogApplication           : Started BlogApplication in 5.575 seconds (JVM running for 7.055)
-2020-12-21 10:30:59.525  INFO 908 --- [http-nio-8888-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2020-12-21 10:30:59.525  INFO 908 --- [http-nio-8888-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2020-12-21 10:30:59.526  INFO 908 --- [http-nio-8888-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
-2020-12-21 10:30:59.656  INFO 908 --- [http-nio-8888-exec-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2020-12-21 10:30:59.873  INFO 908 --- [http-nio-8888-exec-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2020-12-21 10:30:59.879 DEBUG 908 --- [http-nio-8888-exec-1] c.b.b.m.BlogMapper.getBlogList_COUNT     : ==>  Preparing: SELECT count(0) FROM t_blog b INNER JOIN t_blog_tags bt ON b.id = bt.blogs_id INNER JOIN t_tag t ON bt.tags_id = t.tagid INNER JOIN t_user u ON b.user_id = u.userid INNER JOIN t_type ty ON b.type_id = ty.typeid
-2020-12-21 10:30:59.891 DEBUG 908 --- [http-nio-8888-exec-1] c.b.b.m.BlogMapper.getBlogList_COUNT     : ==> Parameters: 
-2020-12-21 10:30:59.916 DEBUG 908 --- [http-nio-8888-exec-1] c.b.b.m.BlogMapper.getBlogList_COUNT     : <==      Total: 1
-2020-12-21 10:30:59.919 DEBUG 908 --- [http-nio-8888-exec-1] c.b.blog.mapper.BlogMapper.getBlogList   : ==>  Preparing: SELECT b.*,t.*,ty.*,u.userid,u.username,u.avatar FROM t_blog b INNER JOIN t_blog_tags bt on b.id = bt.blogs_id INNER JOIN t_tag t on bt.tags_id = t.tagid INNER JOIN t_user u on b.user_id = u.userid INNER JOIN t_type ty ON b.type_id = ty.typeid LIMIT ?
-2020-12-21 10:30:59.919 DEBUG 908 --- [http-nio-8888-exec-1] c.b.blog.mapper.BlogMapper.getBlogList   : ==> Parameters: 8(Integer)
-2020-12-21 10:30:59.924 DEBUG 908 --- [http-nio-8888-exec-1] c.b.blog.mapper.BlogMapper.getBlogList   : <==      Total: 2
-2020-12-21 10:30:59.926 DEBUG 908 --- [http-nio-8888-exec-1] c.b.blog.mapper.TypeMapper.findHomeType  : ==>  Preparing: select * from t_type
-2020-12-21 10:30:59.926 DEBUG 908 --- [http-nio-8888-exec-1] c.b.blog.mapper.TypeMapper.findHomeType  : ==> Parameters: 
-2020-12-21 10:30:59.958 DEBUG 908 --- [http-nio-8888-exec-1] c.b.blog.mapper.TypeMapper.findHomeType  : <==      Total: 2
-2020-12-21 10:30:59.959 DEBUG 908 --- [http-nio-8888-exec-1] c.b.blog.mapper.TagMapper.findHomeTag    : ==>  Preparing: select * from t_tag
-2020-12-21 10:30:59.959 DEBUG 908 --- [http-nio-8888-exec-1] c.b.blog.mapper.TagMapper.findHomeTag    : ==> Parameters: 
-2020-12-21 10:30:59.962 DEBUG 908 --- [http-nio-8888-exec-1] c.b.blog.mapper.TagMapper.findHomeTag    : <==      Total: 5
-2020-12-21 10:31:00.016 DEBUG 908 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 10:31:00.016 DEBUG 908 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 1(Long)
-2020-12-21 10:31:00.018 DEBUG 908 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 1
-2020-12-21 10:31:00.023 DEBUG 908 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 10:31:00.023 DEBUG 908 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 2(Long)
-2020-12-21 10:31:00.024 DEBUG 908 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 0
-2020-12-21 10:31:00.024 DEBUG 908 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 10:31:00.024 DEBUG 908 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 3(Long)
-2020-12-21 10:31:00.025 DEBUG 908 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 0
-2020-12-21 10:31:00.025 DEBUG 908 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 10:31:00.025 DEBUG 908 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 4(Long)
-2020-12-21 10:31:00.026 DEBUG 908 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 1
-2020-12-21 10:31:00.026 DEBUG 908 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 10:31:00.026 DEBUG 908 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 5(Long)
-2020-12-21 10:31:00.027 DEBUG 908 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 0
-2020-12-21 10:31:00.034 DEBUG 908 --- [http-nio-8888-exec-1] c.b.b.m.BlogMapper.findBlogByTypeId      : ==>  Preparing: select * from t_blog where type_id = ?
-2020-12-21 10:31:00.034 DEBUG 908 --- [http-nio-8888-exec-1] c.b.b.m.BlogMapper.findBlogByTypeId      : ==> Parameters: 1(Long)
-2020-12-21 10:31:00.035 DEBUG 908 --- [http-nio-8888-exec-1] c.b.b.m.BlogMapper.findBlogByTypeId      : <==      Total: 0
-2020-12-21 10:31:00.035 DEBUG 908 --- [http-nio-8888-exec-1] c.b.b.m.BlogMapper.findBlogByTypeId      : ==>  Preparing: select * from t_blog where type_id = ?
-2020-12-21 10:31:00.036 DEBUG 908 --- [http-nio-8888-exec-1] c.b.b.m.BlogMapper.findBlogByTypeId      : ==> Parameters: 2(Long)
-2020-12-21 10:31:00.037 DEBUG 908 --- [http-nio-8888-exec-1] c.b.b.m.BlogMapper.findBlogByTypeId      : <==      Total: 1
-2020-12-21 10:31:04.783 DEBUG 908 --- [http-nio-8888-exec-4] c.b.b.m.BlogMapper.getBlogList_COUNT     : ==>  Preparing: SELECT count(0) FROM t_blog b INNER JOIN t_blog_tags bt ON b.id = bt.blogs_id INNER JOIN t_tag t ON bt.tags_id = t.tagid INNER JOIN t_user u ON b.user_id = u.userid INNER JOIN t_type ty ON b.type_id = ty.typeid
-2020-12-21 10:31:04.784 DEBUG 908 --- [http-nio-8888-exec-4] c.b.b.m.BlogMapper.getBlogList_COUNT     : ==> Parameters: 
-2020-12-21 10:31:04.786 DEBUG 908 --- [http-nio-8888-exec-4] c.b.b.m.BlogMapper.getBlogList_COUNT     : <==      Total: 1
-2020-12-21 10:31:04.787 DEBUG 908 --- [http-nio-8888-exec-4] c.b.blog.mapper.BlogMapper.getBlogList   : ==>  Preparing: SELECT b.*,t.*,ty.*,u.userid,u.username,u.avatar FROM t_blog b INNER JOIN t_blog_tags bt on b.id = bt.blogs_id INNER JOIN t_tag t on bt.tags_id = t.tagid INNER JOIN t_user u on b.user_id = u.userid INNER JOIN t_type ty ON b.type_id = ty.typeid LIMIT ?
-2020-12-21 10:31:04.787 DEBUG 908 --- [http-nio-8888-exec-4] c.b.blog.mapper.BlogMapper.getBlogList   : ==> Parameters: 8(Integer)
-2020-12-21 10:31:04.793 DEBUG 908 --- [http-nio-8888-exec-4] c.b.blog.mapper.BlogMapper.getBlogList   : <==      Total: 2
-2020-12-21 10:31:04.795 DEBUG 908 --- [http-nio-8888-exec-4] c.b.blog.mapper.TypeMapper.findHomeType  : ==>  Preparing: select * from t_type
-2020-12-21 10:31:04.795 DEBUG 908 --- [http-nio-8888-exec-4] c.b.blog.mapper.TypeMapper.findHomeType  : ==> Parameters: 
-2020-12-21 10:31:04.800 DEBUG 908 --- [http-nio-8888-exec-4] c.b.blog.mapper.TypeMapper.findHomeType  : <==      Total: 2
-2020-12-21 10:31:04.800 DEBUG 908 --- [http-nio-8888-exec-4] c.b.blog.mapper.TagMapper.findHomeTag    : ==>  Preparing: select * from t_tag
-2020-12-21 10:31:04.800 DEBUG 908 --- [http-nio-8888-exec-4] c.b.blog.mapper.TagMapper.findHomeTag    : ==> Parameters: 
-2020-12-21 10:31:04.802 DEBUG 908 --- [http-nio-8888-exec-4] c.b.blog.mapper.TagMapper.findHomeTag    : <==      Total: 5
-2020-12-21 10:31:04.803 DEBUG 908 --- [http-nio-8888-exec-4] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 10:31:04.804 DEBUG 908 --- [http-nio-8888-exec-4] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 1(Long)
-2020-12-21 10:31:04.807 DEBUG 908 --- [http-nio-8888-exec-4] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 1
-2020-12-21 10:31:04.809 DEBUG 908 --- [http-nio-8888-exec-4] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 10:31:04.810 DEBUG 908 --- [http-nio-8888-exec-4] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 2(Long)
-2020-12-21 10:31:04.810 DEBUG 908 --- [http-nio-8888-exec-4] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 0
-2020-12-21 10:31:04.811 DEBUG 908 --- [http-nio-8888-exec-4] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 10:31:04.811 DEBUG 908 --- [http-nio-8888-exec-4] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 3(Long)
-2020-12-21 10:31:04.811 DEBUG 908 --- [http-nio-8888-exec-4] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 0
-2020-12-21 10:31:04.812 DEBUG 908 --- [http-nio-8888-exec-4] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 10:31:04.812 DEBUG 908 --- [http-nio-8888-exec-4] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 4(Long)
-2020-12-21 10:31:04.812 DEBUG 908 --- [http-nio-8888-exec-4] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 1
-2020-12-21 10:31:04.813 DEBUG 908 --- [http-nio-8888-exec-4] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 10:31:04.813 DEBUG 908 --- [http-nio-8888-exec-4] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 5(Long)
-2020-12-21 10:31:04.813 DEBUG 908 --- [http-nio-8888-exec-4] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 0
-2020-12-21 10:31:04.814 DEBUG 908 --- [http-nio-8888-exec-4] c.b.b.m.BlogMapper.findBlogByTypeId      : ==>  Preparing: select * from t_blog where type_id = ?
-2020-12-21 10:31:04.814 DEBUG 908 --- [http-nio-8888-exec-4] c.b.b.m.BlogMapper.findBlogByTypeId      : ==> Parameters: 1(Long)
-2020-12-21 10:31:04.815 DEBUG 908 --- [http-nio-8888-exec-4] c.b.b.m.BlogMapper.findBlogByTypeId      : <==      Total: 0
-2020-12-21 10:31:04.815 DEBUG 908 --- [http-nio-8888-exec-4] c.b.b.m.BlogMapper.findBlogByTypeId      : ==>  Preparing: select * from t_blog where type_id = ?
-2020-12-21 10:31:04.815 DEBUG 908 --- [http-nio-8888-exec-4] c.b.b.m.BlogMapper.findBlogByTypeId      : ==> Parameters: 2(Long)
-2020-12-21 10:31:04.817 DEBUG 908 --- [http-nio-8888-exec-4] c.b.b.m.BlogMapper.findBlogByTypeId      : <==      Total: 1
-2020-12-21 10:32:14.349 DEBUG 908 --- [http-nio-8888-exec-2] c.b.b.m.BlogMapper.getBlogList_COUNT     : ==>  Preparing: SELECT count(0) FROM t_blog b INNER JOIN t_blog_tags bt ON b.id = bt.blogs_id INNER JOIN t_tag t ON bt.tags_id = t.tagid INNER JOIN t_user u ON b.user_id = u.userid INNER JOIN t_type ty ON b.type_id = ty.typeid
-2020-12-21 10:32:14.362 DEBUG 908 --- [http-nio-8888-exec-2] c.b.b.m.BlogMapper.getBlogList_COUNT     : ==> Parameters: 
-2020-12-21 10:32:14.364 DEBUG 908 --- [http-nio-8888-exec-2] c.b.b.m.BlogMapper.getBlogList_COUNT     : <==      Total: 1
-2020-12-21 10:32:14.364 DEBUG 908 --- [http-nio-8888-exec-2] c.b.blog.mapper.BlogMapper.getBlogList   : ==>  Preparing: SELECT b.*,t.*,ty.*,u.userid,u.username,u.avatar FROM t_blog b INNER JOIN t_blog_tags bt on b.id = bt.blogs_id INNER JOIN t_tag t on bt.tags_id = t.tagid INNER JOIN t_user u on b.user_id = u.userid INNER JOIN t_type ty ON b.type_id = ty.typeid LIMIT ?
-2020-12-21 10:32:14.365 DEBUG 908 --- [http-nio-8888-exec-2] c.b.blog.mapper.BlogMapper.getBlogList   : ==> Parameters: 8(Integer)
-2020-12-21 10:32:14.366 DEBUG 908 --- [http-nio-8888-exec-2] c.b.blog.mapper.BlogMapper.getBlogList   : <==      Total: 2
-2020-12-21 10:32:14.367 DEBUG 908 --- [http-nio-8888-exec-2] c.b.blog.mapper.TypeMapper.findHomeType  : ==>  Preparing: select * from t_type
-2020-12-21 10:32:14.367 DEBUG 908 --- [http-nio-8888-exec-2] c.b.blog.mapper.TypeMapper.findHomeType  : ==> Parameters: 
-2020-12-21 10:32:14.367 DEBUG 908 --- [http-nio-8888-exec-2] c.b.blog.mapper.TypeMapper.findHomeType  : <==      Total: 2
-2020-12-21 10:32:14.368 DEBUG 908 --- [http-nio-8888-exec-2] c.b.blog.mapper.TagMapper.findHomeTag    : ==>  Preparing: select * from t_tag
-2020-12-21 10:32:14.368 DEBUG 908 --- [http-nio-8888-exec-2] c.b.blog.mapper.TagMapper.findHomeTag    : ==> Parameters: 
-2020-12-21 10:32:14.369 DEBUG 908 --- [http-nio-8888-exec-2] c.b.blog.mapper.TagMapper.findHomeTag    : <==      Total: 5
-2020-12-21 10:32:14.370 DEBUG 908 --- [http-nio-8888-exec-2] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 10:32:14.370 DEBUG 908 --- [http-nio-8888-exec-2] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 1(Long)
-2020-12-21 10:32:14.370 DEBUG 908 --- [http-nio-8888-exec-2] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 1
-2020-12-21 10:32:14.371 DEBUG 908 --- [http-nio-8888-exec-2] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 10:32:14.371 DEBUG 908 --- [http-nio-8888-exec-2] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 2(Long)
-2020-12-21 10:32:14.372 DEBUG 908 --- [http-nio-8888-exec-2] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 0
-2020-12-21 10:32:14.372 DEBUG 908 --- [http-nio-8888-exec-2] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 10:32:14.373 DEBUG 908 --- [http-nio-8888-exec-2] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 3(Long)
-2020-12-21 10:32:14.376 DEBUG 908 --- [http-nio-8888-exec-2] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 0
-2020-12-21 10:32:14.376 DEBUG 908 --- [http-nio-8888-exec-2] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 10:32:14.377 DEBUG 908 --- [http-nio-8888-exec-2] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 4(Long)
-2020-12-21 10:32:14.377 DEBUG 908 --- [http-nio-8888-exec-2] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 1
-2020-12-21 10:32:14.378 DEBUG 908 --- [http-nio-8888-exec-2] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 10:32:14.378 DEBUG 908 --- [http-nio-8888-exec-2] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 5(Long)
-2020-12-21 10:32:14.378 DEBUG 908 --- [http-nio-8888-exec-2] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 0
-2020-12-21 10:32:14.379 DEBUG 908 --- [http-nio-8888-exec-2] c.b.b.m.BlogMapper.findBlogByTypeId      : ==>  Preparing: select * from t_blog where type_id = ?
-2020-12-21 10:32:14.379 DEBUG 908 --- [http-nio-8888-exec-2] c.b.b.m.BlogMapper.findBlogByTypeId      : ==> Parameters: 1(Long)
-2020-12-21 10:32:14.379 DEBUG 908 --- [http-nio-8888-exec-2] c.b.b.m.BlogMapper.findBlogByTypeId      : <==      Total: 0
-2020-12-21 10:32:14.380 DEBUG 908 --- [http-nio-8888-exec-2] c.b.b.m.BlogMapper.findBlogByTypeId      : ==>  Preparing: select * from t_blog where type_id = ?
-2020-12-21 10:32:14.380 DEBUG 908 --- [http-nio-8888-exec-2] c.b.b.m.BlogMapper.findBlogByTypeId      : ==> Parameters: 2(Long)
-2020-12-21 10:32:14.381 DEBUG 908 --- [http-nio-8888-exec-2] c.b.b.m.BlogMapper.findBlogByTypeId      : <==      Total: 1
-2020-12-21 10:32:28.294 DEBUG 908 --- [http-nio-8888-exec-5] c.b.b.m.BlogMapper.getBlogList_COUNT     : ==>  Preparing: SELECT count(0) FROM t_blog b INNER JOIN t_blog_tags bt ON b.id = bt.blogs_id INNER JOIN t_tag t ON bt.tags_id = t.tagid INNER JOIN t_user u ON b.user_id = u.userid INNER JOIN t_type ty ON b.type_id = ty.typeid
-2020-12-21 10:32:28.294 DEBUG 908 --- [http-nio-8888-exec-5] c.b.b.m.BlogMapper.getBlogList_COUNT     : ==> Parameters: 
-2020-12-21 10:32:28.295 DEBUG 908 --- [http-nio-8888-exec-5] c.b.b.m.BlogMapper.getBlogList_COUNT     : <==      Total: 1
-2020-12-21 10:32:28.295 DEBUG 908 --- [http-nio-8888-exec-5] c.b.blog.mapper.BlogMapper.getBlogList   : ==>  Preparing: SELECT b.*,t.*,ty.*,u.userid,u.username,u.avatar FROM t_blog b INNER JOIN t_blog_tags bt on b.id = bt.blogs_id INNER JOIN t_tag t on bt.tags_id = t.tagid INNER JOIN t_user u on b.user_id = u.userid INNER JOIN t_type ty ON b.type_id = ty.typeid LIMIT ?
-2020-12-21 10:32:28.296 DEBUG 908 --- [http-nio-8888-exec-5] c.b.blog.mapper.BlogMapper.getBlogList   : ==> Parameters: 8(Integer)
-2020-12-21 10:32:28.298 DEBUG 908 --- [http-nio-8888-exec-5] c.b.blog.mapper.BlogMapper.getBlogList   : <==      Total: 2
-2020-12-21 10:32:28.298 DEBUG 908 --- [http-nio-8888-exec-5] c.b.blog.mapper.TypeMapper.findHomeType  : ==>  Preparing: select * from t_type
-2020-12-21 10:32:28.299 DEBUG 908 --- [http-nio-8888-exec-5] c.b.blog.mapper.TypeMapper.findHomeType  : ==> Parameters: 
-2020-12-21 10:32:28.300 DEBUG 908 --- [http-nio-8888-exec-5] c.b.blog.mapper.TypeMapper.findHomeType  : <==      Total: 2
-2020-12-21 10:32:28.301 DEBUG 908 --- [http-nio-8888-exec-5] c.b.blog.mapper.TagMapper.findHomeTag    : ==>  Preparing: select * from t_tag
-2020-12-21 10:32:28.301 DEBUG 908 --- [http-nio-8888-exec-5] c.b.blog.mapper.TagMapper.findHomeTag    : ==> Parameters: 
-2020-12-21 10:32:28.304 DEBUG 908 --- [http-nio-8888-exec-5] c.b.blog.mapper.TagMapper.findHomeTag    : <==      Total: 5
-2020-12-21 10:32:28.311 DEBUG 908 --- [http-nio-8888-exec-5] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 10:32:28.311 DEBUG 908 --- [http-nio-8888-exec-5] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 1(Long)
-2020-12-21 10:32:28.312 DEBUG 908 --- [http-nio-8888-exec-5] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 1
-2020-12-21 10:32:28.313 DEBUG 908 --- [http-nio-8888-exec-5] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 10:32:28.313 DEBUG 908 --- [http-nio-8888-exec-5] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 2(Long)
-2020-12-21 10:32:28.314 DEBUG 908 --- [http-nio-8888-exec-5] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 0
-2020-12-21 10:32:28.314 DEBUG 908 --- [http-nio-8888-exec-5] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 10:32:28.314 DEBUG 908 --- [http-nio-8888-exec-5] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 3(Long)
-2020-12-21 10:32:28.314 DEBUG 908 --- [http-nio-8888-exec-5] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 0
-2020-12-21 10:32:28.315 DEBUG 908 --- [http-nio-8888-exec-5] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 10:32:28.315 DEBUG 908 --- [http-nio-8888-exec-5] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 4(Long)
-2020-12-21 10:32:28.315 DEBUG 908 --- [http-nio-8888-exec-5] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 1
-2020-12-21 10:32:28.316 DEBUG 908 --- [http-nio-8888-exec-5] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 10:32:28.316 DEBUG 908 --- [http-nio-8888-exec-5] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 5(Long)
-2020-12-21 10:32:28.316 DEBUG 908 --- [http-nio-8888-exec-5] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 0
-2020-12-21 10:32:28.317 DEBUG 908 --- [http-nio-8888-exec-5] c.b.b.m.BlogMapper.findBlogByTypeId      : ==>  Preparing: select * from t_blog where type_id = ?
-2020-12-21 10:32:28.317 DEBUG 908 --- [http-nio-8888-exec-5] c.b.b.m.BlogMapper.findBlogByTypeId      : ==> Parameters: 1(Long)
-2020-12-21 10:32:28.326 DEBUG 908 --- [http-nio-8888-exec-5] c.b.b.m.BlogMapper.findBlogByTypeId      : <==      Total: 0
-2020-12-21 10:32:28.327 DEBUG 908 --- [http-nio-8888-exec-5] c.b.b.m.BlogMapper.findBlogByTypeId      : ==>  Preparing: select * from t_blog where type_id = ?
-2020-12-21 10:32:28.327 DEBUG 908 --- [http-nio-8888-exec-5] c.b.b.m.BlogMapper.findBlogByTypeId      : ==> Parameters: 2(Long)
-2020-12-21 10:32:28.328 DEBUG 908 --- [http-nio-8888-exec-5] c.b.b.m.BlogMapper.findBlogByTypeId      : <==      Total: 1
-2020-12-21 10:32:36.783 DEBUG 908 --- [http-nio-8888-exec-6] c.b.b.m.BlogMapper.getBlogList_COUNT     : ==>  Preparing: SELECT count(0) FROM t_blog b INNER JOIN t_blog_tags bt ON b.id = bt.blogs_id INNER JOIN t_tag t ON bt.tags_id = t.tagid INNER JOIN t_user u ON b.user_id = u.userid INNER JOIN t_type ty ON b.type_id = ty.typeid
-2020-12-21 10:32:36.784 DEBUG 908 --- [http-nio-8888-exec-6] c.b.b.m.BlogMapper.getBlogList_COUNT     : ==> Parameters: 
-2020-12-21 10:32:36.785 DEBUG 908 --- [http-nio-8888-exec-6] c.b.b.m.BlogMapper.getBlogList_COUNT     : <==      Total: 1
-2020-12-21 10:32:36.787 DEBUG 908 --- [http-nio-8888-exec-6] c.b.blog.mapper.BlogMapper.getBlogList   : ==>  Preparing: SELECT b.*,t.*,ty.*,u.userid,u.username,u.avatar FROM t_blog b INNER JOIN t_blog_tags bt on b.id = bt.blogs_id INNER JOIN t_tag t on bt.tags_id = t.tagid INNER JOIN t_user u on b.user_id = u.userid INNER JOIN t_type ty ON b.type_id = ty.typeid LIMIT ?
-2020-12-21 10:32:36.787 DEBUG 908 --- [http-nio-8888-exec-6] c.b.blog.mapper.BlogMapper.getBlogList   : ==> Parameters: 8(Integer)
-2020-12-21 10:32:36.789 DEBUG 908 --- [http-nio-8888-exec-6] c.b.blog.mapper.BlogMapper.getBlogList   : <==      Total: 2
-2020-12-21 10:32:36.792 DEBUG 908 --- [http-nio-8888-exec-6] c.b.blog.mapper.TypeMapper.findHomeType  : ==>  Preparing: select * from t_type
-2020-12-21 10:32:36.792 DEBUG 908 --- [http-nio-8888-exec-6] c.b.blog.mapper.TypeMapper.findHomeType  : ==> Parameters: 
-2020-12-21 10:32:36.794 DEBUG 908 --- [http-nio-8888-exec-6] c.b.blog.mapper.TypeMapper.findHomeType  : <==      Total: 2
-2020-12-21 10:32:36.795 DEBUG 908 --- [http-nio-8888-exec-6] c.b.blog.mapper.TagMapper.findHomeTag    : ==>  Preparing: select * from t_tag
-2020-12-21 10:32:36.795 DEBUG 908 --- [http-nio-8888-exec-6] c.b.blog.mapper.TagMapper.findHomeTag    : ==> Parameters: 
-2020-12-21 10:32:36.798 DEBUG 908 --- [http-nio-8888-exec-6] c.b.blog.mapper.TagMapper.findHomeTag    : <==      Total: 5
-2020-12-21 10:32:36.801 DEBUG 908 --- [http-nio-8888-exec-6] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 10:32:36.801 DEBUG 908 --- [http-nio-8888-exec-6] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 1(Long)
-2020-12-21 10:32:36.801 DEBUG 908 --- [http-nio-8888-exec-6] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 1
-2020-12-21 10:32:36.802 DEBUG 908 --- [http-nio-8888-exec-6] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 10:32:36.802 DEBUG 908 --- [http-nio-8888-exec-6] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 2(Long)
-2020-12-21 10:32:36.802 DEBUG 908 --- [http-nio-8888-exec-6] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 0
-2020-12-21 10:32:36.803 DEBUG 908 --- [http-nio-8888-exec-6] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 10:32:36.803 DEBUG 908 --- [http-nio-8888-exec-6] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 3(Long)
-2020-12-21 10:32:36.803 DEBUG 908 --- [http-nio-8888-exec-6] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 0
-2020-12-21 10:32:36.804 DEBUG 908 --- [http-nio-8888-exec-6] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 10:32:36.804 DEBUG 908 --- [http-nio-8888-exec-6] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 4(Long)
-2020-12-21 10:32:36.804 DEBUG 908 --- [http-nio-8888-exec-6] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 1
-2020-12-21 10:32:36.804 DEBUG 908 --- [http-nio-8888-exec-6] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 10:32:36.804 DEBUG 908 --- [http-nio-8888-exec-6] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 5(Long)
-2020-12-21 10:32:36.805 DEBUG 908 --- [http-nio-8888-exec-6] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 0
-2020-12-21 10:32:36.805 DEBUG 908 --- [http-nio-8888-exec-6] c.b.b.m.BlogMapper.findBlogByTypeId      : ==>  Preparing: select * from t_blog where type_id = ?
-2020-12-21 10:32:36.805 DEBUG 908 --- [http-nio-8888-exec-6] c.b.b.m.BlogMapper.findBlogByTypeId      : ==> Parameters: 1(Long)
-2020-12-21 10:32:36.806 DEBUG 908 --- [http-nio-8888-exec-6] c.b.b.m.BlogMapper.findBlogByTypeId      : <==      Total: 0
-2020-12-21 10:32:36.806 DEBUG 908 --- [http-nio-8888-exec-6] c.b.b.m.BlogMapper.findBlogByTypeId      : ==>  Preparing: select * from t_blog where type_id = ?
-2020-12-21 10:32:36.807 DEBUG 908 --- [http-nio-8888-exec-6] c.b.b.m.BlogMapper.findBlogByTypeId      : ==> Parameters: 2(Long)
-2020-12-21 10:32:36.810 DEBUG 908 --- [http-nio-8888-exec-6] c.b.b.m.BlogMapper.findBlogByTypeId      : <==      Total: 1
-2020-12-21 10:32:50.762 DEBUG 908 --- [http-nio-8888-exec-8] c.b.b.m.BlogMapper.getBlogList_COUNT     : ==>  Preparing: SELECT count(0) FROM t_blog b INNER JOIN t_blog_tags bt ON b.id = bt.blogs_id INNER JOIN t_tag t ON bt.tags_id = t.tagid INNER JOIN t_user u ON b.user_id = u.userid INNER JOIN t_type ty ON b.type_id = ty.typeid
-2020-12-21 10:32:50.762 DEBUG 908 --- [http-nio-8888-exec-8] c.b.b.m.BlogMapper.getBlogList_COUNT     : ==> Parameters: 
-2020-12-21 10:32:50.763 DEBUG 908 --- [http-nio-8888-exec-8] c.b.b.m.BlogMapper.getBlogList_COUNT     : <==      Total: 1
-2020-12-21 10:32:50.763 DEBUG 908 --- [http-nio-8888-exec-8] c.b.blog.mapper.BlogMapper.getBlogList   : ==>  Preparing: SELECT b.*,t.*,ty.*,u.userid,u.username,u.avatar FROM t_blog b INNER JOIN t_blog_tags bt on b.id = bt.blogs_id INNER JOIN t_tag t on bt.tags_id = t.tagid INNER JOIN t_user u on b.user_id = u.userid INNER JOIN t_type ty ON b.type_id = ty.typeid LIMIT ?
-2020-12-21 10:32:50.763 DEBUG 908 --- [http-nio-8888-exec-8] c.b.blog.mapper.BlogMapper.getBlogList   : ==> Parameters: 8(Integer)
-2020-12-21 10:32:50.765 DEBUG 908 --- [http-nio-8888-exec-8] c.b.blog.mapper.BlogMapper.getBlogList   : <==      Total: 2
-2020-12-21 10:32:50.766 DEBUG 908 --- [http-nio-8888-exec-8] c.b.blog.mapper.TypeMapper.findHomeType  : ==>  Preparing: select * from t_type
-2020-12-21 10:32:50.766 DEBUG 908 --- [http-nio-8888-exec-8] c.b.blog.mapper.TypeMapper.findHomeType  : ==> Parameters: 
-2020-12-21 10:32:50.768 DEBUG 908 --- [http-nio-8888-exec-8] c.b.blog.mapper.TypeMapper.findHomeType  : <==      Total: 2
-2020-12-21 10:32:50.769 DEBUG 908 --- [http-nio-8888-exec-8] c.b.blog.mapper.TagMapper.findHomeTag    : ==>  Preparing: select * from t_tag
-2020-12-21 10:32:50.770 DEBUG 908 --- [http-nio-8888-exec-8] c.b.blog.mapper.TagMapper.findHomeTag    : ==> Parameters: 
-2020-12-21 10:32:50.771 DEBUG 908 --- [http-nio-8888-exec-8] c.b.blog.mapper.TagMapper.findHomeTag    : <==      Total: 5
-2020-12-21 10:32:50.773 DEBUG 908 --- [http-nio-8888-exec-8] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 10:32:50.773 DEBUG 908 --- [http-nio-8888-exec-8] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 1(Long)
-2020-12-21 10:32:50.774 DEBUG 908 --- [http-nio-8888-exec-8] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 1
-2020-12-21 10:32:50.775 DEBUG 908 --- [http-nio-8888-exec-8] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 10:32:50.775 DEBUG 908 --- [http-nio-8888-exec-8] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 2(Long)
-2020-12-21 10:32:50.776 DEBUG 908 --- [http-nio-8888-exec-8] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 0
-2020-12-21 10:32:50.777 DEBUG 908 --- [http-nio-8888-exec-8] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 10:32:50.777 DEBUG 908 --- [http-nio-8888-exec-8] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 3(Long)
-2020-12-21 10:32:50.777 DEBUG 908 --- [http-nio-8888-exec-8] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 0
-2020-12-21 10:32:50.779 DEBUG 908 --- [http-nio-8888-exec-8] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 10:32:50.779 DEBUG 908 --- [http-nio-8888-exec-8] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 4(Long)
-2020-12-21 10:32:50.780 DEBUG 908 --- [http-nio-8888-exec-8] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 1
-2020-12-21 10:32:50.780 DEBUG 908 --- [http-nio-8888-exec-8] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 10:32:50.780 DEBUG 908 --- [http-nio-8888-exec-8] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 5(Long)
-2020-12-21 10:32:50.781 DEBUG 908 --- [http-nio-8888-exec-8] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 0
-2020-12-21 10:32:50.782 DEBUG 908 --- [http-nio-8888-exec-8] c.b.b.m.BlogMapper.findBlogByTypeId      : ==>  Preparing: select * from t_blog where type_id = ?
-2020-12-21 10:32:50.782 DEBUG 908 --- [http-nio-8888-exec-8] c.b.b.m.BlogMapper.findBlogByTypeId      : ==> Parameters: 1(Long)
-2020-12-21 10:32:50.783 DEBUG 908 --- [http-nio-8888-exec-8] c.b.b.m.BlogMapper.findBlogByTypeId      : <==      Total: 0
-2020-12-21 10:32:50.783 DEBUG 908 --- [http-nio-8888-exec-8] c.b.b.m.BlogMapper.findBlogByTypeId      : ==>  Preparing: select * from t_blog where type_id = ?
-2020-12-21 10:32:50.784 DEBUG 908 --- [http-nio-8888-exec-8] c.b.b.m.BlogMapper.findBlogByTypeId      : ==> Parameters: 2(Long)
-2020-12-21 10:32:50.785 DEBUG 908 --- [http-nio-8888-exec-8] c.b.b.m.BlogMapper.findBlogByTypeId      : <==      Total: 1
-2020-12-21 10:33:00.642 DEBUG 908 --- [http-nio-8888-exec-9] c.b.b.m.BlogMapper.getBlogList_COUNT     : ==>  Preparing: SELECT count(0) FROM t_blog b INNER JOIN t_blog_tags bt ON b.id = bt.blogs_id INNER JOIN t_tag t ON bt.tags_id = t.tagid INNER JOIN t_user u ON b.user_id = u.userid INNER JOIN t_type ty ON b.type_id = ty.typeid
-2020-12-21 10:33:00.643 DEBUG 908 --- [http-nio-8888-exec-9] c.b.b.m.BlogMapper.getBlogList_COUNT     : ==> Parameters: 
-2020-12-21 10:33:00.643 DEBUG 908 --- [http-nio-8888-exec-9] c.b.b.m.BlogMapper.getBlogList_COUNT     : <==      Total: 1
-2020-12-21 10:33:00.644 DEBUG 908 --- [http-nio-8888-exec-9] c.b.blog.mapper.BlogMapper.getBlogList   : ==>  Preparing: SELECT b.*,t.*,ty.*,u.userid,u.username,u.avatar FROM t_blog b INNER JOIN t_blog_tags bt on b.id = bt.blogs_id INNER JOIN t_tag t on bt.tags_id = t.tagid INNER JOIN t_user u on b.user_id = u.userid INNER JOIN t_type ty ON b.type_id = ty.typeid LIMIT ?
-2020-12-21 10:33:00.645 DEBUG 908 --- [http-nio-8888-exec-9] c.b.blog.mapper.BlogMapper.getBlogList   : ==> Parameters: 8(Integer)
-2020-12-21 10:33:00.647 DEBUG 908 --- [http-nio-8888-exec-9] c.b.blog.mapper.BlogMapper.getBlogList   : <==      Total: 2
-2020-12-21 10:33:00.647 DEBUG 908 --- [http-nio-8888-exec-9] c.b.blog.mapper.TypeMapper.findHomeType  : ==>  Preparing: select * from t_type
-2020-12-21 10:33:00.648 DEBUG 908 --- [http-nio-8888-exec-9] c.b.blog.mapper.TypeMapper.findHomeType  : ==> Parameters: 
-2020-12-21 10:33:00.649 DEBUG 908 --- [http-nio-8888-exec-9] c.b.blog.mapper.TypeMapper.findHomeType  : <==      Total: 2
-2020-12-21 10:33:00.649 DEBUG 908 --- [http-nio-8888-exec-9] c.b.blog.mapper.TagMapper.findHomeTag    : ==>  Preparing: select * from t_tag
-2020-12-21 10:33:00.650 DEBUG 908 --- [http-nio-8888-exec-9] c.b.blog.mapper.TagMapper.findHomeTag    : ==> Parameters: 
-2020-12-21 10:33:00.652 DEBUG 908 --- [http-nio-8888-exec-9] c.b.blog.mapper.TagMapper.findHomeTag    : <==      Total: 5
-2020-12-21 10:33:00.658 DEBUG 908 --- [http-nio-8888-exec-9] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 10:33:00.658 DEBUG 908 --- [http-nio-8888-exec-9] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 1(Long)
-2020-12-21 10:33:00.659 DEBUG 908 --- [http-nio-8888-exec-9] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 1
-2020-12-21 10:33:00.659 DEBUG 908 --- [http-nio-8888-exec-9] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 10:33:00.659 DEBUG 908 --- [http-nio-8888-exec-9] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 2(Long)
-2020-12-21 10:33:00.660 DEBUG 908 --- [http-nio-8888-exec-9] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 0
-2020-12-21 10:33:00.660 DEBUG 908 --- [http-nio-8888-exec-9] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 10:33:00.661 DEBUG 908 --- [http-nio-8888-exec-9] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 3(Long)
-2020-12-21 10:33:00.661 DEBUG 908 --- [http-nio-8888-exec-9] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 0
-2020-12-21 10:33:00.662 DEBUG 908 --- [http-nio-8888-exec-9] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 10:33:00.662 DEBUG 908 --- [http-nio-8888-exec-9] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 4(Long)
-2020-12-21 10:33:00.662 DEBUG 908 --- [http-nio-8888-exec-9] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 1
-2020-12-21 10:33:00.663 DEBUG 908 --- [http-nio-8888-exec-9] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 10:33:00.663 DEBUG 908 --- [http-nio-8888-exec-9] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 5(Long)
-2020-12-21 10:33:00.664 DEBUG 908 --- [http-nio-8888-exec-9] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 0
-2020-12-21 10:33:00.664 DEBUG 908 --- [http-nio-8888-exec-9] c.b.b.m.BlogMapper.findBlogByTypeId      : ==>  Preparing: select * from t_blog where type_id = ?
-2020-12-21 10:33:00.664 DEBUG 908 --- [http-nio-8888-exec-9] c.b.b.m.BlogMapper.findBlogByTypeId      : ==> Parameters: 1(Long)
-2020-12-21 10:33:00.665 DEBUG 908 --- [http-nio-8888-exec-9] c.b.b.m.BlogMapper.findBlogByTypeId      : <==      Total: 0
-2020-12-21 10:33:00.665 DEBUG 908 --- [http-nio-8888-exec-9] c.b.b.m.BlogMapper.findBlogByTypeId      : ==>  Preparing: select * from t_blog where type_id = ?
-2020-12-21 10:33:00.665 DEBUG 908 --- [http-nio-8888-exec-9] c.b.b.m.BlogMapper.findBlogByTypeId      : ==> Parameters: 2(Long)
-2020-12-21 10:33:00.666 DEBUG 908 --- [http-nio-8888-exec-9] c.b.b.m.BlogMapper.findBlogByTypeId      : <==      Total: 1
-2020-12-21 10:35:20.530 DEBUG 908 --- [http-nio-8888-exec-4] c.b.b.m.BlogMapper.getBlogList_COUNT     : ==>  Preparing: SELECT count(0) FROM t_blog b INNER JOIN t_blog_tags bt ON b.id = bt.blogs_id INNER JOIN t_tag t ON bt.tags_id = t.tagid INNER JOIN t_user u ON b.user_id = u.userid INNER JOIN t_type ty ON b.type_id = ty.typeid
-2020-12-21 10:35:20.531 DEBUG 908 --- [http-nio-8888-exec-4] c.b.b.m.BlogMapper.getBlogList_COUNT     : ==> Parameters: 
-2020-12-21 10:35:20.531 DEBUG 908 --- [http-nio-8888-exec-4] c.b.b.m.BlogMapper.getBlogList_COUNT     : <==      Total: 1
-2020-12-21 10:35:20.531 DEBUG 908 --- [http-nio-8888-exec-4] c.b.blog.mapper.BlogMapper.getBlogList   : ==>  Preparing: SELECT b.*,t.*,ty.*,u.userid,u.username,u.avatar FROM t_blog b INNER JOIN t_blog_tags bt on b.id = bt.blogs_id INNER JOIN t_tag t on bt.tags_id = t.tagid INNER JOIN t_user u on b.user_id = u.userid INNER JOIN t_type ty ON b.type_id = ty.typeid LIMIT ?
-2020-12-21 10:35:20.532 DEBUG 908 --- [http-nio-8888-exec-4] c.b.blog.mapper.BlogMapper.getBlogList   : ==> Parameters: 8(Integer)
-2020-12-21 10:35:20.533 DEBUG 908 --- [http-nio-8888-exec-4] c.b.blog.mapper.BlogMapper.getBlogList   : <==      Total: 2
-2020-12-21 10:35:20.533 DEBUG 908 --- [http-nio-8888-exec-4] c.b.blog.mapper.TypeMapper.findHomeType  : ==>  Preparing: select * from t_type
-2020-12-21 10:35:20.533 DEBUG 908 --- [http-nio-8888-exec-4] c.b.blog.mapper.TypeMapper.findHomeType  : ==> Parameters: 
-2020-12-21 10:35:20.534 DEBUG 908 --- [http-nio-8888-exec-4] c.b.blog.mapper.TypeMapper.findHomeType  : <==      Total: 2
-2020-12-21 10:35:20.534 DEBUG 908 --- [http-nio-8888-exec-4] c.b.blog.mapper.TagMapper.findHomeTag    : ==>  Preparing: select * from t_tag
-2020-12-21 10:35:20.534 DEBUG 908 --- [http-nio-8888-exec-4] c.b.blog.mapper.TagMapper.findHomeTag    : ==> Parameters: 
-2020-12-21 10:35:20.535 DEBUG 908 --- [http-nio-8888-exec-4] c.b.blog.mapper.TagMapper.findHomeTag    : <==      Total: 5
-2020-12-21 10:35:20.536 DEBUG 908 --- [http-nio-8888-exec-4] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 10:35:20.536 DEBUG 908 --- [http-nio-8888-exec-4] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 1(Long)
-2020-12-21 10:35:20.537 DEBUG 908 --- [http-nio-8888-exec-4] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 1
-2020-12-21 10:35:20.537 DEBUG 908 --- [http-nio-8888-exec-4] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 10:35:20.537 DEBUG 908 --- [http-nio-8888-exec-4] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 2(Long)
-2020-12-21 10:35:20.537 DEBUG 908 --- [http-nio-8888-exec-4] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 0
-2020-12-21 10:35:20.538 DEBUG 908 --- [http-nio-8888-exec-4] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 10:35:20.538 DEBUG 908 --- [http-nio-8888-exec-4] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 3(Long)
-2020-12-21 10:35:20.538 DEBUG 908 --- [http-nio-8888-exec-4] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 0
-2020-12-21 10:35:20.538 DEBUG 908 --- [http-nio-8888-exec-4] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 10:35:20.538 DEBUG 908 --- [http-nio-8888-exec-4] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 4(Long)
-2020-12-21 10:35:20.539 DEBUG 908 --- [http-nio-8888-exec-4] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 1
-2020-12-21 10:35:20.539 DEBUG 908 --- [http-nio-8888-exec-4] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 10:35:20.539 DEBUG 908 --- [http-nio-8888-exec-4] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 5(Long)
-2020-12-21 10:35:20.539 DEBUG 908 --- [http-nio-8888-exec-4] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 0
-2020-12-21 10:35:20.540 DEBUG 908 --- [http-nio-8888-exec-4] c.b.b.m.BlogMapper.findBlogByTypeId      : ==>  Preparing: select * from t_blog where type_id = ?
-2020-12-21 10:35:20.540 DEBUG 908 --- [http-nio-8888-exec-4] c.b.b.m.BlogMapper.findBlogByTypeId      : ==> Parameters: 1(Long)
-2020-12-21 10:35:20.540 DEBUG 908 --- [http-nio-8888-exec-4] c.b.b.m.BlogMapper.findBlogByTypeId      : <==      Total: 0
-2020-12-21 10:35:20.541 DEBUG 908 --- [http-nio-8888-exec-4] c.b.b.m.BlogMapper.findBlogByTypeId      : ==>  Preparing: select * from t_blog where type_id = ?
-2020-12-21 10:35:20.541 DEBUG 908 --- [http-nio-8888-exec-4] c.b.b.m.BlogMapper.findBlogByTypeId      : ==> Parameters: 2(Long)
-2020-12-21 10:35:20.543 DEBUG 908 --- [http-nio-8888-exec-4] c.b.b.m.BlogMapper.findBlogByTypeId      : <==      Total: 1
-2020-12-21 10:35:23.114 DEBUG 908 --- [http-nio-8888-exec-7] c.b.b.m.BlogMapper.getBlogList_COUNT     : ==>  Preparing: SELECT count(0) FROM t_blog b INNER JOIN t_blog_tags bt ON b.id = bt.blogs_id INNER JOIN t_tag t ON bt.tags_id = t.tagid INNER JOIN t_user u ON b.user_id = u.userid INNER JOIN t_type ty ON b.type_id = ty.typeid
-2020-12-21 10:35:23.115 DEBUG 908 --- [http-nio-8888-exec-7] c.b.b.m.BlogMapper.getBlogList_COUNT     : ==> Parameters: 
-2020-12-21 10:35:23.115 DEBUG 908 --- [http-nio-8888-exec-7] c.b.b.m.BlogMapper.getBlogList_COUNT     : <==      Total: 1
-2020-12-21 10:35:23.116 DEBUG 908 --- [http-nio-8888-exec-7] c.b.blog.mapper.BlogMapper.getBlogList   : ==>  Preparing: SELECT b.*,t.*,ty.*,u.userid,u.username,u.avatar FROM t_blog b INNER JOIN t_blog_tags bt on b.id = bt.blogs_id INNER JOIN t_tag t on bt.tags_id = t.tagid INNER JOIN t_user u on b.user_id = u.userid INNER JOIN t_type ty ON b.type_id = ty.typeid LIMIT ?
-2020-12-21 10:35:23.116 DEBUG 908 --- [http-nio-8888-exec-7] c.b.blog.mapper.BlogMapper.getBlogList   : ==> Parameters: 8(Integer)
-2020-12-21 10:35:23.118 DEBUG 908 --- [http-nio-8888-exec-7] c.b.blog.mapper.BlogMapper.getBlogList   : <==      Total: 2
-2020-12-21 10:35:23.118 DEBUG 908 --- [http-nio-8888-exec-7] c.b.blog.mapper.TypeMapper.findHomeType  : ==>  Preparing: select * from t_type
-2020-12-21 10:35:23.119 DEBUG 908 --- [http-nio-8888-exec-7] c.b.blog.mapper.TypeMapper.findHomeType  : ==> Parameters: 
-2020-12-21 10:35:23.120 DEBUG 908 --- [http-nio-8888-exec-7] c.b.blog.mapper.TypeMapper.findHomeType  : <==      Total: 2
-2020-12-21 10:35:23.121 DEBUG 908 --- [http-nio-8888-exec-7] c.b.blog.mapper.TagMapper.findHomeTag    : ==>  Preparing: select * from t_tag
-2020-12-21 10:35:23.121 DEBUG 908 --- [http-nio-8888-exec-7] c.b.blog.mapper.TagMapper.findHomeTag    : ==> Parameters: 
-2020-12-21 10:35:23.123 DEBUG 908 --- [http-nio-8888-exec-7] c.b.blog.mapper.TagMapper.findHomeTag    : <==      Total: 5
-2020-12-21 10:35:23.125 DEBUG 908 --- [http-nio-8888-exec-7] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 10:35:23.125 DEBUG 908 --- [http-nio-8888-exec-7] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 1(Long)
-2020-12-21 10:35:23.126 DEBUG 908 --- [http-nio-8888-exec-7] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 1
-2020-12-21 10:35:23.127 DEBUG 908 --- [http-nio-8888-exec-7] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 10:35:23.128 DEBUG 908 --- [http-nio-8888-exec-7] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 2(Long)
-2020-12-21 10:35:23.128 DEBUG 908 --- [http-nio-8888-exec-7] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 0
-2020-12-21 10:35:23.130 DEBUG 908 --- [http-nio-8888-exec-7] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 10:35:23.131 DEBUG 908 --- [http-nio-8888-exec-7] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 3(Long)
-2020-12-21 10:35:23.131 DEBUG 908 --- [http-nio-8888-exec-7] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 0
-2020-12-21 10:35:23.131 DEBUG 908 --- [http-nio-8888-exec-7] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 10:35:23.133 DEBUG 908 --- [http-nio-8888-exec-7] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 4(Long)
-2020-12-21 10:35:23.133 DEBUG 908 --- [http-nio-8888-exec-7] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 1
-2020-12-21 10:35:23.133 DEBUG 908 --- [http-nio-8888-exec-7] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 10:35:23.133 DEBUG 908 --- [http-nio-8888-exec-7] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 5(Long)
-2020-12-21 10:35:23.133 DEBUG 908 --- [http-nio-8888-exec-7] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 0
-2020-12-21 10:35:23.134 DEBUG 908 --- [http-nio-8888-exec-7] c.b.b.m.BlogMapper.findBlogByTypeId      : ==>  Preparing: select * from t_blog where type_id = ?
-2020-12-21 10:35:23.134 DEBUG 908 --- [http-nio-8888-exec-7] c.b.b.m.BlogMapper.findBlogByTypeId      : ==> Parameters: 1(Long)
-2020-12-21 10:35:23.134 DEBUG 908 --- [http-nio-8888-exec-7] c.b.b.m.BlogMapper.findBlogByTypeId      : <==      Total: 0
-2020-12-21 10:35:23.134 DEBUG 908 --- [http-nio-8888-exec-7] c.b.b.m.BlogMapper.findBlogByTypeId      : ==>  Preparing: select * from t_blog where type_id = ?
-2020-12-21 10:35:23.134 DEBUG 908 --- [http-nio-8888-exec-7] c.b.b.m.BlogMapper.findBlogByTypeId      : ==> Parameters: 2(Long)
-2020-12-21 10:35:23.135 DEBUG 908 --- [http-nio-8888-exec-7] c.b.b.m.BlogMapper.findBlogByTypeId      : <==      Total: 1
-2020-12-21 10:35:31.003 DEBUG 908 --- [http-nio-8888-exec-2] c.b.b.m.BlogMapper.getBlogList_COUNT     : ==>  Preparing: SELECT count(0) FROM t_blog b INNER JOIN t_blog_tags bt ON b.id = bt.blogs_id INNER JOIN t_tag t ON bt.tags_id = t.tagid INNER JOIN t_user u ON b.user_id = u.userid INNER JOIN t_type ty ON b.type_id = ty.typeid
-2020-12-21 10:35:31.006 DEBUG 908 --- [http-nio-8888-exec-2] c.b.b.m.BlogMapper.getBlogList_COUNT     : ==> Parameters: 
-2020-12-21 10:35:31.006 DEBUG 908 --- [http-nio-8888-exec-2] c.b.b.m.BlogMapper.getBlogList_COUNT     : <==      Total: 1
-2020-12-21 10:35:31.007 DEBUG 908 --- [http-nio-8888-exec-2] c.b.blog.mapper.BlogMapper.getBlogList   : ==>  Preparing: SELECT b.*,t.*,ty.*,u.userid,u.username,u.avatar FROM t_blog b INNER JOIN t_blog_tags bt on b.id = bt.blogs_id INNER JOIN t_tag t on bt.tags_id = t.tagid INNER JOIN t_user u on b.user_id = u.userid INNER JOIN t_type ty ON b.type_id = ty.typeid LIMIT ?
-2020-12-21 10:35:31.007 DEBUG 908 --- [http-nio-8888-exec-2] c.b.blog.mapper.BlogMapper.getBlogList   : ==> Parameters: 8(Integer)
-2020-12-21 10:35:31.009 DEBUG 908 --- [http-nio-8888-exec-2] c.b.blog.mapper.BlogMapper.getBlogList   : <==      Total: 2
-2020-12-21 10:35:31.010 DEBUG 908 --- [http-nio-8888-exec-2] c.b.blog.mapper.TypeMapper.findHomeType  : ==>  Preparing: select * from t_type
-2020-12-21 10:35:31.011 DEBUG 908 --- [http-nio-8888-exec-2] c.b.blog.mapper.TypeMapper.findHomeType  : ==> Parameters: 
-2020-12-21 10:35:31.014 DEBUG 908 --- [http-nio-8888-exec-2] c.b.blog.mapper.TypeMapper.findHomeType  : <==      Total: 2
-2020-12-21 10:35:31.015 DEBUG 908 --- [http-nio-8888-exec-2] c.b.blog.mapper.TagMapper.findHomeTag    : ==>  Preparing: select * from t_tag
-2020-12-21 10:35:31.015 DEBUG 908 --- [http-nio-8888-exec-2] c.b.blog.mapper.TagMapper.findHomeTag    : ==> Parameters: 
-2020-12-21 10:35:31.017 DEBUG 908 --- [http-nio-8888-exec-2] c.b.blog.mapper.TagMapper.findHomeTag    : <==      Total: 5
-2020-12-21 10:35:31.019 DEBUG 908 --- [http-nio-8888-exec-2] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 10:35:31.020 DEBUG 908 --- [http-nio-8888-exec-2] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 1(Long)
-2020-12-21 10:35:31.021 DEBUG 908 --- [http-nio-8888-exec-2] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 1
-2020-12-21 10:35:31.021 DEBUG 908 --- [http-nio-8888-exec-2] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 10:35:31.021 DEBUG 908 --- [http-nio-8888-exec-2] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 2(Long)
-2020-12-21 10:35:31.022 DEBUG 908 --- [http-nio-8888-exec-2] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 0
-2020-12-21 10:35:31.022 DEBUG 908 --- [http-nio-8888-exec-2] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 10:35:31.022 DEBUG 908 --- [http-nio-8888-exec-2] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 3(Long)
-2020-12-21 10:35:31.022 DEBUG 908 --- [http-nio-8888-exec-2] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 0
-2020-12-21 10:35:31.022 DEBUG 908 --- [http-nio-8888-exec-2] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 10:35:31.022 DEBUG 908 --- [http-nio-8888-exec-2] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 4(Long)
-2020-12-21 10:35:31.022 DEBUG 908 --- [http-nio-8888-exec-2] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 1
-2020-12-21 10:35:31.022 DEBUG 908 --- [http-nio-8888-exec-2] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 10:35:31.022 DEBUG 908 --- [http-nio-8888-exec-2] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 5(Long)
-2020-12-21 10:35:31.023 DEBUG 908 --- [http-nio-8888-exec-2] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 0
-2020-12-21 10:35:31.023 DEBUG 908 --- [http-nio-8888-exec-2] c.b.b.m.BlogMapper.findBlogByTypeId      : ==>  Preparing: select * from t_blog where type_id = ?
-2020-12-21 10:35:31.023 DEBUG 908 --- [http-nio-8888-exec-2] c.b.b.m.BlogMapper.findBlogByTypeId      : ==> Parameters: 1(Long)
-2020-12-21 10:35:31.023 DEBUG 908 --- [http-nio-8888-exec-2] c.b.b.m.BlogMapper.findBlogByTypeId      : <==      Total: 0
-2020-12-21 10:35:31.024 DEBUG 908 --- [http-nio-8888-exec-2] c.b.b.m.BlogMapper.findBlogByTypeId      : ==>  Preparing: select * from t_blog where type_id = ?
-2020-12-21 10:35:31.024 DEBUG 908 --- [http-nio-8888-exec-2] c.b.b.m.BlogMapper.findBlogByTypeId      : ==> Parameters: 2(Long)
-2020-12-21 10:35:31.024 DEBUG 908 --- [http-nio-8888-exec-2] c.b.b.m.BlogMapper.findBlogByTypeId      : <==      Total: 1
-2020-12-21 10:45:31.595 DEBUG 908 --- [http-nio-8888-exec-6] c.b.b.m.BlogMapper.getBlogList_COUNT     : ==>  Preparing: SELECT count(0) FROM t_blog b INNER JOIN t_blog_tags bt ON b.id = bt.blogs_id INNER JOIN t_tag t ON bt.tags_id = t.tagid INNER JOIN t_user u ON b.user_id = u.userid INNER JOIN t_type ty ON b.type_id = ty.typeid
-2020-12-21 10:45:31.595 DEBUG 908 --- [http-nio-8888-exec-6] c.b.b.m.BlogMapper.getBlogList_COUNT     : ==> Parameters: 
-2020-12-21 10:45:31.597 DEBUG 908 --- [http-nio-8888-exec-6] c.b.b.m.BlogMapper.getBlogList_COUNT     : <==      Total: 1
-2020-12-21 10:45:31.597 DEBUG 908 --- [http-nio-8888-exec-6] c.b.blog.mapper.BlogMapper.getBlogList   : ==>  Preparing: SELECT b.*,t.*,ty.*,u.userid,u.username,u.avatar FROM t_blog b INNER JOIN t_blog_tags bt on b.id = bt.blogs_id INNER JOIN t_tag t on bt.tags_id = t.tagid INNER JOIN t_user u on b.user_id = u.userid INNER JOIN t_type ty ON b.type_id = ty.typeid LIMIT ?
-2020-12-21 10:45:31.597 DEBUG 908 --- [http-nio-8888-exec-6] c.b.blog.mapper.BlogMapper.getBlogList   : ==> Parameters: 8(Integer)
-2020-12-21 10:45:31.598 DEBUG 908 --- [http-nio-8888-exec-6] c.b.blog.mapper.BlogMapper.getBlogList   : <==      Total: 2
-2020-12-21 10:45:31.598 DEBUG 908 --- [http-nio-8888-exec-6] c.b.blog.mapper.TypeMapper.findHomeType  : ==>  Preparing: select * from t_type
-2020-12-21 10:45:31.598 DEBUG 908 --- [http-nio-8888-exec-6] c.b.blog.mapper.TypeMapper.findHomeType  : ==> Parameters: 
-2020-12-21 10:45:31.599 DEBUG 908 --- [http-nio-8888-exec-6] c.b.blog.mapper.TypeMapper.findHomeType  : <==      Total: 2
-2020-12-21 10:45:31.599 DEBUG 908 --- [http-nio-8888-exec-6] c.b.blog.mapper.TagMapper.findHomeTag    : ==>  Preparing: select * from t_tag
-2020-12-21 10:45:31.599 DEBUG 908 --- [http-nio-8888-exec-6] c.b.blog.mapper.TagMapper.findHomeTag    : ==> Parameters: 
-2020-12-21 10:45:31.600 DEBUG 908 --- [http-nio-8888-exec-6] c.b.blog.mapper.TagMapper.findHomeTag    : <==      Total: 5
-2020-12-21 10:45:31.601 DEBUG 908 --- [http-nio-8888-exec-6] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 10:45:31.601 DEBUG 908 --- [http-nio-8888-exec-6] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 1(Long)
-2020-12-21 10:45:31.602 DEBUG 908 --- [http-nio-8888-exec-6] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 1
-2020-12-21 10:45:31.602 DEBUG 908 --- [http-nio-8888-exec-6] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 10:45:31.602 DEBUG 908 --- [http-nio-8888-exec-6] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 2(Long)
-2020-12-21 10:45:31.602 DEBUG 908 --- [http-nio-8888-exec-6] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 0
-2020-12-21 10:45:31.602 DEBUG 908 --- [http-nio-8888-exec-6] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 10:45:31.603 DEBUG 908 --- [http-nio-8888-exec-6] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 3(Long)
-2020-12-21 10:45:31.603 DEBUG 908 --- [http-nio-8888-exec-6] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 0
-2020-12-21 10:45:31.603 DEBUG 908 --- [http-nio-8888-exec-6] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 10:45:31.603 DEBUG 908 --- [http-nio-8888-exec-6] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 4(Long)
-2020-12-21 10:45:31.604 DEBUG 908 --- [http-nio-8888-exec-6] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 1
-2020-12-21 10:45:31.604 DEBUG 908 --- [http-nio-8888-exec-6] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 10:45:31.604 DEBUG 908 --- [http-nio-8888-exec-6] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 5(Long)
-2020-12-21 10:45:31.604 DEBUG 908 --- [http-nio-8888-exec-6] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 0
-2020-12-21 10:45:31.605 DEBUG 908 --- [http-nio-8888-exec-6] c.b.b.m.BlogMapper.findBlogByTypeId      : ==>  Preparing: select * from t_blog where type_id = ?
-2020-12-21 10:45:31.605 DEBUG 908 --- [http-nio-8888-exec-6] c.b.b.m.BlogMapper.findBlogByTypeId      : ==> Parameters: 1(Long)
-2020-12-21 10:45:31.605 DEBUG 908 --- [http-nio-8888-exec-6] c.b.b.m.BlogMapper.findBlogByTypeId      : <==      Total: 0
-2020-12-21 10:45:31.605 DEBUG 908 --- [http-nio-8888-exec-6] c.b.b.m.BlogMapper.findBlogByTypeId      : ==>  Preparing: select * from t_blog where type_id = ?
-2020-12-21 10:45:31.605 DEBUG 908 --- [http-nio-8888-exec-6] c.b.b.m.BlogMapper.findBlogByTypeId      : ==> Parameters: 2(Long)
-2020-12-21 10:45:31.606 DEBUG 908 --- [http-nio-8888-exec-6] c.b.b.m.BlogMapper.findBlogByTypeId      : <==      Total: 1
-2020-12-21 11:04:12.057  INFO 11104 --- [main] com.bigff.blog.BlogApplication           : Starting BlogApplication using Java 1.8.0_261 on DESKTOP-UE5H5T5 with PID 11104 (D:\项目\blog前后端分离\blog\target\classes started by bigff in D:\项目\blog前后端分离\blog)
-2020-12-21 11:04:12.059 DEBUG 11104 --- [main] com.bigff.blog.BlogApplication           : Running with Spring Boot v2.4.1, Spring v5.3.2
-2020-12-21 11:04:12.059  INFO 11104 --- [main] com.bigff.blog.BlogApplication           : The following profiles are active: dev
-2020-12-21 11:04:13.139  INFO 11104 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8888 (http)
-2020-12-21 11:04:13.145  INFO 11104 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2020-12-21 11:04:13.145  INFO 11104 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.41]
-2020-12-21 11:04:13.193  INFO 11104 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2020-12-21 11:04:13.193  INFO 11104 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1094 ms
-2020-12-21 11:04:13.600  INFO 11104 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
-2020-12-21 11:04:13.928  INFO 11104 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8888 (http) with context path ''
-2020-12-21 11:04:13.935  INFO 11104 --- [main] com.bigff.blog.BlogApplication           : Started BlogApplication in 2.234 seconds (JVM running for 2.899)
-2020-12-21 11:04:19.811  INFO 11104 --- [http-nio-8888-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2020-12-21 11:04:19.811  INFO 11104 --- [http-nio-8888-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2020-12-21 11:04:19.812  INFO 11104 --- [http-nio-8888-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
-2020-12-21 11:04:19.844  INFO 11104 --- [http-nio-8888-exec-1] com.bigff.blog.aspect.LogAspect          : Request : {url='http://127.0.0.1:8888/homeData', ip='127.0.0.1', classMethod='com.bigff.blog.web.IndexController.findPage', args=[1, 8]}
-2020-12-21 11:04:19.878  INFO 11104 --- [http-nio-8888-exec-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2020-12-21 11:04:20.007  INFO 11104 --- [http-nio-8888-exec-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2020-12-21 11:04:20.013 DEBUG 11104 --- [http-nio-8888-exec-1] c.b.b.m.BlogMapper.getBlogList_COUNT     : ==>  Preparing: SELECT count(0) FROM t_blog b INNER JOIN t_blog_tags bt ON b.id = bt.blogs_id INNER JOIN t_tag t ON bt.tags_id = t.tagid INNER JOIN t_user u ON b.user_id = u.userid INNER JOIN t_type ty ON b.type_id = ty.typeid
-2020-12-21 11:04:20.031 DEBUG 11104 --- [http-nio-8888-exec-1] c.b.b.m.BlogMapper.getBlogList_COUNT     : ==> Parameters: 
-2020-12-21 11:04:20.039 DEBUG 11104 --- [http-nio-8888-exec-1] c.b.b.m.BlogMapper.getBlogList_COUNT     : <==      Total: 1
-2020-12-21 11:04:20.042 DEBUG 11104 --- [http-nio-8888-exec-1] c.b.blog.mapper.BlogMapper.getBlogList   : ==>  Preparing: SELECT b.*,t.*,ty.*,u.userid,u.username,u.avatar FROM t_blog b INNER JOIN t_blog_tags bt on b.id = bt.blogs_id INNER JOIN t_tag t on bt.tags_id = t.tagid INNER JOIN t_user u on b.user_id = u.userid INNER JOIN t_type ty ON b.type_id = ty.typeid LIMIT ?
-2020-12-21 11:04:20.042 DEBUG 11104 --- [http-nio-8888-exec-1] c.b.blog.mapper.BlogMapper.getBlogList   : ==> Parameters: 8(Integer)
-2020-12-21 11:04:20.046 DEBUG 11104 --- [http-nio-8888-exec-1] c.b.blog.mapper.BlogMapper.getBlogList   : <==      Total: 2
-2020-12-21 11:04:20.049 DEBUG 11104 --- [http-nio-8888-exec-1] c.b.blog.mapper.TypeMapper.findHomeType  : ==>  Preparing: select * from t_type
-2020-12-21 11:04:20.051 DEBUG 11104 --- [http-nio-8888-exec-1] c.b.blog.mapper.TypeMapper.findHomeType  : ==> Parameters: 
-2020-12-21 11:04:20.074 DEBUG 11104 --- [http-nio-8888-exec-1] c.b.blog.mapper.TypeMapper.findHomeType  : <==      Total: 2
-2020-12-21 11:04:20.075 DEBUG 11104 --- [http-nio-8888-exec-1] c.b.blog.mapper.TagMapper.findHomeTag    : ==>  Preparing: select * from t_tag
-2020-12-21 11:04:20.075 DEBUG 11104 --- [http-nio-8888-exec-1] c.b.blog.mapper.TagMapper.findHomeTag    : ==> Parameters: 
-2020-12-21 11:04:20.078 DEBUG 11104 --- [http-nio-8888-exec-1] c.b.blog.mapper.TagMapper.findHomeTag    : <==      Total: 5
-2020-12-21 11:04:20.079 DEBUG 11104 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 11:04:20.079 DEBUG 11104 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 1(Long)
-2020-12-21 11:04:20.081 DEBUG 11104 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 1
-2020-12-21 11:04:20.083 DEBUG 11104 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 11:04:20.083 DEBUG 11104 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 2(Long)
-2020-12-21 11:04:20.084 DEBUG 11104 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 0
-2020-12-21 11:04:20.084 DEBUG 11104 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 11:04:20.085 DEBUG 11104 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 3(Long)
-2020-12-21 11:04:20.085 DEBUG 11104 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 0
-2020-12-21 11:04:20.085 DEBUG 11104 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 11:04:20.086 DEBUG 11104 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 4(Long)
-2020-12-21 11:04:20.086 DEBUG 11104 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 1
-2020-12-21 11:04:20.087 DEBUG 11104 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 11:04:20.087 DEBUG 11104 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 5(Long)
-2020-12-21 11:04:20.087 DEBUG 11104 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 0
-2020-12-21 11:04:20.088 DEBUG 11104 --- [http-nio-8888-exec-1] c.b.b.m.BlogMapper.findBlogByTypeId      : ==>  Preparing: select * from t_blog where type_id = ?
-2020-12-21 11:04:20.088 DEBUG 11104 --- [http-nio-8888-exec-1] c.b.b.m.BlogMapper.findBlogByTypeId      : ==> Parameters: 1(Long)
-2020-12-21 11:04:20.088 DEBUG 11104 --- [http-nio-8888-exec-1] c.b.b.m.BlogMapper.findBlogByTypeId      : <==      Total: 0
-2020-12-21 11:04:20.089 DEBUG 11104 --- [http-nio-8888-exec-1] c.b.b.m.BlogMapper.findBlogByTypeId      : ==>  Preparing: select * from t_blog where type_id = ?
-2020-12-21 11:04:20.089 DEBUG 11104 --- [http-nio-8888-exec-1] c.b.b.m.BlogMapper.findBlogByTypeId      : ==> Parameters: 2(Long)
-2020-12-21 11:04:20.091 DEBUG 11104 --- [http-nio-8888-exec-1] c.b.b.m.BlogMapper.findBlogByTypeId      : <==      Total: 1
-2020-12-21 11:04:20.078  INFO 11104 --- [http-nio-8888-exec-1] com.bigff.blog.aspect.LogAspect          : Request : {tag=[Tag(tagId=1, tagName=学习, blogs=[Blog(id=1, title=null, content=null, first_picture=null, flag=null, views=null, appreciation=false, share_statement=false, commentabled=false, published=false, recommend=false, create_time=null, update_time=null, type_id=null, type=null, tags=[], user_id=null, user=null, comments=[], description=null)]), Tag(tagId=2, tagName=游戏, blogs=[]), Tag(tagId=3, tagName=休闲, blogs=[]), Tag(tagId=4, tagName=胡说八道, blogs=[Blog(id=1, title=null, content=null, first_picture=null, flag=null, views=null, appreciation=false, share_statement=false, commentabled=false, published=false, recommend=false, create_time=null, update_time=null, type_id=null, type=null, tags=[], user_id=null, user=null, comments=[], description=null)]), Tag(tagId=5, tagName=日记, blogs=[])], blog=com.bigff.blog.entity.util.PageResult@69bd41c4, class=[Type(typeId=1, typeName=学习日记, blogs=[]), Type(typeId=2, typeName=生活日记, blogs=[Blog(id=1, title=test01, content=test01, first_picture=https://picsum.photos/seed/picsum/800/450, flag=, views=0, appreciation=false, share_statement=false, commentabled=false, published=true, recommend=false, create_time=Sun Dec 20 20:22:15 CST 2020, update_time=Sun Dec 20 20:22:15 CST 2020, type_id=2, type=null, tags=[], user_id=1, user=null, comments=[], description=test01)])]}
-2020-12-21 11:07:25.953  INFO 15204 --- [main] com.bigff.blog.BlogApplication           : Starting BlogApplication using Java 1.8.0_261 on DESKTOP-UE5H5T5 with PID 15204 (D:\项目\blog前后端分离\blog\target\classes started by bigff in D:\项目\blog前后端分离\blog)
-2020-12-21 11:07:25.957 DEBUG 15204 --- [main] com.bigff.blog.BlogApplication           : Running with Spring Boot v2.4.1, Spring v5.3.2
-2020-12-21 11:07:25.957  INFO 15204 --- [main] com.bigff.blog.BlogApplication           : The following profiles are active: dev
-2020-12-21 11:07:27.045  INFO 15204 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8888 (http)
-2020-12-21 11:07:27.051  INFO 15204 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2020-12-21 11:07:27.052  INFO 15204 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.41]
-2020-12-21 11:07:27.100  INFO 15204 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2020-12-21 11:07:27.100  INFO 15204 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1099 ms
-2020-12-21 11:07:27.500  INFO 15204 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
-2020-12-21 11:07:27.810  INFO 15204 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8888 (http) with context path ''
-2020-12-21 11:07:27.817  INFO 15204 --- [main] com.bigff.blog.BlogApplication           : Started BlogApplication in 2.212 seconds (JVM running for 2.921)
-2020-12-21 11:07:57.530  INFO 15204 --- [http-nio-8888-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2020-12-21 11:07:57.530  INFO 15204 --- [http-nio-8888-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2020-12-21 11:07:57.531  INFO 15204 --- [http-nio-8888-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
-2020-12-21 11:07:57.565  INFO 15204 --- [http-nio-8888-exec-1] com.bigff.blog.aspect.LogAspect          : Request : {url='http://127.0.0.1:8888/homeData', ip='127.0.0.1', classMethod='com.bigff.blog.web.IndexController.findPage', args=[1, 8]}
-2020-12-21 11:07:57.609  INFO 15204 --- [http-nio-8888-exec-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2020-12-21 11:07:57.741  INFO 15204 --- [http-nio-8888-exec-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2020-12-21 11:07:57.746 DEBUG 15204 --- [http-nio-8888-exec-1] c.b.b.m.BlogMapper.getBlogList_COUNT     : ==>  Preparing: SELECT count(0) FROM t_blog b INNER JOIN t_blog_tags bt ON b.id = bt.blogs_id INNER JOIN t_tag t ON bt.tags_id = t.tagid INNER JOIN t_user u ON b.user_id = u.userid INNER JOIN t_type ty ON b.type_id = ty.typeid
-2020-12-21 11:07:57.760 DEBUG 15204 --- [http-nio-8888-exec-1] c.b.b.m.BlogMapper.getBlogList_COUNT     : ==> Parameters: 
-2020-12-21 11:07:57.771 DEBUG 15204 --- [http-nio-8888-exec-1] c.b.b.m.BlogMapper.getBlogList_COUNT     : <==      Total: 1
-2020-12-21 11:07:57.774 DEBUG 15204 --- [http-nio-8888-exec-1] c.b.blog.mapper.BlogMapper.getBlogList   : ==>  Preparing: SELECT b.*,t.*,ty.*,u.userid,u.username,u.avatar FROM t_blog b INNER JOIN t_blog_tags bt on b.id = bt.blogs_id INNER JOIN t_tag t on bt.tags_id = t.tagid INNER JOIN t_user u on b.user_id = u.userid INNER JOIN t_type ty ON b.type_id = ty.typeid LIMIT ?
-2020-12-21 11:07:57.775 DEBUG 15204 --- [http-nio-8888-exec-1] c.b.blog.mapper.BlogMapper.getBlogList   : ==> Parameters: 8(Integer)
-2020-12-21 11:07:57.778 DEBUG 15204 --- [http-nio-8888-exec-1] c.b.blog.mapper.BlogMapper.getBlogList   : <==      Total: 2
-2020-12-21 11:07:57.780 DEBUG 15204 --- [http-nio-8888-exec-1] c.b.blog.mapper.TypeMapper.findHomeType  : ==>  Preparing: select * from t_type
-2020-12-21 11:07:57.780 DEBUG 15204 --- [http-nio-8888-exec-1] c.b.blog.mapper.TypeMapper.findHomeType  : ==> Parameters: 
-2020-12-21 11:07:57.801 DEBUG 15204 --- [http-nio-8888-exec-1] c.b.blog.mapper.TypeMapper.findHomeType  : <==      Total: 2
-2020-12-21 11:07:57.801 DEBUG 15204 --- [http-nio-8888-exec-1] c.b.blog.mapper.TagMapper.findHomeTag    : ==>  Preparing: select * from t_tag
-2020-12-21 11:07:57.802 DEBUG 15204 --- [http-nio-8888-exec-1] c.b.blog.mapper.TagMapper.findHomeTag    : ==> Parameters: 
-2020-12-21 11:07:57.807 DEBUG 15204 --- [http-nio-8888-exec-1] c.b.blog.mapper.TagMapper.findHomeTag    : <==      Total: 5
-2020-12-21 11:07:57.807 DEBUG 15204 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 11:07:57.807 DEBUG 15204 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 1(Long)
-2020-12-21 11:07:57.808 DEBUG 15204 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 1
-2020-12-21 11:07:57.810 DEBUG 15204 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 11:07:57.810 DEBUG 15204 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 2(Long)
-2020-12-21 11:07:57.810 DEBUG 15204 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 0
-2020-12-21 11:07:57.810 DEBUG 15204 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 11:07:57.810 DEBUG 15204 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 3(Long)
-2020-12-21 11:07:57.810 DEBUG 15204 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 0
-2020-12-21 11:07:57.810 DEBUG 15204 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 11:07:57.811 DEBUG 15204 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 4(Long)
-2020-12-21 11:07:57.811 DEBUG 15204 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 1
-2020-12-21 11:07:57.813 DEBUG 15204 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 11:07:57.813 DEBUG 15204 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 5(Long)
-2020-12-21 11:07:57.813 DEBUG 15204 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 0
-2020-12-21 11:07:57.813 DEBUG 15204 --- [http-nio-8888-exec-1] c.b.b.m.BlogMapper.findBlogByTypeId      : ==>  Preparing: select * from t_blog where type_id = ?
-2020-12-21 11:07:57.813 DEBUG 15204 --- [http-nio-8888-exec-1] c.b.b.m.BlogMapper.findBlogByTypeId      : ==> Parameters: 1(Long)
-2020-12-21 11:07:57.813 DEBUG 15204 --- [http-nio-8888-exec-1] c.b.b.m.BlogMapper.findBlogByTypeId      : <==      Total: 0
-2020-12-21 11:07:57.813 DEBUG 15204 --- [http-nio-8888-exec-1] c.b.b.m.BlogMapper.findBlogByTypeId      : ==>  Preparing: select * from t_blog where type_id = ?
-2020-12-21 11:07:57.814 DEBUG 15204 --- [http-nio-8888-exec-1] c.b.b.m.BlogMapper.findBlogByTypeId      : ==> Parameters: 2(Long)
-2020-12-21 11:07:57.815 DEBUG 15204 --- [http-nio-8888-exec-1] c.b.b.m.BlogMapper.findBlogByTypeId      : <==      Total: 1
-2020-12-21 11:07:57.807  INFO 15204 --- [http-nio-8888-exec-1] com.bigff.blog.aspect.LogAspect          : Request : {tag=[Tag(tagId=1, tagName=学习, blogs=[Blog(id=1, title=null, content=null, first_picture=null, flag=null, views=null, appreciation=false, share_statement=false, commentabled=false, published=false, recommend=false, create_time=null, update_time=null, type_id=null, type=null, tags=[], user_id=null, user=null, comments=[], description=null)]), Tag(tagId=2, tagName=游戏, blogs=[]), Tag(tagId=3, tagName=休闲, blogs=[]), Tag(tagId=4, tagName=胡说八道, blogs=[Blog(id=1, title=null, content=null, first_picture=null, flag=null, views=null, appreciation=false, share_statement=false, commentabled=false, published=false, recommend=false, create_time=null, update_time=null, type_id=null, type=null, tags=[], user_id=null, user=null, comments=[], description=null)]), Tag(tagId=5, tagName=日记, blogs=[])], blog=com.bigff.blog.entity.util.PageResult@24d4c1dd, class=[Type(typeId=1, typeName=学习日记, blogs=[]), Type(typeId=2, typeName=生活日记, blogs=[Blog(id=1, title=test01, content=test01, first_picture=https://picsum.photos/seed/picsum/800/450, flag=, views=0, appreciation=false, share_statement=false, commentabled=false, published=true, recommend=false, create_time=Sun Dec 20 20:22:15 CST 2020, update_time=Sun Dec 20 20:22:15 CST 2020, type_id=2, type=null, tags=[], user_id=1, user=null, comments=[], description=test01)])]}
-2020-12-21 11:11:43.155  INFO 15204 --- [http-nio-8888-exec-3] com.bigff.blog.aspect.LogAspect          : Request : {url='http://127.0.0.1:8888/homeData', ip='127.0.0.1', classMethod='com.bigff.blog.web.IndexController.findPage', args=[1, 8]}
-2020-12-21 11:11:43.159 DEBUG 15204 --- [http-nio-8888-exec-3] c.b.b.m.BlogMapper.getBlogList_COUNT     : ==>  Preparing: SELECT count(0) FROM t_blog b INNER JOIN t_blog_tags bt ON b.id = bt.blogs_id INNER JOIN t_tag t ON bt.tags_id = t.tagid INNER JOIN t_user u ON b.user_id = u.userid INNER JOIN t_type ty ON b.type_id = ty.typeid
-2020-12-21 11:11:43.159 DEBUG 15204 --- [http-nio-8888-exec-3] c.b.b.m.BlogMapper.getBlogList_COUNT     : ==> Parameters: 
-2020-12-21 11:11:43.160 DEBUG 15204 --- [http-nio-8888-exec-3] c.b.b.m.BlogMapper.getBlogList_COUNT     : <==      Total: 1
-2020-12-21 11:11:43.161 DEBUG 15204 --- [http-nio-8888-exec-3] c.b.blog.mapper.BlogMapper.getBlogList   : ==>  Preparing: SELECT b.*,t.*,ty.*,u.userid,u.username,u.avatar FROM t_blog b INNER JOIN t_blog_tags bt on b.id = bt.blogs_id INNER JOIN t_tag t on bt.tags_id = t.tagid INNER JOIN t_user u on b.user_id = u.userid INNER JOIN t_type ty ON b.type_id = ty.typeid LIMIT ?
-2020-12-21 11:11:43.162 DEBUG 15204 --- [http-nio-8888-exec-3] c.b.blog.mapper.BlogMapper.getBlogList   : ==> Parameters: 8(Integer)
-2020-12-21 11:11:43.164 DEBUG 15204 --- [http-nio-8888-exec-3] c.b.blog.mapper.BlogMapper.getBlogList   : <==      Total: 2
-2020-12-21 11:11:43.165 DEBUG 15204 --- [http-nio-8888-exec-3] c.b.blog.mapper.TypeMapper.findHomeType  : ==>  Preparing: select * from t_type
-2020-12-21 11:11:43.166 DEBUG 15204 --- [http-nio-8888-exec-3] c.b.blog.mapper.TypeMapper.findHomeType  : ==> Parameters: 
-2020-12-21 11:11:43.168 DEBUG 15204 --- [http-nio-8888-exec-3] c.b.blog.mapper.TypeMapper.findHomeType  : <==      Total: 2
-2020-12-21 11:11:43.168 DEBUG 15204 --- [http-nio-8888-exec-3] c.b.blog.mapper.TagMapper.findHomeTag    : ==>  Preparing: select * from t_tag
-2020-12-21 11:11:43.169 DEBUG 15204 --- [http-nio-8888-exec-3] c.b.blog.mapper.TagMapper.findHomeTag    : ==> Parameters: 
-2020-12-21 11:11:43.170 DEBUG 15204 --- [http-nio-8888-exec-3] c.b.blog.mapper.TagMapper.findHomeTag    : <==      Total: 5
-2020-12-21 11:11:43.172 DEBUG 15204 --- [http-nio-8888-exec-3] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 11:11:43.173 DEBUG 15204 --- [http-nio-8888-exec-3] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 1(Long)
-2020-12-21 11:11:43.174 DEBUG 15204 --- [http-nio-8888-exec-3] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 1
-2020-12-21 11:11:43.175 DEBUG 15204 --- [http-nio-8888-exec-3] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 11:11:43.175 DEBUG 15204 --- [http-nio-8888-exec-3] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 2(Long)
-2020-12-21 11:11:43.176 DEBUG 15204 --- [http-nio-8888-exec-3] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 0
-2020-12-21 11:11:43.176 DEBUG 15204 --- [http-nio-8888-exec-3] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 11:11:43.176 DEBUG 15204 --- [http-nio-8888-exec-3] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 3(Long)
-2020-12-21 11:11:43.177 DEBUG 15204 --- [http-nio-8888-exec-3] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 0
-2020-12-21 11:11:43.177 DEBUG 15204 --- [http-nio-8888-exec-3] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 11:11:43.178 DEBUG 15204 --- [http-nio-8888-exec-3] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 4(Long)
-2020-12-21 11:11:43.178 DEBUG 15204 --- [http-nio-8888-exec-3] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 1
-2020-12-21 11:11:43.178 DEBUG 15204 --- [http-nio-8888-exec-3] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 11:11:43.178 DEBUG 15204 --- [http-nio-8888-exec-3] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 5(Long)
-2020-12-21 11:11:43.179 DEBUG 15204 --- [http-nio-8888-exec-3] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 0
-2020-12-21 11:11:43.179 DEBUG 15204 --- [http-nio-8888-exec-3] c.b.b.m.BlogMapper.findBlogByTypeId      : ==>  Preparing: select * from t_blog where type_id = ?
-2020-12-21 11:11:43.179 DEBUG 15204 --- [http-nio-8888-exec-3] c.b.b.m.BlogMapper.findBlogByTypeId      : ==> Parameters: 1(Long)
-2020-12-21 11:11:43.180 DEBUG 15204 --- [http-nio-8888-exec-3] c.b.b.m.BlogMapper.findBlogByTypeId      : <==      Total: 0
-2020-12-21 11:11:43.180 DEBUG 15204 --- [http-nio-8888-exec-3] c.b.b.m.BlogMapper.findBlogByTypeId      : ==>  Preparing: select * from t_blog where type_id = ?
-2020-12-21 11:11:43.180 DEBUG 15204 --- [http-nio-8888-exec-3] c.b.b.m.BlogMapper.findBlogByTypeId      : ==> Parameters: 2(Long)
-2020-12-21 11:11:43.182 DEBUG 15204 --- [http-nio-8888-exec-3] c.b.b.m.BlogMapper.findBlogByTypeId      : <==      Total: 1
-2020-12-21 11:11:43.171  INFO 15204 --- [http-nio-8888-exec-3] com.bigff.blog.aspect.LogAspect          : Request : {tag=[Tag(tagId=1, tagName=学习, blogs=[Blog(id=1, title=null, content=null, first_picture=null, flag=null, views=null, appreciation=false, share_statement=false, commentabled=false, published=false, recommend=false, create_time=null, update_time=null, type_id=null, type=null, tags=[], user_id=null, user=null, comments=[], description=null)]), Tag(tagId=2, tagName=游戏, blogs=[]), Tag(tagId=3, tagName=休闲, blogs=[]), Tag(tagId=4, tagName=胡说八道, blogs=[Blog(id=1, title=null, content=null, first_picture=null, flag=null, views=null, appreciation=false, share_statement=false, commentabled=false, published=false, recommend=false, create_time=null, update_time=null, type_id=null, type=null, tags=[], user_id=null, user=null, comments=[], description=null)]), Tag(tagId=5, tagName=日记, blogs=[])], blog=com.bigff.blog.entity.util.PageResult@7db41784, class=[Type(typeId=1, typeName=学习日记, blogs=[]), Type(typeId=2, typeName=生活日记, blogs=[Blog(id=1, title=test01, content=test01, first_picture=https://picsum.photos/seed/picsum/800/450, flag=, views=0, appreciation=false, share_statement=false, commentabled=false, published=true, recommend=false, create_time=Sun Dec 20 20:22:15 CST 2020, update_time=Sun Dec 20 20:22:15 CST 2020, type_id=2, type=null, tags=[], user_id=1, user=null, comments=[], description=test01)])]}
-2020-12-21 11:13:07.177  INFO 19160 --- [main] com.bigff.blog.BlogApplication           : Starting BlogApplication using Java 1.8.0_261 on DESKTOP-UE5H5T5 with PID 19160 (D:\项目\blog前后端分离\blog\target\classes started by bigff in D:\项目\blog前后端分离\blog)
-2020-12-21 11:13:07.179 DEBUG 19160 --- [main] com.bigff.blog.BlogApplication           : Running with Spring Boot v2.4.1, Spring v5.3.2
-2020-12-21 11:13:07.179  INFO 19160 --- [main] com.bigff.blog.BlogApplication           : The following profiles are active: dev
-2020-12-21 11:13:08.284  INFO 19160 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8888 (http)
-2020-12-21 11:13:08.289  INFO 19160 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2020-12-21 11:13:08.290  INFO 19160 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.41]
-2020-12-21 11:13:08.337  INFO 19160 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2020-12-21 11:13:08.338  INFO 19160 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1111 ms
-2020-12-21 11:13:08.751  INFO 19160 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
-2020-12-21 11:13:09.059  INFO 19160 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8888 (http) with context path ''
-2020-12-21 11:13:09.066  INFO 19160 --- [main] com.bigff.blog.BlogApplication           : Started BlogApplication in 2.234 seconds (JVM running for 2.96)
-2020-12-21 11:13:23.457  INFO 19160 --- [http-nio-8888-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2020-12-21 11:13:23.457  INFO 19160 --- [http-nio-8888-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2020-12-21 11:13:23.458  INFO 19160 --- [http-nio-8888-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
-2020-12-21 11:13:23.499  INFO 19160 --- [http-nio-8888-exec-1] com.bigff.blog.aspect.LogAspect          : Request : {url='http://127.0.0.1:8888/homeData', ip='127.0.0.1', classMethod='com.bigff.blog.web.IndexController.findPage', args=[1, 8]}
-2020-12-21 11:13:23.535  INFO 19160 --- [http-nio-8888-exec-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2020-12-21 11:13:23.665  INFO 19160 --- [http-nio-8888-exec-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2020-12-21 11:13:23.670 DEBUG 19160 --- [http-nio-8888-exec-1] c.b.b.m.BlogMapper.getBlogList_COUNT     : ==>  Preparing: SELECT count(0) FROM t_blog b INNER JOIN t_blog_tags bt ON b.id = bt.blogs_id INNER JOIN t_tag t ON bt.tags_id = t.tagid INNER JOIN t_user u ON b.user_id = u.userid INNER JOIN t_type ty ON b.type_id = ty.typeid
-2020-12-21 11:13:23.683 DEBUG 19160 --- [http-nio-8888-exec-1] c.b.b.m.BlogMapper.getBlogList_COUNT     : ==> Parameters: 
-2020-12-21 11:13:23.692 DEBUG 19160 --- [http-nio-8888-exec-1] c.b.b.m.BlogMapper.getBlogList_COUNT     : <==      Total: 1
-2020-12-21 11:13:23.696 DEBUG 19160 --- [http-nio-8888-exec-1] c.b.blog.mapper.BlogMapper.getBlogList   : ==>  Preparing: SELECT b.*,t.*,ty.*,u.userid,u.username,u.avatar FROM t_blog b INNER JOIN t_blog_tags bt on b.id = bt.blogs_id INNER JOIN t_tag t on bt.tags_id = t.tagid INNER JOIN t_user u on b.user_id = u.userid INNER JOIN t_type ty ON b.type_id = ty.typeid LIMIT ?
-2020-12-21 11:13:23.696 DEBUG 19160 --- [http-nio-8888-exec-1] c.b.blog.mapper.BlogMapper.getBlogList   : ==> Parameters: 8(Integer)
-2020-12-21 11:13:23.700 DEBUG 19160 --- [http-nio-8888-exec-1] c.b.blog.mapper.BlogMapper.getBlogList   : <==      Total: 2
-2020-12-21 11:13:23.702 DEBUG 19160 --- [http-nio-8888-exec-1] c.b.blog.mapper.TypeMapper.findHomeType  : ==>  Preparing: select * from t_type
-2020-12-21 11:13:23.702 DEBUG 19160 --- [http-nio-8888-exec-1] c.b.blog.mapper.TypeMapper.findHomeType  : ==> Parameters: 
-2020-12-21 11:13:23.722 DEBUG 19160 --- [http-nio-8888-exec-1] c.b.blog.mapper.TypeMapper.findHomeType  : <==      Total: 2
-2020-12-21 11:13:23.723 DEBUG 19160 --- [http-nio-8888-exec-1] c.b.blog.mapper.TagMapper.findHomeTag    : ==>  Preparing: select * from t_tag
-2020-12-21 11:13:23.723 DEBUG 19160 --- [http-nio-8888-exec-1] c.b.blog.mapper.TagMapper.findHomeTag    : ==> Parameters: 
-2020-12-21 11:13:23.726 DEBUG 19160 --- [http-nio-8888-exec-1] c.b.blog.mapper.TagMapper.findHomeTag    : <==      Total: 5
-2020-12-21 11:13:23.727 DEBUG 19160 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 11:13:23.727 DEBUG 19160 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 1(Long)
-2020-12-21 11:13:23.728 DEBUG 19160 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 1
-2020-12-21 11:13:23.728 DEBUG 19160 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 11:13:23.728 DEBUG 19160 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 2(Long)
-2020-12-21 11:13:23.729 DEBUG 19160 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 0
-2020-12-21 11:13:23.729 DEBUG 19160 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 11:13:23.729 DEBUG 19160 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 3(Long)
-2020-12-21 11:13:23.729 DEBUG 19160 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 0
-2020-12-21 11:13:23.730 DEBUG 19160 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 11:13:23.730 DEBUG 19160 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 4(Long)
-2020-12-21 11:13:23.730 DEBUG 19160 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 1
-2020-12-21 11:13:23.731 DEBUG 19160 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 11:13:23.731 DEBUG 19160 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 5(Long)
-2020-12-21 11:13:23.731 DEBUG 19160 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 0
-2020-12-21 11:13:23.732 DEBUG 19160 --- [http-nio-8888-exec-1] c.b.b.m.BlogMapper.findBlogByTypeId      : ==>  Preparing: select * from t_blog where type_id = ?
-2020-12-21 11:13:23.732 DEBUG 19160 --- [http-nio-8888-exec-1] c.b.b.m.BlogMapper.findBlogByTypeId      : ==> Parameters: 1(Long)
-2020-12-21 11:13:23.733 DEBUG 19160 --- [http-nio-8888-exec-1] c.b.b.m.BlogMapper.findBlogByTypeId      : <==      Total: 0
-2020-12-21 11:13:23.733 DEBUG 19160 --- [http-nio-8888-exec-1] c.b.b.m.BlogMapper.findBlogByTypeId      : ==>  Preparing: select * from t_blog where type_id = ?
-2020-12-21 11:13:23.734 DEBUG 19160 --- [http-nio-8888-exec-1] c.b.b.m.BlogMapper.findBlogByTypeId      : ==> Parameters: 2(Long)
-2020-12-21 11:13:23.735 DEBUG 19160 --- [http-nio-8888-exec-1] c.b.b.m.BlogMapper.findBlogByTypeId      : <==      Total: 1
-2020-12-21 11:13:23.726  INFO 19160 --- [http-nio-8888-exec-1] com.bigff.blog.aspect.LogAspect          : Request : {tag=[Tag(tagId=1, tagName=学习, blogs=[Blog(id=1, title=null, content=null, first_picture=null, flag=null, views=null, appreciation=false, share_statement=false, commentabled=false, published=false, recommend=false, create_time=null, update_time=null, type_id=null, type=null, tags=[], user_id=null, user=null, comments=[], description=null)]), Tag(tagId=2, tagName=游戏, blogs=[]), Tag(tagId=3, tagName=休闲, blogs=[]), Tag(tagId=4, tagName=胡说八道, blogs=[Blog(id=1, title=null, content=null, first_picture=null, flag=null, views=null, appreciation=false, share_statement=false, commentabled=false, published=false, recommend=false, create_time=null, update_time=null, type_id=null, type=null, tags=[], user_id=null, user=null, comments=[], description=null)]), Tag(tagId=5, tagName=日记, blogs=[])], blog=com.bigff.blog.entity.util.PageResult@3649e34f, class=[Type(typeId=1, typeName=学习日记, blogs=[]), Type(typeId=2, typeName=生活日记, blogs=[Blog(id=1, title=test01, content=test01, first_picture=https://picsum.photos/seed/picsum/800/450, flag=, views=0, appreciation=false, share_statement=false, commentabled=false, published=true, recommend=false, create_time=Sun Dec 20 20:22:15 CST 2020, update_time=Sun Dec 20 20:22:15 CST 2020, type_id=2, type=null, tags=[], user_id=1, user=null, comments=[], description=test01)])]}
-2020-12-21 11:15:52.733  INFO 19940 --- [main] com.bigff.blog.BlogApplication           : Starting BlogApplication using Java 1.8.0_261 on DESKTOP-UE5H5T5 with PID 19940 (D:\项目\blog前后端分离\blog\target\classes started by bigff in D:\项目\blog前后端分离\blog)
-2020-12-21 11:15:52.736 DEBUG 19940 --- [main] com.bigff.blog.BlogApplication           : Running with Spring Boot v2.4.1, Spring v5.3.2
-2020-12-21 11:15:52.736  INFO 19940 --- [main] com.bigff.blog.BlogApplication           : The following profiles are active: dev
-2020-12-21 11:15:53.734  INFO 19940 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8888 (http)
-2020-12-21 11:15:53.740  INFO 19940 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2020-12-21 11:15:53.740  INFO 19940 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.41]
-2020-12-21 11:15:53.787  INFO 19940 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2020-12-21 11:15:53.787  INFO 19940 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1008 ms
-2020-12-21 11:15:54.190  INFO 19940 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
-2020-12-21 11:15:54.504  INFO 19940 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8888 (http) with context path ''
-2020-12-21 11:15:54.512  INFO 19940 --- [main] com.bigff.blog.BlogApplication           : Started BlogApplication in 2.098 seconds (JVM running for 2.762)
-2020-12-21 11:16:11.620  INFO 19940 --- [http-nio-8888-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2020-12-21 11:16:11.620  INFO 19940 --- [http-nio-8888-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2020-12-21 11:16:11.621  INFO 19940 --- [http-nio-8888-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
-2020-12-21 11:16:11.650  INFO 19940 --- [http-nio-8888-exec-1] com.bigff.blog.aspect.LogAspect          : Request : {url='http://127.0.0.1:8888/homeData', ip='127.0.0.1', classMethod='com.bigff.blog.web.IndexController.findPage', args=[1, 8]}
-2020-12-21 11:16:11.682  INFO 19940 --- [http-nio-8888-exec-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2020-12-21 11:16:11.805  INFO 19940 --- [http-nio-8888-exec-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2020-12-21 11:16:11.811 DEBUG 19940 --- [http-nio-8888-exec-1] c.b.b.m.BlogMapper.getBlogList_COUNT     : ==>  Preparing: SELECT count(0) FROM t_blog b INNER JOIN t_blog_tags bt ON b.id = bt.blogs_id INNER JOIN t_tag t ON bt.tags_id = t.tagid INNER JOIN t_user u ON b.user_id = u.userid INNER JOIN t_type ty ON b.type_id = ty.typeid
-2020-12-21 11:16:11.824 DEBUG 19940 --- [http-nio-8888-exec-1] c.b.b.m.BlogMapper.getBlogList_COUNT     : ==> Parameters: 
-2020-12-21 11:16:11.833 DEBUG 19940 --- [http-nio-8888-exec-1] c.b.b.m.BlogMapper.getBlogList_COUNT     : <==      Total: 1
-2020-12-21 11:16:11.836 DEBUG 19940 --- [http-nio-8888-exec-1] c.b.blog.mapper.BlogMapper.getBlogList   : ==>  Preparing: SELECT b.*,t.*,ty.*,u.userid,u.username,u.avatar FROM t_blog b INNER JOIN t_blog_tags bt on b.id = bt.blogs_id INNER JOIN t_tag t on bt.tags_id = t.tagid INNER JOIN t_user u on b.user_id = u.userid INNER JOIN t_type ty ON b.type_id = ty.typeid LIMIT ?
-2020-12-21 11:16:11.837 DEBUG 19940 --- [http-nio-8888-exec-1] c.b.blog.mapper.BlogMapper.getBlogList   : ==> Parameters: 8(Integer)
-2020-12-21 11:16:11.840 DEBUG 19940 --- [http-nio-8888-exec-1] c.b.blog.mapper.BlogMapper.getBlogList   : <==      Total: 2
-2020-12-21 11:16:11.842 DEBUG 19940 --- [http-nio-8888-exec-1] c.b.blog.mapper.TypeMapper.findHomeType  : ==>  Preparing: select * from t_type
-2020-12-21 11:16:11.842 DEBUG 19940 --- [http-nio-8888-exec-1] c.b.blog.mapper.TypeMapper.findHomeType  : ==> Parameters: 
-2020-12-21 11:16:11.866 DEBUG 19940 --- [http-nio-8888-exec-1] c.b.blog.mapper.TypeMapper.findHomeType  : <==      Total: 2
-2020-12-21 11:16:11.866 DEBUG 19940 --- [http-nio-8888-exec-1] c.b.blog.mapper.TagMapper.findHomeTag    : ==>  Preparing: select * from t_tag
-2020-12-21 11:16:11.866 DEBUG 19940 --- [http-nio-8888-exec-1] c.b.blog.mapper.TagMapper.findHomeTag    : ==> Parameters: 
-2020-12-21 11:16:11.870 DEBUG 19940 --- [http-nio-8888-exec-1] c.b.blog.mapper.TagMapper.findHomeTag    : <==      Total: 5
-2020-12-21 11:16:11.871 DEBUG 19940 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 11:16:11.871 DEBUG 19940 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 1(Long)
-2020-12-21 11:16:11.872 DEBUG 19940 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 1
-2020-12-21 11:16:11.872 DEBUG 19940 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 11:16:11.872 DEBUG 19940 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 2(Long)
-2020-12-21 11:16:11.873 DEBUG 19940 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 0
-2020-12-21 11:16:11.873 DEBUG 19940 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 11:16:11.873 DEBUG 19940 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 3(Long)
-2020-12-21 11:16:11.873 DEBUG 19940 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 0
-2020-12-21 11:16:11.874 DEBUG 19940 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 11:16:11.874 DEBUG 19940 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 4(Long)
-2020-12-21 11:16:11.874 DEBUG 19940 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 1
-2020-12-21 11:16:11.875 DEBUG 19940 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 11:16:11.875 DEBUG 19940 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 5(Long)
-2020-12-21 11:16:11.875 DEBUG 19940 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 0
-2020-12-21 11:16:11.876 DEBUG 19940 --- [http-nio-8888-exec-1] c.b.b.m.BlogMapper.findBlogByTypeId      : ==>  Preparing: select * from t_blog where type_id = ?
-2020-12-21 11:16:11.876 DEBUG 19940 --- [http-nio-8888-exec-1] c.b.b.m.BlogMapper.findBlogByTypeId      : ==> Parameters: 1(Long)
-2020-12-21 11:16:11.876 DEBUG 19940 --- [http-nio-8888-exec-1] c.b.b.m.BlogMapper.findBlogByTypeId      : <==      Total: 0
-2020-12-21 11:16:11.876 DEBUG 19940 --- [http-nio-8888-exec-1] c.b.b.m.BlogMapper.findBlogByTypeId      : ==>  Preparing: select * from t_blog where type_id = ?
-2020-12-21 11:16:11.877 DEBUG 19940 --- [http-nio-8888-exec-1] c.b.b.m.BlogMapper.findBlogByTypeId      : ==> Parameters: 2(Long)
-2020-12-21 11:16:11.878 DEBUG 19940 --- [http-nio-8888-exec-1] c.b.b.m.BlogMapper.findBlogByTypeId      : <==      Total: 1
-2020-12-21 11:16:11.870  INFO 19940 --- [http-nio-8888-exec-1] com.bigff.blog.aspect.LogAspect          : Request : {tag=[Tag(tagId=1, tagName=学习, blogs=[Blog(id=1, title=null, content=null, first_picture=null, flag=null, views=null, appreciation=false, share_statement=false, commentabled=false, published=false, recommend=false, create_time=null, update_time=null, type_id=null, type=null, tags=[], user_id=null, user=null, comments=[], description=null)]), Tag(tagId=2, tagName=游戏, blogs=[]), Tag(tagId=3, tagName=休闲, blogs=[]), Tag(tagId=4, tagName=胡说八道, blogs=[Blog(id=1, title=null, content=null, first_picture=null, flag=null, views=null, appreciation=false, share_statement=false, commentabled=false, published=false, recommend=false, create_time=null, update_time=null, type_id=null, type=null, tags=[], user_id=null, user=null, comments=[], description=null)]), Tag(tagId=5, tagName=日记, blogs=[])], blog=com.bigff.blog.entity.util.PageResult@a11ba6b, class=[Type(typeId=1, typeName=学习日记, blogs=[]), Type(typeId=2, typeName=生活日记, blogs=[Blog(id=1, title=test01, content=test01, first_picture=https://picsum.photos/seed/picsum/800/450, flag=, views=0, appreciation=false, share_statement=false, commentabled=false, published=true, recommend=false, create_time=Sun Dec 20 20:22:15 CST 2020, update_time=Sun Dec 20 20:22:15 CST 2020, type_id=2, type=null, tags=[], user_id=1, user=null, comments=[], description=test01)])]}
-2020-12-21 11:18:29.686  INFO 14516 --- [main] com.bigff.blog.BlogApplication           : Starting BlogApplication using Java 1.8.0_261 on DESKTOP-UE5H5T5 with PID 14516 (D:\项目\blog前后端分离\blog\target\classes started by bigff in D:\项目\blog前后端分离\blog)
-2020-12-21 11:18:29.689 DEBUG 14516 --- [main] com.bigff.blog.BlogApplication           : Running with Spring Boot v2.4.1, Spring v5.3.2
-2020-12-21 11:18:29.689  INFO 14516 --- [main] com.bigff.blog.BlogApplication           : The following profiles are active: dev
-2020-12-21 11:18:30.710  INFO 14516 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8888 (http)
-2020-12-21 11:18:30.716  INFO 14516 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2020-12-21 11:18:30.716  INFO 14516 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.41]
-2020-12-21 11:18:30.765  INFO 14516 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2020-12-21 11:18:30.765  INFO 14516 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1035 ms
-2020-12-21 11:18:31.146  INFO 14516 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
-2020-12-21 11:18:31.454  INFO 14516 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8888 (http) with context path ''
-2020-12-21 11:18:31.461  INFO 14516 --- [main] com.bigff.blog.BlogApplication           : Started BlogApplication in 2.124 seconds (JVM running for 2.828)
-2020-12-21 11:18:44.835  INFO 14516 --- [http-nio-8888-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2020-12-21 11:18:44.835  INFO 14516 --- [http-nio-8888-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2020-12-21 11:18:44.836  INFO 14516 --- [http-nio-8888-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
-2020-12-21 11:18:44.870  INFO 14516 --- [http-nio-8888-exec-1] com.bigff.blog.aspect.LogAspect          : Request : {url='http://127.0.0.1:8888/homeData', ip='127.0.0.1', classMethod='com.bigff.blog.web.IndexController.findPage', args=[1, 8]}
-2020-12-21 11:18:44.909  INFO 14516 --- [http-nio-8888-exec-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2020-12-21 11:18:45.044  INFO 14516 --- [http-nio-8888-exec-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2020-12-21 11:18:45.050 DEBUG 14516 --- [http-nio-8888-exec-1] c.b.b.m.BlogMapper.getBlogList_COUNT     : ==>  Preparing: SELECT count(0) FROM t_blog b INNER JOIN t_blog_tags bt ON b.id = bt.blogs_id INNER JOIN t_tag t ON bt.tags_id = t.tagid INNER JOIN t_user u ON b.user_id = u.userid INNER JOIN t_type ty ON b.type_id = ty.typeid
-2020-12-21 11:18:45.063 DEBUG 14516 --- [http-nio-8888-exec-1] c.b.b.m.BlogMapper.getBlogList_COUNT     : ==> Parameters: 
-2020-12-21 11:18:45.072 DEBUG 14516 --- [http-nio-8888-exec-1] c.b.b.m.BlogMapper.getBlogList_COUNT     : <==      Total: 1
-2020-12-21 11:18:45.075 DEBUG 14516 --- [http-nio-8888-exec-1] c.b.blog.mapper.BlogMapper.getBlogList   : ==>  Preparing: SELECT b.*,t.*,ty.*,u.userid,u.username,u.avatar FROM t_blog b INNER JOIN t_blog_tags bt on b.id = bt.blogs_id INNER JOIN t_tag t on bt.tags_id = t.tagid INNER JOIN t_user u on b.user_id = u.userid INNER JOIN t_type ty ON b.type_id = ty.typeid LIMIT ?
-2020-12-21 11:18:45.075 DEBUG 14516 --- [http-nio-8888-exec-1] c.b.blog.mapper.BlogMapper.getBlogList   : ==> Parameters: 8(Integer)
-2020-12-21 11:18:45.078 DEBUG 14516 --- [http-nio-8888-exec-1] c.b.blog.mapper.BlogMapper.getBlogList   : <==      Total: 2
-2020-12-21 11:18:45.080 DEBUG 14516 --- [http-nio-8888-exec-1] c.b.blog.mapper.TypeMapper.findHomeType  : ==>  Preparing: select * from t_type
-2020-12-21 11:18:45.080 DEBUG 14516 --- [http-nio-8888-exec-1] c.b.blog.mapper.TypeMapper.findHomeType  : ==> Parameters: 
-2020-12-21 11:18:45.100 DEBUG 14516 --- [http-nio-8888-exec-1] c.b.blog.mapper.TypeMapper.findHomeType  : <==      Total: 2
-2020-12-21 11:18:45.100 DEBUG 14516 --- [http-nio-8888-exec-1] c.b.blog.mapper.TagMapper.findHomeTag    : ==>  Preparing: select * from t_tag
-2020-12-21 11:18:45.100 DEBUG 14516 --- [http-nio-8888-exec-1] c.b.blog.mapper.TagMapper.findHomeTag    : ==> Parameters: 
-2020-12-21 11:18:45.103 DEBUG 14516 --- [http-nio-8888-exec-1] c.b.blog.mapper.TagMapper.findHomeTag    : <==      Total: 5
-2020-12-21 11:18:45.104 DEBUG 14516 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 11:18:45.104 DEBUG 14516 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 1(Long)
-2020-12-21 11:18:45.105 DEBUG 14516 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 1
-2020-12-21 11:18:45.105 DEBUG 14516 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 11:18:45.105 DEBUG 14516 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 2(Long)
-2020-12-21 11:18:45.106 DEBUG 14516 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 0
-2020-12-21 11:18:45.106 DEBUG 14516 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 11:18:45.106 DEBUG 14516 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 3(Long)
-2020-12-21 11:18:45.107 DEBUG 14516 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 0
-2020-12-21 11:18:45.107 DEBUG 14516 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 11:18:45.107 DEBUG 14516 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 4(Long)
-2020-12-21 11:18:45.108 DEBUG 14516 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 1
-2020-12-21 11:18:45.109 DEBUG 14516 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 11:18:45.109 DEBUG 14516 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 5(Long)
-2020-12-21 11:18:45.109 DEBUG 14516 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 0
-2020-12-21 11:18:45.110 DEBUG 14516 --- [http-nio-8888-exec-1] c.b.b.m.BlogMapper.findBlogByTypeId      : ==>  Preparing: select * from t_blog where type_id = ?
-2020-12-21 11:18:45.110 DEBUG 14516 --- [http-nio-8888-exec-1] c.b.b.m.BlogMapper.findBlogByTypeId      : ==> Parameters: 1(Long)
-2020-12-21 11:18:45.110 DEBUG 14516 --- [http-nio-8888-exec-1] c.b.b.m.BlogMapper.findBlogByTypeId      : <==      Total: 0
-2020-12-21 11:18:45.110 DEBUG 14516 --- [http-nio-8888-exec-1] c.b.b.m.BlogMapper.findBlogByTypeId      : ==>  Preparing: select * from t_blog where type_id = ?
-2020-12-21 11:18:45.111 DEBUG 14516 --- [http-nio-8888-exec-1] c.b.b.m.BlogMapper.findBlogByTypeId      : ==> Parameters: 2(Long)
-2020-12-21 11:18:45.112 DEBUG 14516 --- [http-nio-8888-exec-1] c.b.b.m.BlogMapper.findBlogByTypeId      : <==      Total: 1
-2020-12-21 11:18:45.103  INFO 14516 --- [http-nio-8888-exec-1] com.bigff.blog.aspect.LogAspect          : Request : {tag=[Tag(tagId=1, tagName=学习, blogs=[Blog(id=1, title=null, content=null, first_picture=null, flag=null, views=null, appreciation=false, share_statement=false, commentabled=false, published=false, recommend=false, create_time=null, update_time=null, type_id=null, type=null, tags=[], user_id=null, user=null, comments=[], description=null)]), Tag(tagId=2, tagName=游戏, blogs=[]), Tag(tagId=3, tagName=休闲, blogs=[]), Tag(tagId=4, tagName=胡说八道, blogs=[Blog(id=1, title=null, content=null, first_picture=null, flag=null, views=null, appreciation=false, share_statement=false, commentabled=false, published=false, recommend=false, create_time=null, update_time=null, type_id=null, type=null, tags=[], user_id=null, user=null, comments=[], description=null)]), Tag(tagId=5, tagName=日记, blogs=[])], blog=com.bigff.blog.entity.util.PageResult@2c31827b, class=[Type(typeId=1, typeName=学习日记, blogs=[]), Type(typeId=2, typeName=生活日记, blogs=[Blog(id=1, title=test01, content=test01, first_picture=https://picsum.photos/seed/picsum/800/450, flag=, views=0, appreciation=false, share_statement=false, commentabled=false, published=true, recommend=false, create_time=Sun Dec 20 20:22:15 CST 2020, update_time=Sun Dec 20 20:22:15 CST 2020, type_id=2, type=null, tags=[], user_id=1, user=null, comments=[], description=test01)])]}
-2020-12-21 11:20:24.633  INFO 14460 --- [main] com.bigff.blog.BlogApplication           : Starting BlogApplication using Java 1.8.0_261 on DESKTOP-UE5H5T5 with PID 14460 (D:\项目\blog前后端分离\blog\target\classes started by bigff in D:\项目\blog前后端分离\blog)
-2020-12-21 11:20:24.635 DEBUG 14460 --- [main] com.bigff.blog.BlogApplication           : Running with Spring Boot v2.4.1, Spring v5.3.2
-2020-12-21 11:20:24.636  INFO 14460 --- [main] com.bigff.blog.BlogApplication           : The following profiles are active: dev
-2020-12-21 11:20:25.652  INFO 14460 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8888 (http)
-2020-12-21 11:20:25.658  INFO 14460 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2020-12-21 11:20:25.658  INFO 14460 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.41]
-2020-12-21 11:20:25.716  INFO 14460 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2020-12-21 11:20:25.716  INFO 14460 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1038 ms
-2020-12-21 11:20:26.132  INFO 14460 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
-2020-12-21 11:20:26.467  INFO 14460 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8888 (http) with context path ''
-2020-12-21 11:20:26.474  INFO 14460 --- [main] com.bigff.blog.BlogApplication           : Started BlogApplication in 2.216 seconds (JVM running for 2.891)
-2020-12-21 11:20:56.582  INFO 15816 --- [main] com.bigff.blog.BlogApplication           : Starting BlogApplication using Java 1.8.0_261 on DESKTOP-UE5H5T5 with PID 15816 (D:\项目\blog前后端分离\blog\target\classes started by bigff in D:\项目\blog前后端分离\blog)
-2020-12-21 11:20:56.584 DEBUG 15816 --- [main] com.bigff.blog.BlogApplication           : Running with Spring Boot v2.4.1, Spring v5.3.2
-2020-12-21 11:20:56.584  INFO 15816 --- [main] com.bigff.blog.BlogApplication           : The following profiles are active: dev
-2020-12-21 11:20:57.625  INFO 15816 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8888 (http)
-2020-12-21 11:20:57.631  INFO 15816 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2020-12-21 11:20:57.631  INFO 15816 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.41]
-2020-12-21 11:20:57.681  INFO 15816 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2020-12-21 11:20:57.681  INFO 15816 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 998 ms
-2020-12-21 11:20:58.064  INFO 15816 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
-2020-12-21 11:20:58.369  INFO 15816 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8888 (http) with context path ''
-2020-12-21 11:20:58.376  INFO 15816 --- [main] com.bigff.blog.BlogApplication           : Started BlogApplication in 2.133 seconds (JVM running for 2.876)
-2020-12-21 11:21:35.068  INFO 15816 --- [http-nio-8888-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2020-12-21 11:21:35.068  INFO 15816 --- [http-nio-8888-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2020-12-21 11:21:35.069  INFO 15816 --- [http-nio-8888-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
-2020-12-21 11:21:35.105  INFO 15816 --- [http-nio-8888-exec-1] com.bigff.blog.aspect.LogAspect          : Request : {url='http://127.0.0.1:8888/homeData', ip='127.0.0.1', classMethod='com.bigff.blog.web.IndexController.findPage', args=[1, 8]}
-2020-12-21 11:21:35.148  INFO 15816 --- [http-nio-8888-exec-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2020-12-21 11:21:35.270  INFO 15816 --- [http-nio-8888-exec-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2020-12-21 11:21:35.276 DEBUG 15816 --- [http-nio-8888-exec-1] c.b.b.m.BlogMapper.getBlogList_COUNT     : ==>  Preparing: SELECT count(0) FROM t_blog b INNER JOIN t_blog_tags bt ON b.id = bt.blogs_id INNER JOIN t_tag t ON bt.tags_id = t.tagid INNER JOIN t_user u ON b.user_id = u.userid INNER JOIN t_type ty ON b.type_id = ty.typeid
-2020-12-21 11:21:35.290 DEBUG 15816 --- [http-nio-8888-exec-1] c.b.b.m.BlogMapper.getBlogList_COUNT     : ==> Parameters: 
-2020-12-21 11:21:35.298 DEBUG 15816 --- [http-nio-8888-exec-1] c.b.b.m.BlogMapper.getBlogList_COUNT     : <==      Total: 1
-2020-12-21 11:21:35.301 DEBUG 15816 --- [http-nio-8888-exec-1] c.b.blog.mapper.BlogMapper.getBlogList   : ==>  Preparing: SELECT b.*,t.*,ty.*,u.userid,u.username,u.avatar FROM t_blog b INNER JOIN t_blog_tags bt on b.id = bt.blogs_id INNER JOIN t_tag t on bt.tags_id = t.tagid INNER JOIN t_user u on b.user_id = u.userid INNER JOIN t_type ty ON b.type_id = ty.typeid LIMIT ?
-2020-12-21 11:21:35.302 DEBUG 15816 --- [http-nio-8888-exec-1] c.b.blog.mapper.BlogMapper.getBlogList   : ==> Parameters: 8(Integer)
-2020-12-21 11:21:35.308 DEBUG 15816 --- [http-nio-8888-exec-1] c.b.blog.mapper.BlogMapper.getBlogList   : <==      Total: 2
-2020-12-21 11:21:35.311 DEBUG 15816 --- [http-nio-8888-exec-1] c.b.blog.mapper.TypeMapper.findHomeType  : ==>  Preparing: select * from t_type
-2020-12-21 11:21:35.311 DEBUG 15816 --- [http-nio-8888-exec-1] c.b.blog.mapper.TypeMapper.findHomeType  : ==> Parameters: 
-2020-12-21 11:21:35.334 DEBUG 15816 --- [http-nio-8888-exec-1] c.b.blog.mapper.TypeMapper.findHomeType  : <==      Total: 2
-2020-12-21 11:21:35.334 DEBUG 15816 --- [http-nio-8888-exec-1] c.b.blog.mapper.TagMapper.findHomeTag    : ==>  Preparing: select * from t_tag
-2020-12-21 11:21:35.335 DEBUG 15816 --- [http-nio-8888-exec-1] c.b.blog.mapper.TagMapper.findHomeTag    : ==> Parameters: 
-2020-12-21 11:21:35.338 DEBUG 15816 --- [http-nio-8888-exec-1] c.b.blog.mapper.TagMapper.findHomeTag    : <==      Total: 5
-2020-12-21 11:21:35.339 DEBUG 15816 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 11:21:35.340 DEBUG 15816 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 1(Long)
-2020-12-21 11:21:35.341 DEBUG 15816 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 1
-2020-12-21 11:21:35.341 DEBUG 15816 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 11:21:35.341 DEBUG 15816 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 2(Long)
-2020-12-21 11:21:35.342 DEBUG 15816 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 0
-2020-12-21 11:21:35.342 DEBUG 15816 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 11:21:35.342 DEBUG 15816 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 3(Long)
-2020-12-21 11:21:35.342 DEBUG 15816 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 0
-2020-12-21 11:21:35.343 DEBUG 15816 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 11:21:35.343 DEBUG 15816 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 4(Long)
-2020-12-21 11:21:35.344 DEBUG 15816 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 1
-2020-12-21 11:21:35.344 DEBUG 15816 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 11:21:35.344 DEBUG 15816 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 5(Long)
-2020-12-21 11:21:35.345 DEBUG 15816 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 0
-2020-12-21 11:21:35.345 DEBUG 15816 --- [http-nio-8888-exec-1] c.b.b.m.BlogMapper.findBlogByTypeId      : ==>  Preparing: select * from t_blog where type_id = ?
-2020-12-21 11:21:35.345 DEBUG 15816 --- [http-nio-8888-exec-1] c.b.b.m.BlogMapper.findBlogByTypeId      : ==> Parameters: 1(Long)
-2020-12-21 11:21:35.346 DEBUG 15816 --- [http-nio-8888-exec-1] c.b.b.m.BlogMapper.findBlogByTypeId      : <==      Total: 0
-2020-12-21 11:21:35.346 DEBUG 15816 --- [http-nio-8888-exec-1] c.b.b.m.BlogMapper.findBlogByTypeId      : ==>  Preparing: select * from t_blog where type_id = ?
-2020-12-21 11:21:35.346 DEBUG 15816 --- [http-nio-8888-exec-1] c.b.b.m.BlogMapper.findBlogByTypeId      : ==> Parameters: 2(Long)
-2020-12-21 11:21:35.348 DEBUG 15816 --- [http-nio-8888-exec-1] c.b.b.m.BlogMapper.findBlogByTypeId      : <==      Total: 1
-2020-12-21 11:21:35.339  INFO 15816 --- [http-nio-8888-exec-1] com.bigff.blog.aspect.LogAspect          : Request : {tag=[Tag(tagId=1, tagName=学习, blogs=[Blog(id=1, title=null, content=null, first_picture=null, flag=null, views=null, appreciation=false, share_statement=false, commentabled=false, published=false, recommend=false, create_time=null, update_time=null, type_id=null, type=null, tags=[], user_id=null, user=null, comments=[], description=null)]), Tag(tagId=2, tagName=游戏, blogs=[]), Tag(tagId=3, tagName=休闲, blogs=[]), Tag(tagId=4, tagName=胡说八道, blogs=[Blog(id=1, title=null, content=null, first_picture=null, flag=null, views=null, appreciation=false, share_statement=false, commentabled=false, published=false, recommend=false, create_time=null, update_time=null, type_id=null, type=null, tags=[], user_id=null, user=null, comments=[], description=null)]), Tag(tagId=5, tagName=日记, blogs=[])], blog=com.bigff.blog.entity.util.PageResult@6273e274, class=[Type(typeId=1, typeName=学习日记, blogs=[]), Type(typeId=2, typeName=生活日记, blogs=[Blog(id=1, title=test01, content=test01, first_picture=https://picsum.photos/seed/picsum/800/450, flag=, views=0, appreciation=false, share_statement=false, commentabled=false, published=true, recommend=false, create_time=Sun Dec 20 20:22:15 CST 2020, update_time=Sun Dec 20 20:22:15 CST 2020, type_id=2, type=null, tags=[], user_id=1, user=null, comments=[], description=test01)])]}
-2020-12-21 11:23:15.451  INFO 11164 --- [main] com.bigff.blog.BlogApplication           : Starting BlogApplication using Java 1.8.0_261 on DESKTOP-UE5H5T5 with PID 11164 (D:\项目\blog前后端分离\blog\target\classes started by bigff in D:\项目\blog前后端分离\blog)
-2020-12-21 11:23:15.452 DEBUG 11164 --- [main] com.bigff.blog.BlogApplication           : Running with Spring Boot v2.4.1, Spring v5.3.2
-2020-12-21 11:23:15.453  INFO 11164 --- [main] com.bigff.blog.BlogApplication           : The following profiles are active: dev
-2020-12-21 11:23:16.468  INFO 11164 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8888 (http)
-2020-12-21 11:23:16.474  INFO 11164 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2020-12-21 11:23:16.475  INFO 11164 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.41]
-2020-12-21 11:23:16.528  INFO 11164 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2020-12-21 11:23:16.529  INFO 11164 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1027 ms
-2020-12-21 11:23:17.024  INFO 11164 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
-2020-12-21 11:23:17.377  INFO 11164 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8888 (http) with context path ''
-2020-12-21 11:23:17.385  INFO 11164 --- [main] com.bigff.blog.BlogApplication           : Started BlogApplication in 2.256 seconds (JVM running for 2.927)
-2020-12-21 11:23:27.212  INFO 11164 --- [http-nio-8888-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2020-12-21 11:23:27.212  INFO 11164 --- [http-nio-8888-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2020-12-21 11:23:27.213  INFO 11164 --- [http-nio-8888-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
-2020-12-21 11:23:27.244  INFO 11164 --- [http-nio-8888-exec-1] com.bigff.blog.aspect.LogAspect          : Request : {url='http://127.0.0.1:8888/homeData', ip='127.0.0.1', classMethod='com.bigff.blog.web.IndexController.findPage', args=[1, 8]}
-2020-12-21 11:23:27.286  INFO 11164 --- [http-nio-8888-exec-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2020-12-21 11:23:27.416  INFO 11164 --- [http-nio-8888-exec-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2020-12-21 11:23:27.421 DEBUG 11164 --- [http-nio-8888-exec-1] c.b.b.m.BlogMapper.getBlogList_COUNT     : ==>  Preparing: SELECT count(0) FROM t_blog b INNER JOIN t_blog_tags bt ON b.id = bt.blogs_id INNER JOIN t_tag t ON bt.tags_id = t.tagid INNER JOIN t_user u ON b.user_id = u.userid INNER JOIN t_type ty ON b.type_id = ty.typeid
-2020-12-21 11:23:27.433 DEBUG 11164 --- [http-nio-8888-exec-1] c.b.b.m.BlogMapper.getBlogList_COUNT     : ==> Parameters: 
-2020-12-21 11:23:27.443 DEBUG 11164 --- [http-nio-8888-exec-1] c.b.b.m.BlogMapper.getBlogList_COUNT     : <==      Total: 1
-2020-12-21 11:23:27.446 DEBUG 11164 --- [http-nio-8888-exec-1] c.b.blog.mapper.BlogMapper.getBlogList   : ==>  Preparing: SELECT b.*,t.*,ty.*,u.userid,u.username,u.avatar FROM t_blog b INNER JOIN t_blog_tags bt on b.id = bt.blogs_id INNER JOIN t_tag t on bt.tags_id = t.tagid INNER JOIN t_user u on b.user_id = u.userid INNER JOIN t_type ty ON b.type_id = ty.typeid LIMIT ?
-2020-12-21 11:23:27.446 DEBUG 11164 --- [http-nio-8888-exec-1] c.b.blog.mapper.BlogMapper.getBlogList   : ==> Parameters: 8(Integer)
-2020-12-21 11:23:27.449 DEBUG 11164 --- [http-nio-8888-exec-1] c.b.blog.mapper.BlogMapper.getBlogList   : <==      Total: 2
-2020-12-21 11:23:27.451 DEBUG 11164 --- [http-nio-8888-exec-1] c.b.blog.mapper.TypeMapper.findHomeType  : ==>  Preparing: select * from t_type
-2020-12-21 11:23:27.452 DEBUG 11164 --- [http-nio-8888-exec-1] c.b.blog.mapper.TypeMapper.findHomeType  : ==> Parameters: 
-2020-12-21 11:23:27.473 DEBUG 11164 --- [http-nio-8888-exec-1] c.b.blog.mapper.TypeMapper.findHomeType  : <==      Total: 2
-2020-12-21 11:23:27.474 DEBUG 11164 --- [http-nio-8888-exec-1] c.b.blog.mapper.TagMapper.findHomeTag    : ==>  Preparing: select * from t_tag
-2020-12-21 11:23:27.474 DEBUG 11164 --- [http-nio-8888-exec-1] c.b.blog.mapper.TagMapper.findHomeTag    : ==> Parameters: 
-2020-12-21 11:23:27.477 DEBUG 11164 --- [http-nio-8888-exec-1] c.b.blog.mapper.TagMapper.findHomeTag    : <==      Total: 5
-2020-12-21 11:23:27.477 DEBUG 11164 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 11:23:27.477 DEBUG 11164 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 1(Long)
-2020-12-21 11:23:27.477 DEBUG 11164 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 1
-2020-12-21 11:23:27.478 DEBUG 11164 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 11:23:27.478 DEBUG 11164 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 2(Long)
-2020-12-21 11:23:27.478 DEBUG 11164 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 0
-2020-12-21 11:23:27.479 DEBUG 11164 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 11:23:27.479 DEBUG 11164 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 3(Long)
-2020-12-21 11:23:27.479 DEBUG 11164 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 0
-2020-12-21 11:23:27.479 DEBUG 11164 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 11:23:27.480 DEBUG 11164 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 4(Long)
-2020-12-21 11:23:27.480 DEBUG 11164 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 1
-2020-12-21 11:23:27.481 DEBUG 11164 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==>  Preparing: select * from t_blog_tags where tags_id = ?
-2020-12-21 11:23:27.481 DEBUG 11164 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : ==> Parameters: 5(Long)
-2020-12-21 11:23:27.481 DEBUG 11164 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.findBlogByTagId  : <==      Total: 0
-2020-12-21 11:23:27.481 DEBUG 11164 --- [http-nio-8888-exec-1] c.b.b.m.BlogMapper.findBlogByTypeId      : ==>  Preparing: select * from t_blog where type_id = ?
-2020-12-21 11:23:27.481 DEBUG 11164 --- [http-nio-8888-exec-1] c.b.b.m.BlogMapper.findBlogByTypeId      : ==> Parameters: 1(Long)
-2020-12-21 11:23:27.482 DEBUG 11164 --- [http-nio-8888-exec-1] c.b.b.m.BlogMapper.findBlogByTypeId      : <==      Total: 0
-2020-12-21 11:23:27.482 DEBUG 11164 --- [http-nio-8888-exec-1] c.b.b.m.BlogMapper.findBlogByTypeId      : ==>  Preparing: select * from t_blog where type_id = ?
-2020-12-21 11:23:27.482 DEBUG 11164 --- [http-nio-8888-exec-1] c.b.b.m.BlogMapper.findBlogByTypeId      : ==> Parameters: 2(Long)
-2020-12-21 11:23:27.484 DEBUG 11164 --- [http-nio-8888-exec-1] c.b.b.m.BlogMapper.findBlogByTypeId      : <==      Total: 1
-2020-12-21 11:23:27.477  INFO 11164 --- [http-nio-8888-exec-1] com.bigff.blog.aspect.LogAspect          : Request : {tag=[Tag(tagId=1, tagName=学习, blogs=[Blog(id=1, title=null, content=null, first_picture=null, flag=null, views=null, appreciation=false, share_statement=false, commentabled=false, published=false, recommend=false, create_time=null, update_time=null, type_id=null, type=null, tags=[], user_id=null, user=null, comments=[], description=null)]), Tag(tagId=2, tagName=游戏, blogs=[]), Tag(tagId=3, tagName=休闲, blogs=[]), Tag(tagId=4, tagName=胡说八道, blogs=[Blog(id=1, title=null, content=null, first_picture=null, flag=null, views=null, appreciation=false, share_statement=false, commentabled=false, published=false, recommend=false, create_time=null, update_time=null, type_id=null, type=null, tags=[], user_id=null, user=null, comments=[], description=null)]), Tag(tagId=5, tagName=日记, blogs=[])], blog=com.bigff.blog.entity.util.PageResult@7e863c6c, class=[Type(typeId=1, typeName=学习日记, blogs=[]), Type(typeId=2, typeName=生活日记, blogs=[Blog(id=1, title=test01, content=test01, first_picture=https://picsum.photos/seed/picsum/800/450, flag=, views=0, appreciation=false, share_statement=false, commentabled=false, published=true, recommend=false, create_time=Sun Dec 20 20:22:15 CST 2020, update_time=Sun Dec 20 20:22:15 CST 2020, type_id=2, type=null, tags=[], user_id=1, user=null, comments=[], description=test01)])]}
-2020-12-21 11:23:35.055  INFO 12692 --- [main] com.bigff.blog.BlogApplication           : Starting BlogApplication using Java 1.8.0_261 on DESKTOP-UE5H5T5 with PID 12692 (D:\项目\blog前后端分离\blog\target\classes started by bigff in D:\项目\blog前后端分离\blog)
-2020-12-21 11:23:35.059 DEBUG 12692 --- [main] com.bigff.blog.BlogApplication           : Running with Spring Boot v2.4.1, Spring v5.3.2
-2020-12-21 11:23:35.059  INFO 12692 --- [main] com.bigff.blog.BlogApplication           : The following profiles are active: dev
-2020-12-21 11:23:36.116  INFO 12692 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8888 (http)
-2020-12-21 11:23:36.126  INFO 12692 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2020-12-21 11:23:36.126  INFO 12692 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.41]
-2020-12-21 11:23:36.173  INFO 12692 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2020-12-21 11:23:36.173  INFO 12692 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1075 ms
-2020-12-21 11:23:36.552  INFO 12692 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
-2020-12-21 11:23:36.859  INFO 12692 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8888 (http) with context path ''
-2020-12-21 11:23:36.866  INFO 12692 --- [main] com.bigff.blog.BlogApplication           : Started BlogApplication in 2.126 seconds (JVM running for 2.806)
-2020-12-21 11:27:41.717  INFO 16060 --- [main] com.bigff.blog.BlogApplication           : Starting BlogApplication using Java 1.8.0_261 on DESKTOP-UE5H5T5 with PID 16060 (D:\项目\blog前后端分离\blog\target\classes started by bigff in D:\项目\blog前后端分离\blog)
-2020-12-21 11:27:41.720 DEBUG 16060 --- [main] com.bigff.blog.BlogApplication           : Running with Spring Boot v2.4.1, Spring v5.3.2
-2020-12-21 11:27:41.720  INFO 16060 --- [main] com.bigff.blog.BlogApplication           : The following profiles are active: dev
-2020-12-21 11:27:42.784  INFO 16060 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8888 (http)
-2020-12-21 11:27:42.790  INFO 16060 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2020-12-21 11:27:42.790  INFO 16060 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.41]
-2020-12-21 11:27:42.838  INFO 16060 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2020-12-21 11:27:42.838  INFO 16060 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1068 ms
-2020-12-21 11:27:43.253  INFO 16060 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
-2020-12-21 11:27:43.545  INFO 16060 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8888 (http) with context path ''
-2020-12-21 11:27:43.551  INFO 16060 --- [main] com.bigff.blog.BlogApplication           : Started BlogApplication in 2.185 seconds (JVM running for 2.921)
-2020-12-21 11:28:22.023  INFO 21484 --- [main] com.bigff.blog.BlogApplication           : Starting BlogApplication using Java 1.8.0_261 on DESKTOP-UE5H5T5 with PID 21484 (D:\项目\blog前后端分离\blog\target\classes started by bigff in D:\项目\blog前后端分离\blog)
-2020-12-21 11:28:22.025 DEBUG 21484 --- [main] com.bigff.blog.BlogApplication           : Running with Spring Boot v2.4.1, Spring v5.3.2
-2020-12-21 11:28:22.025  INFO 21484 --- [main] com.bigff.blog.BlogApplication           : The following profiles are active: dev
-2020-12-21 11:28:23.028  INFO 21484 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8888 (http)
-2020-12-21 11:28:23.033  INFO 21484 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2020-12-21 11:28:23.033  INFO 21484 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.41]
-2020-12-21 11:28:23.082  INFO 21484 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2020-12-21 11:28:23.082  INFO 21484 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1011 ms
-2020-12-21 11:28:23.475  INFO 21484 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
-2020-12-21 11:28:23.796  INFO 21484 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8888 (http) with context path ''
-2020-12-21 11:28:23.804  INFO 21484 --- [main] com.bigff.blog.BlogApplication           : Started BlogApplication in 2.193 seconds (JVM running for 3.111)
-2020-12-21 13:09:22.819  INFO 20708 --- [main] com.bigff.blog.BlogApplication           : Starting BlogApplication using Java 1.8.0_261 on DESKTOP-UE5H5T5 with PID 20708 (D:\项目\blog前后端分离\blog\target\classes started by bigff in D:\项目\blog前后端分离\blog)
-2020-12-21 13:09:22.822 DEBUG 20708 --- [main] com.bigff.blog.BlogApplication           : Running with Spring Boot v2.4.1, Spring v5.3.2
-2020-12-21 13:09:22.823  INFO 20708 --- [main] com.bigff.blog.BlogApplication           : The following profiles are active: dev
-2020-12-21 13:09:24.650  INFO 20708 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8888 (http)
-2020-12-21 13:09:24.657  INFO 20708 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2020-12-21 13:09:24.658  INFO 20708 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.41]
-2020-12-21 13:09:24.776  INFO 20708 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2020-12-21 13:09:24.776  INFO 20708 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1853 ms
-2020-12-21 13:09:25.314  INFO 20708 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
-2020-12-21 13:09:25.632  INFO 20708 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8888 (http) with context path ''
-2020-12-21 13:09:25.640  INFO 20708 --- [main] com.bigff.blog.BlogApplication           : Started BlogApplication in 3.612 seconds (JVM running for 4.705)
-2020-12-21 13:10:01.217  INFO 4620 --- [main] com.bigff.blog.BlogApplication           : Starting BlogApplication using Java 1.8.0_261 on DESKTOP-UE5H5T5 with PID 4620 (D:\项目\blog前后端分离\blog\target\classes started by bigff in D:\项目\blog前后端分离\blog)
-2020-12-21 13:10:01.219 DEBUG 4620 --- [main] com.bigff.blog.BlogApplication           : Running with Spring Boot v2.4.1, Spring v5.3.2
-2020-12-21 13:10:01.220  INFO 4620 --- [main] com.bigff.blog.BlogApplication           : The following profiles are active: dev
-2020-12-21 13:10:02.152  INFO 4620 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8888 (http)
-2020-12-21 13:10:02.158  INFO 4620 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2020-12-21 13:10:02.158  INFO 4620 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.41]
-2020-12-21 13:10:02.205  INFO 4620 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2020-12-21 13:10:02.205  INFO 4620 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 950 ms
-2020-12-21 13:10:02.620  INFO 4620 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
-2020-12-21 13:10:02.891  INFO 4620 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8888 (http) with context path ''
-2020-12-21 13:10:02.898  INFO 4620 --- [main] com.bigff.blog.BlogApplication           : Started BlogApplication in 2.203 seconds (JVM running for 2.912)
-2020-12-21 13:10:49.505  INFO 4620 --- [http-nio-8888-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2020-12-21 13:10:49.505  INFO 4620 --- [http-nio-8888-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2020-12-21 13:10:49.506  INFO 4620 --- [http-nio-8888-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
-2020-12-21 13:10:49.567 ERROR 4620 --- [http-nio-8888-exec-1] c.b.b.h.ControlledExceptionHandler       : Requset URL: http://127.0.0.1:8888/login,Exception : {}
-
-org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' not supported
-	at org.springframework.web.servlet.mvc.method.RequestMappingInfoHandlerMapping.handleNoMatch(RequestMappingInfoHandlerMapping.java:250)
-	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.lookupHandlerMethod(AbstractHandlerMethodMapping.java:417)
-	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.getHandlerInternal(AbstractHandlerMethodMapping.java:364)
-	at org.springframework.web.servlet.mvc.method.RequestMappingInfoHandlerMapping.getHandlerInternal(RequestMappingInfoHandlerMapping.java:123)
-	at org.springframework.web.servlet.mvc.method.RequestMappingInfoHandlerMapping.getHandlerInternal(RequestMappingInfoHandlerMapping.java:66)
-	at org.springframework.web.servlet.handler.AbstractHandlerMapping.getHandler(AbstractHandlerMapping.java:491)
-	at org.springframework.web.servlet.DispatcherServlet.getHandler(DispatcherServlet.java:1255)
-	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1037)
-	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:961)
-	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
-	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:898)
-	at javax.servlet.http.HttpServlet.service(HttpServlet.java:626)
-	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
-	at javax.servlet.http.HttpServlet.service(HttpServlet.java:733)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
-	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
-	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
-	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
-	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
-	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202)
-	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)
-	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:542)
-	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:143)
-	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
-	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)
-	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
-	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:374)
-	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
-	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:888)
-	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1597)
-	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
-	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
-	at java.lang.Thread.run(Thread.java:748)
-
-2020-12-21 13:11:40.019 ERROR 4620 --- [http-nio-8888-exec-2] c.b.b.h.ControlledExceptionHandler       : Requset URL: http://127.0.0.1:8888/login,Exception : {}
-
-org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' not supported
-	at org.springframework.web.servlet.mvc.method.RequestMappingInfoHandlerMapping.handleNoMatch(RequestMappingInfoHandlerMapping.java:250)
-	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.lookupHandlerMethod(AbstractHandlerMethodMapping.java:417)
-	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.getHandlerInternal(AbstractHandlerMethodMapping.java:364)
-	at org.springframework.web.servlet.mvc.method.RequestMappingInfoHandlerMapping.getHandlerInternal(RequestMappingInfoHandlerMapping.java:123)
-	at org.springframework.web.servlet.mvc.method.RequestMappingInfoHandlerMapping.getHandlerInternal(RequestMappingInfoHandlerMapping.java:66)
-	at org.springframework.web.servlet.handler.AbstractHandlerMapping.getHandler(AbstractHandlerMapping.java:491)
-	at org.springframework.web.servlet.DispatcherServlet.getHandler(DispatcherServlet.java:1255)
-	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1037)
-	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:961)
-	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006)
-	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:898)
-	at javax.servlet.http.HttpServlet.service(HttpServlet.java:626)
-	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883)
-	at javax.servlet.http.HttpServlet.service(HttpServlet.java:733)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
-	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
-	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
-	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
-	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
-	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:119)
-	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
-	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
-	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202)
-	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97)
-	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:542)
-	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:143)
-	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
-	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78)
-	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
-	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:374)
-	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
-	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:888)
-	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1597)
-	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
-	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
-	at java.lang.Thread.run(Thread.java:748)
-
-2020-12-21 13:12:20.133  INFO 4620 --- [http-nio-8888-exec-4] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2020-12-21 13:12:20.378  INFO 4620 --- [http-nio-8888-exec-4] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2020-12-21 13:12:20.385 DEBUG 4620 --- [http-nio-8888-exec-4] c.b.blog.mapper.UserMapper.checkUser     : ==>  Preparing: select username,avatar from t_user where username = ? and password = ?
-2020-12-21 13:12:20.397 DEBUG 4620 --- [http-nio-8888-exec-4] c.b.blog.mapper.UserMapper.checkUser     : ==> Parameters: Bigff(String), 96e79218965eb72c92a549dd5a330112(String)
-2020-12-21 13:12:20.413 DEBUG 4620 --- [http-nio-8888-exec-4] c.b.blog.mapper.UserMapper.checkUser     : <==      Total: 1
+2020-12-28 08:26:24.758  WARN 14584 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=9h35m15s122ms50µs200ns).
+2020-12-28 10:42:39.055  INFO 14584 --- [http-nio-8888-exec-4] com.bigff.blog.aspect.LogAspect          : Request : {url='http://127.0.0.1:8888/getBlogByTagId', ip='127.0.0.1', classMethod='com.bigff.blog.web.TagShowController.getBlogByTypeId', args=[1, 30, 2]}
+2020-12-28 10:42:39.067 DEBUG 14584 --- [http-nio-8888-exec-4] c.b.b.m.BlogMapper.getBlogByTagId_COUNT  : ==>  Preparing: SELECT count(0) FROM t_blog b INNER JOIN t_blog_tags bt ON b.id = bt.blogs_id INNER JOIN t_tag t ON bt.tags_id = t.tagid INNER JOIN t_user u ON b.user_id = u.userid INNER JOIN t_type ty ON b.type_id = ty.typeid WHERE t.tagid = ?
+2020-12-28 10:42:39.069 DEBUG 14584 --- [http-nio-8888-exec-4] c.b.b.m.BlogMapper.getBlogByTagId_COUNT  : ==> Parameters: 2(Long)
+2020-12-28 10:42:39.169 DEBUG 14584 --- [http-nio-8888-exec-4] c.b.b.m.BlogMapper.getBlogByTagId_COUNT  : <==      Total: 1
+2020-12-28 10:42:39.169 DEBUG 14584 --- [http-nio-8888-exec-4] c.b.b.mapper.BlogMapper.getBlogByTagId   : ==>  Preparing: SELECT b.*,t.*,ty.*,u.userid,u.username,u.avatar FROM t_blog b INNER JOIN t_blog_tags bt on b.id = bt.blogs_id INNER JOIN t_tag t on bt.tags_id = t.tagid INNER JOIN t_user u on b.user_id = u.userid INNER JOIN t_type ty ON b.type_id = ty.typeid where t.tagid = ? LIMIT ?
+2020-12-28 10:42:39.170 DEBUG 14584 --- [http-nio-8888-exec-4] c.b.b.mapper.BlogMapper.getBlogByTagId   : ==> Parameters: 2(Long), 30(Integer)
+2020-12-28 10:42:39.180 DEBUG 14584 --- [http-nio-8888-exec-4] c.b.b.mapper.BlogMapper.getBlogByTagId   : <==      Total: 1
+2020-12-28 10:42:39.180  INFO 14584 --- [http-nio-8888-exec-4] com.bigff.blog.aspect.LogAspect          : Request : Result{code=200, msg='成功', data=com.bigff.blog.entity.util.PageResult@79a04cc8}
+2020-12-28 10:42:40.219  INFO 14584 --- [http-nio-8888-exec-8] com.bigff.blog.aspect.LogAspect          : Request : {url='http://127.0.0.1:8888/getBlogByTagId', ip='127.0.0.1', classMethod='com.bigff.blog.web.TagShowController.getBlogByTypeId', args=[1, 30, 4]}
+2020-12-28 10:42:40.221 DEBUG 14584 --- [http-nio-8888-exec-8] c.b.b.m.BlogMapper.getBlogByTagId_COUNT  : ==>  Preparing: SELECT count(0) FROM t_blog b INNER JOIN t_blog_tags bt ON b.id = bt.blogs_id INNER JOIN t_tag t ON bt.tags_id = t.tagid INNER JOIN t_user u ON b.user_id = u.userid INNER JOIN t_type ty ON b.type_id = ty.typeid WHERE t.tagid = ?
+2020-12-28 10:42:40.221 DEBUG 14584 --- [http-nio-8888-exec-8] c.b.b.m.BlogMapper.getBlogByTagId_COUNT  : ==> Parameters: 4(Long)
+2020-12-28 10:42:40.222 DEBUG 14584 --- [http-nio-8888-exec-8] c.b.b.m.BlogMapper.getBlogByTagId_COUNT  : <==      Total: 1
+2020-12-28 10:42:40.222 DEBUG 14584 --- [http-nio-8888-exec-8] c.b.b.mapper.BlogMapper.getBlogByTagId   : ==>  Preparing: SELECT b.*,t.*,ty.*,u.userid,u.username,u.avatar FROM t_blog b INNER JOIN t_blog_tags bt on b.id = bt.blogs_id INNER JOIN t_tag t on bt.tags_id = t.tagid INNER JOIN t_user u on b.user_id = u.userid INNER JOIN t_type ty ON b.type_id = ty.typeid where t.tagid = ? LIMIT ?
+2020-12-28 10:42:40.222 DEBUG 14584 --- [http-nio-8888-exec-8] c.b.b.mapper.BlogMapper.getBlogByTagId   : ==> Parameters: 4(Long), 30(Integer)
+2020-12-28 10:42:40.223 DEBUG 14584 --- [http-nio-8888-exec-8] c.b.b.mapper.BlogMapper.getBlogByTagId   : <==      Total: 4
+2020-12-28 10:42:40.224  INFO 14584 --- [http-nio-8888-exec-8] com.bigff.blog.aspect.LogAspect          : Request : Result{code=200, msg='成功', data=com.bigff.blog.entity.util.PageResult@56de41fd}
+2020-12-28 11:03:10.077  INFO 14584 --- [http-nio-8888-exec-10] com.bigff.blog.aspect.LogAspect          : Request : {url='http://127.0.0.1:8888/getBlogByTagId', ip='127.0.0.1', classMethod='com.bigff.blog.web.TagShowController.getBlogByTypeId', args=[1, 30, 5]}
+2020-12-28 11:03:10.079 DEBUG 14584 --- [http-nio-8888-exec-10] c.b.b.m.BlogMapper.getBlogByTagId_COUNT  : ==>  Preparing: SELECT count(0) FROM t_blog b INNER JOIN t_blog_tags bt ON b.id = bt.blogs_id INNER JOIN t_tag t ON bt.tags_id = t.tagid INNER JOIN t_user u ON b.user_id = u.userid INNER JOIN t_type ty ON b.type_id = ty.typeid WHERE t.tagid = ?
+2020-12-28 11:03:10.079 DEBUG 14584 --- [http-nio-8888-exec-10] c.b.b.m.BlogMapper.getBlogByTagId_COUNT  : ==> Parameters: 5(Long)
+2020-12-28 11:03:10.080 DEBUG 14584 --- [http-nio-8888-exec-10] c.b.b.m.BlogMapper.getBlogByTagId_COUNT  : <==      Total: 1
+2020-12-28 11:03:10.080 DEBUG 14584 --- [http-nio-8888-exec-10] c.b.b.mapper.BlogMapper.getBlogByTagId   : ==>  Preparing: SELECT b.*,t.*,ty.*,u.userid,u.username,u.avatar FROM t_blog b INNER JOIN t_blog_tags bt on b.id = bt.blogs_id INNER JOIN t_tag t on bt.tags_id = t.tagid INNER JOIN t_user u on b.user_id = u.userid INNER JOIN t_type ty ON b.type_id = ty.typeid where t.tagid = ? LIMIT ?
+2020-12-28 11:03:10.080 DEBUG 14584 --- [http-nio-8888-exec-10] c.b.b.mapper.BlogMapper.getBlogByTagId   : ==> Parameters: 5(Long), 30(Integer)
+2020-12-28 11:03:10.081 DEBUG 14584 --- [http-nio-8888-exec-10] c.b.b.mapper.BlogMapper.getBlogByTagId   : <==      Total: 1
+2020-12-28 11:03:10.081  INFO 14584 --- [http-nio-8888-exec-10] com.bigff.blog.aspect.LogAspect          : Request : Result{code=200, msg='成功', data=com.bigff.blog.entity.util.PageResult@1f6cac2b}
+2020-12-28 11:03:11.336  INFO 14584 --- [http-nio-8888-exec-1] com.bigff.blog.aspect.LogAspect          : Request : {url='http://127.0.0.1:8888/getBlogByTagId', ip='127.0.0.1', classMethod='com.bigff.blog.web.TagShowController.getBlogByTypeId', args=[1, 30, 3]}
+2020-12-28 11:03:11.338 DEBUG 14584 --- [http-nio-8888-exec-1] c.b.b.m.BlogMapper.getBlogByTagId_COUNT  : ==>  Preparing: SELECT count(0) FROM t_blog b INNER JOIN t_blog_tags bt ON b.id = bt.blogs_id INNER JOIN t_tag t ON bt.tags_id = t.tagid INNER JOIN t_user u ON b.user_id = u.userid INNER JOIN t_type ty ON b.type_id = ty.typeid WHERE t.tagid = ?
+2020-12-28 11:03:11.338 DEBUG 14584 --- [http-nio-8888-exec-1] c.b.b.m.BlogMapper.getBlogByTagId_COUNT  : ==> Parameters: 3(Long)
+2020-12-28 11:03:11.339 DEBUG 14584 --- [http-nio-8888-exec-1] c.b.b.m.BlogMapper.getBlogByTagId_COUNT  : <==      Total: 1
+2020-12-28 11:03:11.339  INFO 14584 --- [http-nio-8888-exec-1] com.bigff.blog.aspect.LogAspect          : Request : Result{code=200, msg='成功', data=com.bigff.blog.entity.util.PageResult@200743b1}
+2020-12-28 11:03:11.750  INFO 14584 --- [http-nio-8888-exec-6] com.bigff.blog.aspect.LogAspect          : Request : {url='http://127.0.0.1:8888/getBlogByTagId', ip='127.0.0.1', classMethod='com.bigff.blog.web.TagShowController.getBlogByTypeId', args=[1, 30, 2]}
+2020-12-28 11:03:11.751 DEBUG 14584 --- [http-nio-8888-exec-6] c.b.b.m.BlogMapper.getBlogByTagId_COUNT  : ==>  Preparing: SELECT count(0) FROM t_blog b INNER JOIN t_blog_tags bt ON b.id = bt.blogs_id INNER JOIN t_tag t ON bt.tags_id = t.tagid INNER JOIN t_user u ON b.user_id = u.userid INNER JOIN t_type ty ON b.type_id = ty.typeid WHERE t.tagid = ?
+2020-12-28 11:03:11.751 DEBUG 14584 --- [http-nio-8888-exec-6] c.b.b.m.BlogMapper.getBlogByTagId_COUNT  : ==> Parameters: 2(Long)
+2020-12-28 11:03:11.752 DEBUG 14584 --- [http-nio-8888-exec-6] c.b.b.m.BlogMapper.getBlogByTagId_COUNT  : <==      Total: 1
+2020-12-28 11:03:11.752 DEBUG 14584 --- [http-nio-8888-exec-6] c.b.b.mapper.BlogMapper.getBlogByTagId   : ==>  Preparing: SELECT b.*,t.*,ty.*,u.userid,u.username,u.avatar FROM t_blog b INNER JOIN t_blog_tags bt on b.id = bt.blogs_id INNER JOIN t_tag t on bt.tags_id = t.tagid INNER JOIN t_user u on b.user_id = u.userid INNER JOIN t_type ty ON b.type_id = ty.typeid where t.tagid = ? LIMIT ?
+2020-12-28 11:03:11.752 DEBUG 14584 --- [http-nio-8888-exec-6] c.b.b.mapper.BlogMapper.getBlogByTagId   : ==> Parameters: 2(Long), 30(Integer)
+2020-12-28 11:03:11.753 DEBUG 14584 --- [http-nio-8888-exec-6] c.b.b.mapper.BlogMapper.getBlogByTagId   : <==      Total: 1
+2020-12-28 11:03:11.753  INFO 14584 --- [http-nio-8888-exec-6] com.bigff.blog.aspect.LogAspect          : Request : Result{code=200, msg='成功', data=com.bigff.blog.entity.util.PageResult@22d3637e}
+2020-12-28 11:03:12.661  INFO 14584 --- [http-nio-8888-exec-2] com.bigff.blog.aspect.LogAspect          : Request : {url='http://127.0.0.1:8888/getBlogByTagId', ip='127.0.0.1', classMethod='com.bigff.blog.web.TagShowController.getBlogByTypeId', args=[1, 30, 1]}
+2020-12-28 11:03:12.662 DEBUG 14584 --- [http-nio-8888-exec-2] c.b.b.m.BlogMapper.getBlogByTagId_COUNT  : ==>  Preparing: SELECT count(0) FROM t_blog b INNER JOIN t_blog_tags bt ON b.id = bt.blogs_id INNER JOIN t_tag t ON bt.tags_id = t.tagid INNER JOIN t_user u ON b.user_id = u.userid INNER JOIN t_type ty ON b.type_id = ty.typeid WHERE t.tagid = ?
+2020-12-28 11:03:12.662 DEBUG 14584 --- [http-nio-8888-exec-2] c.b.b.m.BlogMapper.getBlogByTagId_COUNT  : ==> Parameters: 1(Long)
+2020-12-28 11:03:12.662 DEBUG 14584 --- [http-nio-8888-exec-2] c.b.b.m.BlogMapper.getBlogByTagId_COUNT  : <==      Total: 1
+2020-12-28 11:03:12.663 DEBUG 14584 --- [http-nio-8888-exec-2] c.b.b.mapper.BlogMapper.getBlogByTagId   : ==>  Preparing: SELECT b.*,t.*,ty.*,u.userid,u.username,u.avatar FROM t_blog b INNER JOIN t_blog_tags bt on b.id = bt.blogs_id INNER JOIN t_tag t on bt.tags_id = t.tagid INNER JOIN t_user u on b.user_id = u.userid INNER JOIN t_type ty ON b.type_id = ty.typeid where t.tagid = ? LIMIT ?
+2020-12-28 11:03:12.663 DEBUG 14584 --- [http-nio-8888-exec-2] c.b.b.mapper.BlogMapper.getBlogByTagId   : ==> Parameters: 1(Long), 30(Integer)
+2020-12-28 11:03:12.663 DEBUG 14584 --- [http-nio-8888-exec-2] c.b.b.mapper.BlogMapper.getBlogByTagId   : <==      Total: 2
+2020-12-28 11:03:12.664  INFO 14584 --- [http-nio-8888-exec-2] com.bigff.blog.aspect.LogAspect          : Request : Result{code=200, msg='成功', data=com.bigff.blog.entity.util.PageResult@402020f1}
+2020-12-28 11:03:16.082  INFO 14584 --- [http-nio-8888-exec-7] com.bigff.blog.aspect.LogAspect          : Request : {url='http://127.0.0.1:8888/getBlogByTagId', ip='127.0.0.1', classMethod='com.bigff.blog.web.TagShowController.getBlogByTypeId', args=[1, 30, 4]}
+2020-12-28 11:03:16.083 DEBUG 14584 --- [http-nio-8888-exec-7] c.b.b.m.BlogMapper.getBlogByTagId_COUNT  : ==>  Preparing: SELECT count(0) FROM t_blog b INNER JOIN t_blog_tags bt ON b.id = bt.blogs_id INNER JOIN t_tag t ON bt.tags_id = t.tagid INNER JOIN t_user u ON b.user_id = u.userid INNER JOIN t_type ty ON b.type_id = ty.typeid WHERE t.tagid = ?
+2020-12-28 11:03:16.084 DEBUG 14584 --- [http-nio-8888-exec-7] c.b.b.m.BlogMapper.getBlogByTagId_COUNT  : ==> Parameters: 4(Long)
+2020-12-28 11:03:16.084 DEBUG 14584 --- [http-nio-8888-exec-7] c.b.b.m.BlogMapper.getBlogByTagId_COUNT  : <==      Total: 1
+2020-12-28 11:03:16.084 DEBUG 14584 --- [http-nio-8888-exec-7] c.b.b.mapper.BlogMapper.getBlogByTagId   : ==>  Preparing: SELECT b.*,t.*,ty.*,u.userid,u.username,u.avatar FROM t_blog b INNER JOIN t_blog_tags bt on b.id = bt.blogs_id INNER JOIN t_tag t on bt.tags_id = t.tagid INNER JOIN t_user u on b.user_id = u.userid INNER JOIN t_type ty ON b.type_id = ty.typeid where t.tagid = ? LIMIT ?
+2020-12-28 11:03:16.085 DEBUG 14584 --- [http-nio-8888-exec-7] c.b.b.mapper.BlogMapper.getBlogByTagId   : ==> Parameters: 4(Long), 30(Integer)
+2020-12-28 11:03:16.086 DEBUG 14584 --- [http-nio-8888-exec-7] c.b.b.mapper.BlogMapper.getBlogByTagId   : <==      Total: 4
+2020-12-28 11:03:16.086  INFO 14584 --- [http-nio-8888-exec-7] com.bigff.blog.aspect.LogAspect          : Request : Result{code=200, msg='成功', data=com.bigff.blog.entity.util.PageResult@7f776aed}
+2020-12-28 11:03:16.700  INFO 14584 --- [http-nio-8888-exec-3] com.bigff.blog.aspect.LogAspect          : Request : {url='http://127.0.0.1:8888/getBlogByTagId', ip='127.0.0.1', classMethod='com.bigff.blog.web.TagShowController.getBlogByTypeId', args=[1, 30, 5]}
+2020-12-28 11:03:16.701 DEBUG 14584 --- [http-nio-8888-exec-3] c.b.b.m.BlogMapper.getBlogByTagId_COUNT  : ==>  Preparing: SELECT count(0) FROM t_blog b INNER JOIN t_blog_tags bt ON b.id = bt.blogs_id INNER JOIN t_tag t ON bt.tags_id = t.tagid INNER JOIN t_user u ON b.user_id = u.userid INNER JOIN t_type ty ON b.type_id = ty.typeid WHERE t.tagid = ?
+2020-12-28 11:03:16.702 DEBUG 14584 --- [http-nio-8888-exec-3] c.b.b.m.BlogMapper.getBlogByTagId_COUNT  : ==> Parameters: 5(Long)
+2020-12-28 11:03:16.702 DEBUG 14584 --- [http-nio-8888-exec-3] c.b.b.m.BlogMapper.getBlogByTagId_COUNT  : <==      Total: 1
+2020-12-28 11:03:16.702 DEBUG 14584 --- [http-nio-8888-exec-3] c.b.b.mapper.BlogMapper.getBlogByTagId   : ==>  Preparing: SELECT b.*,t.*,ty.*,u.userid,u.username,u.avatar FROM t_blog b INNER JOIN t_blog_tags bt on b.id = bt.blogs_id INNER JOIN t_tag t on bt.tags_id = t.tagid INNER JOIN t_user u on b.user_id = u.userid INNER JOIN t_type ty ON b.type_id = ty.typeid where t.tagid = ? LIMIT ?
+2020-12-28 11:03:16.703 DEBUG 14584 --- [http-nio-8888-exec-3] c.b.b.mapper.BlogMapper.getBlogByTagId   : ==> Parameters: 5(Long), 30(Integer)
+2020-12-28 11:03:16.704 DEBUG 14584 --- [http-nio-8888-exec-3] c.b.b.mapper.BlogMapper.getBlogByTagId   : <==      Total: 1
+2020-12-28 11:03:16.704  INFO 14584 --- [http-nio-8888-exec-3] com.bigff.blog.aspect.LogAspect          : Request : Result{code=200, msg='成功', data=com.bigff.blog.entity.util.PageResult@512a614b}
+2020-12-28 11:03:17.387  INFO 14584 --- [http-nio-8888-exec-5] com.bigff.blog.aspect.LogAspect          : Request : {url='http://127.0.0.1:8888/getBlogByTagId', ip='127.0.0.1', classMethod='com.bigff.blog.web.TagShowController.getBlogByTypeId', args=[1, 30, 2]}
+2020-12-28 11:03:17.388 DEBUG 14584 --- [http-nio-8888-exec-5] c.b.b.m.BlogMapper.getBlogByTagId_COUNT  : ==>  Preparing: SELECT count(0) FROM t_blog b INNER JOIN t_blog_tags bt ON b.id = bt.blogs_id INNER JOIN t_tag t ON bt.tags_id = t.tagid INNER JOIN t_user u ON b.user_id = u.userid INNER JOIN t_type ty ON b.type_id = ty.typeid WHERE t.tagid = ?
+2020-12-28 11:03:17.389 DEBUG 14584 --- [http-nio-8888-exec-5] c.b.b.m.BlogMapper.getBlogByTagId_COUNT  : ==> Parameters: 2(Long)
+2020-12-28 11:03:17.390 DEBUG 14584 --- [http-nio-8888-exec-5] c.b.b.m.BlogMapper.getBlogByTagId_COUNT  : <==      Total: 1
+2020-12-28 11:03:17.390 DEBUG 14584 --- [http-nio-8888-exec-5] c.b.b.mapper.BlogMapper.getBlogByTagId   : ==>  Preparing: SELECT b.*,t.*,ty.*,u.userid,u.username,u.avatar FROM t_blog b INNER JOIN t_blog_tags bt on b.id = bt.blogs_id INNER JOIN t_tag t on bt.tags_id = t.tagid INNER JOIN t_user u on b.user_id = u.userid INNER JOIN t_type ty ON b.type_id = ty.typeid where t.tagid = ? LIMIT ?
+2020-12-28 11:03:17.390 DEBUG 14584 --- [http-nio-8888-exec-5] c.b.b.mapper.BlogMapper.getBlogByTagId   : ==> Parameters: 2(Long), 30(Integer)
+2020-12-28 11:03:17.391 DEBUG 14584 --- [http-nio-8888-exec-5] c.b.b.mapper.BlogMapper.getBlogByTagId   : <==      Total: 1
+2020-12-28 11:03:17.391  INFO 14584 --- [http-nio-8888-exec-5] com.bigff.blog.aspect.LogAspect          : Request : Result{code=200, msg='成功', data=com.bigff.blog.entity.util.PageResult@457f0f00}
+2020-12-28 11:03:17.947  INFO 14584 --- [http-nio-8888-exec-4] com.bigff.blog.aspect.LogAspect          : Request : {url='http://127.0.0.1:8888/getBlogByTagId', ip='127.0.0.1', classMethod='com.bigff.blog.web.TagShowController.getBlogByTypeId', args=[1, 30, 1]}
+2020-12-28 11:03:17.948 DEBUG 14584 --- [http-nio-8888-exec-4] c.b.b.m.BlogMapper.getBlogByTagId_COUNT  : ==>  Preparing: SELECT count(0) FROM t_blog b INNER JOIN t_blog_tags bt ON b.id = bt.blogs_id INNER JOIN t_tag t ON bt.tags_id = t.tagid INNER JOIN t_user u ON b.user_id = u.userid INNER JOIN t_type ty ON b.type_id = ty.typeid WHERE t.tagid = ?
+2020-12-28 11:03:17.948 DEBUG 14584 --- [http-nio-8888-exec-4] c.b.b.m.BlogMapper.getBlogByTagId_COUNT  : ==> Parameters: 1(Long)
+2020-12-28 11:03:17.949 DEBUG 14584 --- [http-nio-8888-exec-4] c.b.b.m.BlogMapper.getBlogByTagId_COUNT  : <==      Total: 1
+2020-12-28 11:03:17.949 DEBUG 14584 --- [http-nio-8888-exec-4] c.b.b.mapper.BlogMapper.getBlogByTagId   : ==>  Preparing: SELECT b.*,t.*,ty.*,u.userid,u.username,u.avatar FROM t_blog b INNER JOIN t_blog_tags bt on b.id = bt.blogs_id INNER JOIN t_tag t on bt.tags_id = t.tagid INNER JOIN t_user u on b.user_id = u.userid INNER JOIN t_type ty ON b.type_id = ty.typeid where t.tagid = ? LIMIT ?
+2020-12-28 11:03:17.949 DEBUG 14584 --- [http-nio-8888-exec-4] c.b.b.mapper.BlogMapper.getBlogByTagId   : ==> Parameters: 1(Long), 30(Integer)
+2020-12-28 11:03:17.950 DEBUG 14584 --- [http-nio-8888-exec-4] c.b.b.mapper.BlogMapper.getBlogByTagId   : <==      Total: 2
+2020-12-28 11:03:17.950  INFO 14584 --- [http-nio-8888-exec-4] com.bigff.blog.aspect.LogAspect          : Request : Result{code=200, msg='成功', data=com.bigff.blog.entity.util.PageResult@1dc795d5}
+2020-12-28 11:03:18.775  INFO 14584 --- [http-nio-8888-exec-8] com.bigff.blog.aspect.LogAspect          : Request : {url='http://127.0.0.1:8888/getBlogByTagId', ip='127.0.0.1', classMethod='com.bigff.blog.web.TagShowController.getBlogByTypeId', args=[1, 30, 4]}
+2020-12-28 11:03:18.776 DEBUG 14584 --- [http-nio-8888-exec-8] c.b.b.m.BlogMapper.getBlogByTagId_COUNT  : ==>  Preparing: SELECT count(0) FROM t_blog b INNER JOIN t_blog_tags bt ON b.id = bt.blogs_id INNER JOIN t_tag t ON bt.tags_id = t.tagid INNER JOIN t_user u ON b.user_id = u.userid INNER JOIN t_type ty ON b.type_id = ty.typeid WHERE t.tagid = ?
+2020-12-28 11:03:18.777 DEBUG 14584 --- [http-nio-8888-exec-8] c.b.b.m.BlogMapper.getBlogByTagId_COUNT  : ==> Parameters: 4(Long)
+2020-12-28 11:03:18.777 DEBUG 14584 --- [http-nio-8888-exec-8] c.b.b.m.BlogMapper.getBlogByTagId_COUNT  : <==      Total: 1
+2020-12-28 11:03:18.777 DEBUG 14584 --- [http-nio-8888-exec-8] c.b.b.mapper.BlogMapper.getBlogByTagId   : ==>  Preparing: SELECT b.*,t.*,ty.*,u.userid,u.username,u.avatar FROM t_blog b INNER JOIN t_blog_tags bt on b.id = bt.blogs_id INNER JOIN t_tag t on bt.tags_id = t.tagid INNER JOIN t_user u on b.user_id = u.userid INNER JOIN t_type ty ON b.type_id = ty.typeid where t.tagid = ? LIMIT ?
+2020-12-28 11:03:18.777 DEBUG 14584 --- [http-nio-8888-exec-8] c.b.b.mapper.BlogMapper.getBlogByTagId   : ==> Parameters: 4(Long), 30(Integer)
+2020-12-28 11:03:18.778 DEBUG 14584 --- [http-nio-8888-exec-8] c.b.b.mapper.BlogMapper.getBlogByTagId   : <==      Total: 4
+2020-12-28 11:03:18.778  INFO 14584 --- [http-nio-8888-exec-8] com.bigff.blog.aspect.LogAspect          : Request : Result{code=200, msg='成功', data=com.bigff.blog.entity.util.PageResult@499eb15a}
+2020-12-28 11:03:19.478  INFO 14584 --- [http-nio-8888-exec-9] com.bigff.blog.aspect.LogAspect          : Request : {url='http://127.0.0.1:8888/getBlogByTagId', ip='127.0.0.1', classMethod='com.bigff.blog.web.TagShowController.getBlogByTypeId', args=[1, 30, 2]}
+2020-12-28 11:03:19.479 DEBUG 14584 --- [http-nio-8888-exec-9] c.b.b.m.BlogMapper.getBlogByTagId_COUNT  : ==>  Preparing: SELECT count(0) FROM t_blog b INNER JOIN t_blog_tags bt ON b.id = bt.blogs_id INNER JOIN t_tag t ON bt.tags_id = t.tagid INNER JOIN t_user u ON b.user_id = u.userid INNER JOIN t_type ty ON b.type_id = ty.typeid WHERE t.tagid = ?
+2020-12-28 11:03:19.479 DEBUG 14584 --- [http-nio-8888-exec-9] c.b.b.m.BlogMapper.getBlogByTagId_COUNT  : ==> Parameters: 2(Long)
+2020-12-28 11:03:19.480 DEBUG 14584 --- [http-nio-8888-exec-9] c.b.b.m.BlogMapper.getBlogByTagId_COUNT  : <==      Total: 1
+2020-12-28 11:03:19.480 DEBUG 14584 --- [http-nio-8888-exec-9] c.b.b.mapper.BlogMapper.getBlogByTagId   : ==>  Preparing: SELECT b.*,t.*,ty.*,u.userid,u.username,u.avatar FROM t_blog b INNER JOIN t_blog_tags bt on b.id = bt.blogs_id INNER JOIN t_tag t on bt.tags_id = t.tagid INNER JOIN t_user u on b.user_id = u.userid INNER JOIN t_type ty ON b.type_id = ty.typeid where t.tagid = ? LIMIT ?
+2020-12-28 11:03:19.480 DEBUG 14584 --- [http-nio-8888-exec-9] c.b.b.mapper.BlogMapper.getBlogByTagId   : ==> Parameters: 2(Long), 30(Integer)
+2020-12-28 11:03:19.481 DEBUG 14584 --- [http-nio-8888-exec-9] c.b.b.mapper.BlogMapper.getBlogByTagId   : <==      Total: 1
+2020-12-28 11:03:19.481  INFO 14584 --- [http-nio-8888-exec-9] com.bigff.blog.aspect.LogAspect          : Request : Result{code=200, msg='成功', data=com.bigff.blog.entity.util.PageResult@1a44164e}
+2020-12-28 11:03:19.873  INFO 14584 --- [http-nio-8888-exec-10] com.bigff.blog.aspect.LogAspect          : Request : {url='http://127.0.0.1:8888/getBlogByTagId', ip='127.0.0.1', classMethod='com.bigff.blog.web.TagShowController.getBlogByTypeId', args=[1, 30, 1]}
+2020-12-28 11:03:19.874 DEBUG 14584 --- [http-nio-8888-exec-10] c.b.b.m.BlogMapper.getBlogByTagId_COUNT  : ==>  Preparing: SELECT count(0) FROM t_blog b INNER JOIN t_blog_tags bt ON b.id = bt.blogs_id INNER JOIN t_tag t ON bt.tags_id = t.tagid INNER JOIN t_user u ON b.user_id = u.userid INNER JOIN t_type ty ON b.type_id = ty.typeid WHERE t.tagid = ?
+2020-12-28 11:03:19.874 DEBUG 14584 --- [http-nio-8888-exec-10] c.b.b.m.BlogMapper.getBlogByTagId_COUNT  : ==> Parameters: 1(Long)
+2020-12-28 11:03:19.875 DEBUG 14584 --- [http-nio-8888-exec-10] c.b.b.m.BlogMapper.getBlogByTagId_COUNT  : <==      Total: 1
+2020-12-28 11:03:19.875 DEBUG 14584 --- [http-nio-8888-exec-10] c.b.b.mapper.BlogMapper.getBlogByTagId   : ==>  Preparing: SELECT b.*,t.*,ty.*,u.userid,u.username,u.avatar FROM t_blog b INNER JOIN t_blog_tags bt on b.id = bt.blogs_id INNER JOIN t_tag t on bt.tags_id = t.tagid INNER JOIN t_user u on b.user_id = u.userid INNER JOIN t_type ty ON b.type_id = ty.typeid where t.tagid = ? LIMIT ?
+2020-12-28 11:03:19.875 DEBUG 14584 --- [http-nio-8888-exec-10] c.b.b.mapper.BlogMapper.getBlogByTagId   : ==> Parameters: 1(Long), 30(Integer)
+2020-12-28 11:03:19.876 DEBUG 14584 --- [http-nio-8888-exec-10] c.b.b.mapper.BlogMapper.getBlogByTagId   : <==      Total: 2
+2020-12-28 11:03:19.876  INFO 14584 --- [http-nio-8888-exec-10] com.bigff.blog.aspect.LogAspect          : Request : Result{code=200, msg='成功', data=com.bigff.blog.entity.util.PageResult@3a1509b9}
+2020-12-28 11:03:20.580  INFO 14584 --- [http-nio-8888-exec-1] com.bigff.blog.aspect.LogAspect          : Request : {url='http://127.0.0.1:8888/getBlogByTagId', ip='127.0.0.1', classMethod='com.bigff.blog.web.TagShowController.getBlogByTypeId', args=[1, 30, 5]}
+2020-12-28 11:03:20.580 DEBUG 14584 --- [http-nio-8888-exec-1] c.b.b.m.BlogMapper.getBlogByTagId_COUNT  : ==>  Preparing: SELECT count(0) FROM t_blog b INNER JOIN t_blog_tags bt ON b.id = bt.blogs_id INNER JOIN t_tag t ON bt.tags_id = t.tagid INNER JOIN t_user u ON b.user_id = u.userid INNER JOIN t_type ty ON b.type_id = ty.typeid WHERE t.tagid = ?
+2020-12-28 11:03:20.580 DEBUG 14584 --- [http-nio-8888-exec-1] c.b.b.m.BlogMapper.getBlogByTagId_COUNT  : ==> Parameters: 5(Long)
+2020-12-28 11:03:20.581 DEBUG 14584 --- [http-nio-8888-exec-1] c.b.b.m.BlogMapper.getBlogByTagId_COUNT  : <==      Total: 1
+2020-12-28 11:03:20.581 DEBUG 14584 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.getBlogByTagId   : ==>  Preparing: SELECT b.*,t.*,ty.*,u.userid,u.username,u.avatar FROM t_blog b INNER JOIN t_blog_tags bt on b.id = bt.blogs_id INNER JOIN t_tag t on bt.tags_id = t.tagid INNER JOIN t_user u on b.user_id = u.userid INNER JOIN t_type ty ON b.type_id = ty.typeid where t.tagid = ? LIMIT ?
+2020-12-28 11:03:20.581 DEBUG 14584 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.getBlogByTagId   : ==> Parameters: 5(Long), 30(Integer)
+2020-12-28 11:03:20.581 DEBUG 14584 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.getBlogByTagId   : <==      Total: 1
+2020-12-28 11:03:20.581  INFO 14584 --- [http-nio-8888-exec-1] com.bigff.blog.aspect.LogAspect          : Request : Result{code=200, msg='成功', data=com.bigff.blog.entity.util.PageResult@928961c}
+2020-12-28 11:04:13.891  INFO 14584 --- [http-nio-8888-exec-6] com.bigff.blog.aspect.LogAspect          : Request : {url='http://127.0.0.1:8888/getBlogByTagId', ip='127.0.0.1', classMethod='com.bigff.blog.web.TagShowController.getBlogByTypeId', args=[1, 30, 4]}
+2020-12-28 11:04:13.892 DEBUG 14584 --- [http-nio-8888-exec-6] c.b.b.m.BlogMapper.getBlogByTagId_COUNT  : ==>  Preparing: SELECT count(0) FROM t_blog b INNER JOIN t_blog_tags bt ON b.id = bt.blogs_id INNER JOIN t_tag t ON bt.tags_id = t.tagid INNER JOIN t_user u ON b.user_id = u.userid INNER JOIN t_type ty ON b.type_id = ty.typeid WHERE t.tagid = ?
+2020-12-28 11:04:13.892 DEBUG 14584 --- [http-nio-8888-exec-6] c.b.b.m.BlogMapper.getBlogByTagId_COUNT  : ==> Parameters: 4(Long)
+2020-12-28 11:04:13.901 DEBUG 14584 --- [http-nio-8888-exec-6] c.b.b.m.BlogMapper.getBlogByTagId_COUNT  : <==      Total: 1
+2020-12-28 11:04:13.901 DEBUG 14584 --- [http-nio-8888-exec-6] c.b.b.mapper.BlogMapper.getBlogByTagId   : ==>  Preparing: SELECT b.*,t.*,ty.*,u.userid,u.username,u.avatar FROM t_blog b INNER JOIN t_blog_tags bt on b.id = bt.blogs_id INNER JOIN t_tag t on bt.tags_id = t.tagid INNER JOIN t_user u on b.user_id = u.userid INNER JOIN t_type ty ON b.type_id = ty.typeid where t.tagid = ? LIMIT ?
+2020-12-28 11:04:13.901 DEBUG 14584 --- [http-nio-8888-exec-6] c.b.b.mapper.BlogMapper.getBlogByTagId   : ==> Parameters: 4(Long), 30(Integer)
+2020-12-28 11:04:13.902 DEBUG 14584 --- [http-nio-8888-exec-6] c.b.b.mapper.BlogMapper.getBlogByTagId   : <==      Total: 4
+2020-12-28 11:04:13.903  INFO 14584 --- [http-nio-8888-exec-6] com.bigff.blog.aspect.LogAspect          : Request : Result{code=200, msg='成功', data=com.bigff.blog.entity.util.PageResult@585931d0}
+2020-12-28 11:04:15.014  INFO 14584 --- [http-nio-8888-exec-2] com.bigff.blog.aspect.LogAspect          : Request : {url='http://127.0.0.1:8888/getBlogByTagId', ip='127.0.0.1', classMethod='com.bigff.blog.web.TagShowController.getBlogByTypeId', args=[1, 30, 2]}
+2020-12-28 11:04:15.015 DEBUG 14584 --- [http-nio-8888-exec-2] c.b.b.m.BlogMapper.getBlogByTagId_COUNT  : ==>  Preparing: SELECT count(0) FROM t_blog b INNER JOIN t_blog_tags bt ON b.id = bt.blogs_id INNER JOIN t_tag t ON bt.tags_id = t.tagid INNER JOIN t_user u ON b.user_id = u.userid INNER JOIN t_type ty ON b.type_id = ty.typeid WHERE t.tagid = ?
+2020-12-28 11:04:15.015 DEBUG 14584 --- [http-nio-8888-exec-2] c.b.b.m.BlogMapper.getBlogByTagId_COUNT  : ==> Parameters: 2(Long)
+2020-12-28 11:04:15.015 DEBUG 14584 --- [http-nio-8888-exec-2] c.b.b.m.BlogMapper.getBlogByTagId_COUNT  : <==      Total: 1
+2020-12-28 11:04:15.016 DEBUG 14584 --- [http-nio-8888-exec-2] c.b.b.mapper.BlogMapper.getBlogByTagId   : ==>  Preparing: SELECT b.*,t.*,ty.*,u.userid,u.username,u.avatar FROM t_blog b INNER JOIN t_blog_tags bt on b.id = bt.blogs_id INNER JOIN t_tag t on bt.tags_id = t.tagid INNER JOIN t_user u on b.user_id = u.userid INNER JOIN t_type ty ON b.type_id = ty.typeid where t.tagid = ? LIMIT ?
+2020-12-28 11:04:15.016 DEBUG 14584 --- [http-nio-8888-exec-2] c.b.b.mapper.BlogMapper.getBlogByTagId   : ==> Parameters: 2(Long), 30(Integer)
+2020-12-28 11:04:15.016 DEBUG 14584 --- [http-nio-8888-exec-2] c.b.b.mapper.BlogMapper.getBlogByTagId   : <==      Total: 1
+2020-12-28 11:04:15.017  INFO 14584 --- [http-nio-8888-exec-2] com.bigff.blog.aspect.LogAspect          : Request : Result{code=200, msg='成功', data=com.bigff.blog.entity.util.PageResult@454c971a}
+2020-12-28 11:04:15.678  INFO 14584 --- [http-nio-8888-exec-7] com.bigff.blog.aspect.LogAspect          : Request : {url='http://127.0.0.1:8888/getBlogByTagId', ip='127.0.0.1', classMethod='com.bigff.blog.web.TagShowController.getBlogByTypeId', args=[1, 30, 1]}
+2020-12-28 11:04:15.679 DEBUG 14584 --- [http-nio-8888-exec-7] c.b.b.m.BlogMapper.getBlogByTagId_COUNT  : ==>  Preparing: SELECT count(0) FROM t_blog b INNER JOIN t_blog_tags bt ON b.id = bt.blogs_id INNER JOIN t_tag t ON bt.tags_id = t.tagid INNER JOIN t_user u ON b.user_id = u.userid INNER JOIN t_type ty ON b.type_id = ty.typeid WHERE t.tagid = ?
+2020-12-28 11:04:15.679 DEBUG 14584 --- [http-nio-8888-exec-7] c.b.b.m.BlogMapper.getBlogByTagId_COUNT  : ==> Parameters: 1(Long)
+2020-12-28 11:04:15.680 DEBUG 14584 --- [http-nio-8888-exec-7] c.b.b.m.BlogMapper.getBlogByTagId_COUNT  : <==      Total: 1
+2020-12-28 11:04:15.680 DEBUG 14584 --- [http-nio-8888-exec-7] c.b.b.mapper.BlogMapper.getBlogByTagId   : ==>  Preparing: SELECT b.*,t.*,ty.*,u.userid,u.username,u.avatar FROM t_blog b INNER JOIN t_blog_tags bt on b.id = bt.blogs_id INNER JOIN t_tag t on bt.tags_id = t.tagid INNER JOIN t_user u on b.user_id = u.userid INNER JOIN t_type ty ON b.type_id = ty.typeid where t.tagid = ? LIMIT ?
+2020-12-28 11:04:15.680 DEBUG 14584 --- [http-nio-8888-exec-7] c.b.b.mapper.BlogMapper.getBlogByTagId   : ==> Parameters: 1(Long), 30(Integer)
+2020-12-28 11:04:15.681 DEBUG 14584 --- [http-nio-8888-exec-7] c.b.b.mapper.BlogMapper.getBlogByTagId   : <==      Total: 2
+2020-12-28 11:04:15.681  INFO 14584 --- [http-nio-8888-exec-7] com.bigff.blog.aspect.LogAspect          : Request : Result{code=200, msg='成功', data=com.bigff.blog.entity.util.PageResult@7f2f0ed1}
+2020-12-28 11:04:16.634  INFO 14584 --- [http-nio-8888-exec-3] com.bigff.blog.aspect.LogAspect          : Request : {url='http://127.0.0.1:8888/getBlogByTagId', ip='127.0.0.1', classMethod='com.bigff.blog.web.TagShowController.getBlogByTypeId', args=[1, 30, 2]}
+2020-12-28 11:04:16.635 DEBUG 14584 --- [http-nio-8888-exec-3] c.b.b.m.BlogMapper.getBlogByTagId_COUNT  : ==>  Preparing: SELECT count(0) FROM t_blog b INNER JOIN t_blog_tags bt ON b.id = bt.blogs_id INNER JOIN t_tag t ON bt.tags_id = t.tagid INNER JOIN t_user u ON b.user_id = u.userid INNER JOIN t_type ty ON b.type_id = ty.typeid WHERE t.tagid = ?
+2020-12-28 11:04:16.635 DEBUG 14584 --- [http-nio-8888-exec-3] c.b.b.m.BlogMapper.getBlogByTagId_COUNT  : ==> Parameters: 2(Long)
+2020-12-28 11:04:16.635 DEBUG 14584 --- [http-nio-8888-exec-3] c.b.b.m.BlogMapper.getBlogByTagId_COUNT  : <==      Total: 1
+2020-12-28 11:04:16.636 DEBUG 14584 --- [http-nio-8888-exec-3] c.b.b.mapper.BlogMapper.getBlogByTagId   : ==>  Preparing: SELECT b.*,t.*,ty.*,u.userid,u.username,u.avatar FROM t_blog b INNER JOIN t_blog_tags bt on b.id = bt.blogs_id INNER JOIN t_tag t on bt.tags_id = t.tagid INNER JOIN t_user u on b.user_id = u.userid INNER JOIN t_type ty ON b.type_id = ty.typeid where t.tagid = ? LIMIT ?
+2020-12-28 11:04:16.636 DEBUG 14584 --- [http-nio-8888-exec-3] c.b.b.mapper.BlogMapper.getBlogByTagId   : ==> Parameters: 2(Long), 30(Integer)
+2020-12-28 11:04:16.636 DEBUG 14584 --- [http-nio-8888-exec-3] c.b.b.mapper.BlogMapper.getBlogByTagId   : <==      Total: 1
+2020-12-28 11:04:16.636  INFO 14584 --- [http-nio-8888-exec-3] com.bigff.blog.aspect.LogAspect          : Request : Result{code=200, msg='成功', data=com.bigff.blog.entity.util.PageResult@f669c3f}
+2020-12-28 11:04:17.487  INFO 14584 --- [http-nio-8888-exec-5] com.bigff.blog.aspect.LogAspect          : Request : {url='http://127.0.0.1:8888/getBlogByTagId', ip='127.0.0.1', classMethod='com.bigff.blog.web.TagShowController.getBlogByTypeId', args=[1, 30, 4]}
+2020-12-28 11:04:17.488 DEBUG 14584 --- [http-nio-8888-exec-5] c.b.b.m.BlogMapper.getBlogByTagId_COUNT  : ==>  Preparing: SELECT count(0) FROM t_blog b INNER JOIN t_blog_tags bt ON b.id = bt.blogs_id INNER JOIN t_tag t ON bt.tags_id = t.tagid INNER JOIN t_user u ON b.user_id = u.userid INNER JOIN t_type ty ON b.type_id = ty.typeid WHERE t.tagid = ?
+2020-12-28 11:04:17.488 DEBUG 14584 --- [http-nio-8888-exec-5] c.b.b.m.BlogMapper.getBlogByTagId_COUNT  : ==> Parameters: 4(Long)
+2020-12-28 11:04:17.489 DEBUG 14584 --- [http-nio-8888-exec-5] c.b.b.m.BlogMapper.getBlogByTagId_COUNT  : <==      Total: 1
+2020-12-28 11:04:17.490 DEBUG 14584 --- [http-nio-8888-exec-5] c.b.b.mapper.BlogMapper.getBlogByTagId   : ==>  Preparing: SELECT b.*,t.*,ty.*,u.userid,u.username,u.avatar FROM t_blog b INNER JOIN t_blog_tags bt on b.id = bt.blogs_id INNER JOIN t_tag t on bt.tags_id = t.tagid INNER JOIN t_user u on b.user_id = u.userid INNER JOIN t_type ty ON b.type_id = ty.typeid where t.tagid = ? LIMIT ?
+2020-12-28 11:04:17.490 DEBUG 14584 --- [http-nio-8888-exec-5] c.b.b.mapper.BlogMapper.getBlogByTagId   : ==> Parameters: 4(Long), 30(Integer)
+2020-12-28 11:04:17.491 DEBUG 14584 --- [http-nio-8888-exec-5] c.b.b.mapper.BlogMapper.getBlogByTagId   : <==      Total: 4
+2020-12-28 11:04:17.491  INFO 14584 --- [http-nio-8888-exec-5] com.bigff.blog.aspect.LogAspect          : Request : Result{code=200, msg='成功', data=com.bigff.blog.entity.util.PageResult@2559e485}
+2020-12-28 11:04:19.510  INFO 14584 --- [http-nio-8888-exec-4] com.bigff.blog.aspect.LogAspect          : Request : {url='http://127.0.0.1:8888/getBlogByTagId', ip='127.0.0.1', classMethod='com.bigff.blog.web.TagShowController.getBlogByTypeId', args=[1, 30, 5]}
+2020-12-28 11:04:19.511 DEBUG 14584 --- [http-nio-8888-exec-4] c.b.b.m.BlogMapper.getBlogByTagId_COUNT  : ==>  Preparing: SELECT count(0) FROM t_blog b INNER JOIN t_blog_tags bt ON b.id = bt.blogs_id INNER JOIN t_tag t ON bt.tags_id = t.tagid INNER JOIN t_user u ON b.user_id = u.userid INNER JOIN t_type ty ON b.type_id = ty.typeid WHERE t.tagid = ?
+2020-12-28 11:04:19.512 DEBUG 14584 --- [http-nio-8888-exec-4] c.b.b.m.BlogMapper.getBlogByTagId_COUNT  : ==> Parameters: 5(Long)
+2020-12-28 11:04:19.512 DEBUG 14584 --- [http-nio-8888-exec-4] c.b.b.m.BlogMapper.getBlogByTagId_COUNT  : <==      Total: 1
+2020-12-28 11:04:19.512 DEBUG 14584 --- [http-nio-8888-exec-4] c.b.b.mapper.BlogMapper.getBlogByTagId   : ==>  Preparing: SELECT b.*,t.*,ty.*,u.userid,u.username,u.avatar FROM t_blog b INNER JOIN t_blog_tags bt on b.id = bt.blogs_id INNER JOIN t_tag t on bt.tags_id = t.tagid INNER JOIN t_user u on b.user_id = u.userid INNER JOIN t_type ty ON b.type_id = ty.typeid where t.tagid = ? LIMIT ?
+2020-12-28 11:04:19.512 DEBUG 14584 --- [http-nio-8888-exec-4] c.b.b.mapper.BlogMapper.getBlogByTagId   : ==> Parameters: 5(Long), 30(Integer)
+2020-12-28 11:04:19.513 DEBUG 14584 --- [http-nio-8888-exec-4] c.b.b.mapper.BlogMapper.getBlogByTagId   : <==      Total: 1
+2020-12-28 11:04:19.513  INFO 14584 --- [http-nio-8888-exec-4] com.bigff.blog.aspect.LogAspect          : Request : Result{code=200, msg='成功', data=com.bigff.blog.entity.util.PageResult@386ea8e}
+2020-12-28 11:12:22.877  INFO 14584 --- [http-nio-8888-exec-9] com.bigff.blog.aspect.LogAspect          : Request : {url='http://127.0.0.1:8888/getBlogByTagId', ip='127.0.0.1', classMethod='com.bigff.blog.web.TagShowController.getBlogByTypeId', args=[1, 30, 4]}
+2020-12-28 11:12:22.878 DEBUG 14584 --- [http-nio-8888-exec-9] c.b.b.m.BlogMapper.getBlogByTagId_COUNT  : ==>  Preparing: SELECT count(0) FROM t_blog b INNER JOIN t_blog_tags bt ON b.id = bt.blogs_id INNER JOIN t_tag t ON bt.tags_id = t.tagid INNER JOIN t_user u ON b.user_id = u.userid INNER JOIN t_type ty ON b.type_id = ty.typeid WHERE t.tagid = ?
+2020-12-28 11:12:22.879 DEBUG 14584 --- [http-nio-8888-exec-9] c.b.b.m.BlogMapper.getBlogByTagId_COUNT  : ==> Parameters: 4(Long)
+2020-12-28 11:12:22.881 DEBUG 14584 --- [http-nio-8888-exec-9] c.b.b.m.BlogMapper.getBlogByTagId_COUNT  : <==      Total: 1
+2020-12-28 11:12:22.881 DEBUG 14584 --- [http-nio-8888-exec-9] c.b.b.mapper.BlogMapper.getBlogByTagId   : ==>  Preparing: SELECT b.*,t.*,ty.*,u.userid,u.username,u.avatar FROM t_blog b INNER JOIN t_blog_tags bt on b.id = bt.blogs_id INNER JOIN t_tag t on bt.tags_id = t.tagid INNER JOIN t_user u on b.user_id = u.userid INNER JOIN t_type ty ON b.type_id = ty.typeid where t.tagid = ? LIMIT ?
+2020-12-28 11:12:22.881 DEBUG 14584 --- [http-nio-8888-exec-9] c.b.b.mapper.BlogMapper.getBlogByTagId   : ==> Parameters: 4(Long), 30(Integer)
+2020-12-28 11:12:22.883 DEBUG 14584 --- [http-nio-8888-exec-9] c.b.b.mapper.BlogMapper.getBlogByTagId   : <==      Total: 4
+2020-12-28 11:12:22.884  INFO 14584 --- [http-nio-8888-exec-9] com.bigff.blog.aspect.LogAspect          : Request : Result{code=200, msg='成功', data=com.bigff.blog.entity.util.PageResult@7cb5e11f}
+2020-12-28 11:12:23.570  INFO 14584 --- [http-nio-8888-exec-10] com.bigff.blog.aspect.LogAspect          : Request : {url='http://127.0.0.1:8888/getBlogByTagId', ip='127.0.0.1', classMethod='com.bigff.blog.web.TagShowController.getBlogByTypeId', args=[1, 30, 3]}
+2020-12-28 11:12:23.570 DEBUG 14584 --- [http-nio-8888-exec-10] c.b.b.m.BlogMapper.getBlogByTagId_COUNT  : ==>  Preparing: SELECT count(0) FROM t_blog b INNER JOIN t_blog_tags bt ON b.id = bt.blogs_id INNER JOIN t_tag t ON bt.tags_id = t.tagid INNER JOIN t_user u ON b.user_id = u.userid INNER JOIN t_type ty ON b.type_id = ty.typeid WHERE t.tagid = ?
+2020-12-28 11:12:23.571 DEBUG 14584 --- [http-nio-8888-exec-10] c.b.b.m.BlogMapper.getBlogByTagId_COUNT  : ==> Parameters: 3(Long)
+2020-12-28 11:12:23.571 DEBUG 14584 --- [http-nio-8888-exec-10] c.b.b.m.BlogMapper.getBlogByTagId_COUNT  : <==      Total: 1
+2020-12-28 11:12:23.571  INFO 14584 --- [http-nio-8888-exec-10] com.bigff.blog.aspect.LogAspect          : Request : Result{code=200, msg='成功', data=com.bigff.blog.entity.util.PageResult@56e66149}
+2020-12-28 11:12:24.335  INFO 14584 --- [http-nio-8888-exec-1] com.bigff.blog.aspect.LogAspect          : Request : {url='http://127.0.0.1:8888/getBlogByTagId', ip='127.0.0.1', classMethod='com.bigff.blog.web.TagShowController.getBlogByTypeId', args=[1, 30, 4]}
+2020-12-28 11:12:24.336 DEBUG 14584 --- [http-nio-8888-exec-1] c.b.b.m.BlogMapper.getBlogByTagId_COUNT  : ==>  Preparing: SELECT count(0) FROM t_blog b INNER JOIN t_blog_tags bt ON b.id = bt.blogs_id INNER JOIN t_tag t ON bt.tags_id = t.tagid INNER JOIN t_user u ON b.user_id = u.userid INNER JOIN t_type ty ON b.type_id = ty.typeid WHERE t.tagid = ?
+2020-12-28 11:12:24.336 DEBUG 14584 --- [http-nio-8888-exec-1] c.b.b.m.BlogMapper.getBlogByTagId_COUNT  : ==> Parameters: 4(Long)
+2020-12-28 11:12:24.336 DEBUG 14584 --- [http-nio-8888-exec-1] c.b.b.m.BlogMapper.getBlogByTagId_COUNT  : <==      Total: 1
+2020-12-28 11:12:24.337 DEBUG 14584 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.getBlogByTagId   : ==>  Preparing: SELECT b.*,t.*,ty.*,u.userid,u.username,u.avatar FROM t_blog b INNER JOIN t_blog_tags bt on b.id = bt.blogs_id INNER JOIN t_tag t on bt.tags_id = t.tagid INNER JOIN t_user u on b.user_id = u.userid INNER JOIN t_type ty ON b.type_id = ty.typeid where t.tagid = ? LIMIT ?
+2020-12-28 11:12:24.337 DEBUG 14584 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.getBlogByTagId   : ==> Parameters: 4(Long), 30(Integer)
+2020-12-28 11:12:24.337 DEBUG 14584 --- [http-nio-8888-exec-1] c.b.b.mapper.BlogMapper.getBlogByTagId   : <==      Total: 4
+2020-12-28 11:12:24.337  INFO 14584 --- [http-nio-8888-exec-1] com.bigff.blog.aspect.LogAspect          : Request : Result{code=200, msg='成功', data=com.bigff.blog.entity.util.PageResult@555af640}
+2020-12-28 11:12:27.585  INFO 14584 --- [http-nio-8888-exec-6] com.bigff.blog.aspect.LogAspect          : Request : {url='http://127.0.0.1:8888/getBlogByTagId', ip='127.0.0.1', classMethod='com.bigff.blog.web.TagShowController.getBlogByTypeId', args=[1, 30, 3]}
+2020-12-28 11:12:27.587 DEBUG 14584 --- [http-nio-8888-exec-6] c.b.b.m.BlogMapper.getBlogByTagId_COUNT  : ==>  Preparing: SELECT count(0) FROM t_blog b INNER JOIN t_blog_tags bt ON b.id = bt.blogs_id INNER JOIN t_tag t ON bt.tags_id = t.tagid INNER JOIN t_user u ON b.user_id = u.userid INNER JOIN t_type ty ON b.type_id = ty.typeid WHERE t.tagid = ?
+2020-12-28 11:12:27.587 DEBUG 14584 --- [http-nio-8888-exec-6] c.b.b.m.BlogMapper.getBlogByTagId_COUNT  : ==> Parameters: 3(Long)
+2020-12-28 11:12:27.588 DEBUG 14584 --- [http-nio-8888-exec-6] c.b.b.m.BlogMapper.getBlogByTagId_COUNT  : <==      Total: 1
+2020-12-28 11:12:27.588  INFO 14584 --- [http-nio-8888-exec-6] com.bigff.blog.aspect.LogAspect          : Request : Result{code=200, msg='成功', data=com.bigff.blog.entity.util.PageResult@6c984ef7}
+2020-12-28 11:12:28.699  INFO 14584 --- [http-nio-8888-exec-2] com.bigff.blog.aspect.LogAspect          : Request : {url='http://127.0.0.1:8888/getBlogByTagId', ip='127.0.0.1', classMethod='com.bigff.blog.web.TagShowController.getBlogByTypeId', args=[1, 30, 2]}
+2020-12-28 11:12:28.700 DEBUG 14584 --- [http-nio-8888-exec-2] c.b.b.m.BlogMapper.getBlogByTagId_COUNT  : ==>  Preparing: SELECT count(0) FROM t_blog b INNER JOIN t_blog_tags bt ON b.id = bt.blogs_id INNER JOIN t_tag t ON bt.tags_id = t.tagid INNER JOIN t_user u ON b.user_id = u.userid INNER JOIN t_type ty ON b.type_id = ty.typeid WHERE t.tagid = ?
+2020-12-28 11:12:28.700 DEBUG 14584 --- [http-nio-8888-exec-2] c.b.b.m.BlogMapper.getBlogByTagId_COUNT  : ==> Parameters: 2(Long)
+2020-12-28 11:12:28.701 DEBUG 14584 --- [http-nio-8888-exec-2] c.b.b.m.BlogMapper.getBlogByTagId_COUNT  : <==      Total: 1
+2020-12-28 11:12:28.701 DEBUG 14584 --- [http-nio-8888-exec-2] c.b.b.mapper.BlogMapper.getBlogByTagId   : ==>  Preparing: SELECT b.*,t.*,ty.*,u.userid,u.username,u.avatar FROM t_blog b INNER JOIN t_blog_tags bt on b.id = bt.blogs_id INNER JOIN t_tag t on bt.tags_id = t.tagid INNER JOIN t_user u on b.user_id = u.userid INNER JOIN t_type ty ON b.type_id = ty.typeid where t.tagid = ? LIMIT ?
+2020-12-28 11:12:28.701 DEBUG 14584 --- [http-nio-8888-exec-2] c.b.b.mapper.BlogMapper.getBlogByTagId   : ==> Parameters: 2(Long), 30(Integer)
+2020-12-28 11:12:28.702 DEBUG 14584 --- [http-nio-8888-exec-2] c.b.b.mapper.BlogMapper.getBlogByTagId   : <==      Total: 1
+2020-12-28 11:12:28.702  INFO 14584 --- [http-nio-8888-exec-2] com.bigff.blog.aspect.LogAspect          : Request : Result{code=200, msg='成功', data=com.bigff.blog.entity.util.PageResult@4ac21d2f}
+2020-12-28 11:12:29.277  INFO 14584 --- [http-nio-8888-exec-7] com.bigff.blog.aspect.LogAspect          : Request : {url='http://127.0.0.1:8888/getBlogByTagId', ip='127.0.0.1', classMethod='com.bigff.blog.web.TagShowController.getBlogByTypeId', args=[1, 30, 1]}
+2020-12-28 11:12:29.278 DEBUG 14584 --- [http-nio-8888-exec-7] c.b.b.m.BlogMapper.getBlogByTagId_COUNT  : ==>  Preparing: SELECT count(0) FROM t_blog b INNER JOIN t_blog_tags bt ON b.id = bt.blogs_id INNER JOIN t_tag t ON bt.tags_id = t.tagid INNER JOIN t_user u ON b.user_id = u.userid INNER JOIN t_type ty ON b.type_id = ty.typeid WHERE t.tagid = ?
+2020-12-28 11:12:29.278 DEBUG 14584 --- [http-nio-8888-exec-7] c.b.b.m.BlogMapper.getBlogByTagId_COUNT  : ==> Parameters: 1(Long)
+2020-12-28 11:12:29.278 DEBUG 14584 --- [http-nio-8888-exec-7] c.b.b.m.BlogMapper.getBlogByTagId_COUNT  : <==      Total: 1
+2020-12-28 11:12:29.278 DEBUG 14584 --- [http-nio-8888-exec-7] c.b.b.mapper.BlogMapper.getBlogByTagId   : ==>  Preparing: SELECT b.*,t.*,ty.*,u.userid,u.username,u.avatar FROM t_blog b INNER JOIN t_blog_tags bt on b.id = bt.blogs_id INNER JOIN t_tag t on bt.tags_id = t.tagid INNER JOIN t_user u on b.user_id = u.userid INNER JOIN t_type ty ON b.type_id = ty.typeid where t.tagid = ? LIMIT ?
+2020-12-28 11:12:29.278 DEBUG 14584 --- [http-nio-8888-exec-7] c.b.b.mapper.BlogMapper.getBlogByTagId   : ==> Parameters: 1(Long), 30(Integer)
+2020-12-28 11:12:29.279 DEBUG 14584 --- [http-nio-8888-exec-7] c.b.b.mapper.BlogMapper.getBlogByTagId   : <==      Total: 2
+2020-12-28 11:12:29.279  INFO 14584 --- [http-nio-8888-exec-7] com.bigff.blog.aspect.LogAspect          : Request : Result{code=200, msg='成功', data=com.bigff.blog.entity.util.PageResult@24196753}
+2020-12-28 11:12:30.083  INFO 14584 --- [http-nio-8888-exec-3] com.bigff.blog.aspect.LogAspect          : Request : {url='http://127.0.0.1:8888/getBlogByTagId', ip='127.0.0.1', classMethod='com.bigff.blog.web.TagShowController.getBlogByTypeId', args=[1, 30, 5]}
+2020-12-28 11:12:30.085 DEBUG 14584 --- [http-nio-8888-exec-3] c.b.b.m.BlogMapper.getBlogByTagId_COUNT  : ==>  Preparing: SELECT count(0) FROM t_blog b INNER JOIN t_blog_tags bt ON b.id = bt.blogs_id INNER JOIN t_tag t ON bt.tags_id = t.tagid INNER JOIN t_user u ON b.user_id = u.userid INNER JOIN t_type ty ON b.type_id = ty.typeid WHERE t.tagid = ?
+2020-12-28 11:12:30.085 DEBUG 14584 --- [http-nio-8888-exec-3] c.b.b.m.BlogMapper.getBlogByTagId_COUNT  : ==> Parameters: 5(Long)
+2020-12-28 11:12:30.085 DEBUG 14584 --- [http-nio-8888-exec-3] c.b.b.m.BlogMapper.getBlogByTagId_COUNT  : <==      Total: 1
+2020-12-28 11:12:30.085 DEBUG 14584 --- [http-nio-8888-exec-3] c.b.b.mapper.BlogMapper.getBlogByTagId   : ==>  Preparing: SELECT b.*,t.*,ty.*,u.userid,u.username,u.avatar FROM t_blog b INNER JOIN t_blog_tags bt on b.id = bt.blogs_id INNER JOIN t_tag t on bt.tags_id = t.tagid INNER JOIN t_user u on b.user_id = u.userid INNER JOIN t_type ty ON b.type_id = ty.typeid where t.tagid = ? LIMIT ?
+2020-12-28 11:12:30.085 DEBUG 14584 --- [http-nio-8888-exec-3] c.b.b.mapper.BlogMapper.getBlogByTagId   : ==> Parameters: 5(Long), 30(Integer)
+2020-12-28 11:12:30.086 DEBUG 14584 --- [http-nio-8888-exec-3] c.b.b.mapper.BlogMapper.getBlogByTagId   : <==      Total: 1
+2020-12-28 11:12:30.086  INFO 14584 --- [http-nio-8888-exec-3] com.bigff.blog.aspect.LogAspect          : Request : Result{code=200, msg='成功', data=com.bigff.blog.entity.util.PageResult@44c8b541}

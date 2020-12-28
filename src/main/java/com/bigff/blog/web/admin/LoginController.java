@@ -2,6 +2,8 @@ package com.bigff.blog.web.admin;
 
 
 import com.bigff.blog.entity.User;
+import com.bigff.blog.entity.util.Result;
+import com.bigff.blog.entity.util.ResultUtil;
 import com.bigff.blog.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,16 +20,15 @@ public  class LoginController{
   private UserService userService;
 
   @PostMapping("login")
-  public String checkUser(@RequestParam("username") String username, @RequestParam("password") String password, HttpSession session,
+  public Result checkUser(@RequestParam("username") String username, @RequestParam("password") String password, HttpSession session,
                           RedirectAttributes attributes){
     User user = userService.checkUser(username,password);
     if (user!=null){
       user.setPassword(null);
       session.setAttribute("user",user);
-      return  "/admin/index";
+      return ResultUtil.success();
     }
-      attributes.addFlashAttribute("message","用户名密码错误！");
-      return "redirect:/login";
+      return ResultUtil.error(400,"用户名密码错误！");
 
   }
 

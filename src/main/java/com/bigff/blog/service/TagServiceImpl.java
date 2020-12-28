@@ -17,7 +17,7 @@ public class TagServiceImpl implements TagService {
   private TagMapper tagMapper;
 
   @Override
-  public List<Tag> findHomeTag() {
-    return tagMapper.findHomeTag();
+  public List<Tag> getTagList() {
+    return tagMapper.getTagList();
   }
 }

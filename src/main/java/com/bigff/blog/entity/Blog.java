@@ -1,19 +1,24 @@
 package com.bigff.blog.entity;
 
 
+import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
+
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-@Data   //生成set和get方法
+
+@Getter
+@Setter
 @ToString   //生成tostring方法
-@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
 public class Blog {
     private Long id;
     private String title;

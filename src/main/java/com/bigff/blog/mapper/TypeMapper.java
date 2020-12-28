@@ -17,8 +17,8 @@ public interface TypeMapper {
   @Results({
           @Result(property = "typeId",column = "typeid"),
           @Result(property = "typeName",column = "typename"),
-          @Result(property = "blogs",column = "typeId",one = @One(select = "com.bigff.blog.mapper.BlogMapper.findBlogByTypeId",
+          @Result(property = "blogs",column = "typeId",one = @One(select = "com.bigff.blog.mapper.BlogMapper.getBlogByTypeId",
                   fetchType = FetchType.LAZY)),
   })
-  List<Type> findHomeType();
+  List<Type> getTypeList();
 }

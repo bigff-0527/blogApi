@@ -1,11 +1,16 @@
 package com.bigff.blog.service;
 
+import com.bigff.blog.entity.Blog;
 import com.bigff.blog.entity.Type;
+import com.bigff.blog.entity.util.PageRequest;
 import com.bigff.blog.mapper.TypeMapper;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.awt.print.Pageable;
 import java.util.List;
 
 @Service
@@ -16,7 +21,12 @@ public class TypeServiceImpl implements TypeService {
 
 
   @Override
-  public List<Type> findHomeType() {
-    return typeMapper.findHomeType();
+  public List<Type> getTypeList() {
+    return typeMapper.getTypeList();
   }
+
+
+
+
+
 }

@@ -1,9 +1,14 @@
 package com.bigff.blog.web;
 
+import com.bigff.blog.entity.Blog;
 import com.bigff.blog.entity.util.PageRequest;
+import com.bigff.blog.entity.util.Result;
+import com.bigff.blog.entity.util.ResultUtil;
 import com.bigff.blog.service.BlogService;
 import com.bigff.blog.service.TagService;
 import com.bigff.blog.service.TypeService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -32,16 +37,15 @@ public class IndexController {
 //    return blogList;
 //  }
 
-  @RequestMapping(value="homeData")
-  public Map<String,Object> findPage(@RequestParam("pageNum") int pageNum, @RequestParam("pageSize") int pageSize ) {
-    PageRequest pageQuery = new PageRequest();
-    pageQuery.setPageNum(pageNum);
-    pageQuery.setPageSize(pageSize);
-
+  @RequestMapping(value="getIndexData")
+  public Result findPage(int pageNum ) {
+    PageHelper.startPage(pageNum,2);
+    List blogs =blogService.getBlogList();
+    PageInfo<Blog> pageInfo = new PageInfo<Blog>(blogs);
     Map<String,Object> homeData = new HashMap<>();
-    homeData.put("blog",blogService.getBlogList(pageQuery));
-    homeData.put("class", typeService.findHomeType());
-    homeData.put("tag",tagService.findHomeTag());
-    return homeData;
+    homeData.put("blog",pageInfo);
+    homeData.put("class", typeService.getTypeList());
+    homeData.put("tag",tagService.getTagList());
+    return ResultUtil.success(homeData);
   }
 }

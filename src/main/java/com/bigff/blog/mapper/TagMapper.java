@@ -17,14 +17,13 @@ public interface TagMapper {
   @Results({
           @Result(property = "tagId", column = "tagid"),
           @Result(property = "tagName", column = "tagname"),
-          @Result(property = "blogs",column = "tagId",one = @One(select = "com.bigff.blog.mapper.BlogMapper.findBlogByTagId",
+          @Result(property = "blogs",column = "tagId",one = @One(select = "com.bigff.blog.mapper.BlogMapper.getBlogByTagId",
                   fetchType = FetchType.LAZY)),
-
   })
-  List<Tag> findHomeTag();
+  List<Tag> getTagList();
 
 
-  @Select("select * from t_blog_tags where blogs_id = #{id}")
+  @Select("select * from t_blog_tags where tags_id = #{id}")
   @Results({
           @Result(property = "tagId", column = "tags_id"),
 

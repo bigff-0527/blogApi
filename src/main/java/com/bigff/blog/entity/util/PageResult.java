@@ -23,6 +23,7 @@ public class PageResult {
    * 数据模型
    */
   private List<?> content;
+
   public int getPageNum() {
     return pageNum;
   }

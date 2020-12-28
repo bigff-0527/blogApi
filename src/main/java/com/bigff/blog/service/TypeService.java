@@ -5,7 +5,7 @@ import java.util.List;
 
 public interface TypeService {
 
-  List<Type> findHomeType();
+  List<Type> getTypeList();
 
 
 }
