@@ -9,9 +9,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserMapper {
 
-  @Select("select id,username,avatar from t_user where id=#{id}")
+  @Select("select userid,username,avatar from t_user where userid = #{id}")
   User findUserById(Long id);
 
-  @Select("select username,avatar from t_user where username = #{username} and password = #{password}")
-  User checkUser(String username,String password);
+  @Select("select * from t_user where username = #{username}")
+  User checkUser(String username);
 }

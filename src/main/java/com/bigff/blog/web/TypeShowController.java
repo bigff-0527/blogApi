@@ -15,7 +15,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
 @RestController
+@RequestMapping("front")
 public class TypeShowController {
 
   @Autowired
@@ -27,8 +29,8 @@ public class TypeShowController {
   @Autowired
   TagService tagService;
 
-  @GetMapping("getClassList")
-  public Result getClassList(){
+  @GetMapping("getTypeList")
+  public Result getTypeList(){
     return  ResultUtil.success(typeService.getTypeList());
   }
 

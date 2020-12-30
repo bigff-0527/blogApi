@@ -1,11 +1,11 @@
 package com.bigff.blog.service;
 
-        import com.bigff.blog.entity.Blog;
-        import com.bigff.blog.entity.Tag;
-        import com.bigff.blog.entity.util.PageRequest;
-        import com.bigff.blog.entity.util.PageResult;
+import com.bigff.blog.entity.Blog;
+import com.bigff.blog.entity.Tag;
+import com.bigff.blog.entity.util.PageRequest;
+import com.bigff.blog.entity.util.PageResult;
 
-        import java.util.List;
+import java.util.List;
 
 public interface BlogService {
 
@@ -19,7 +19,7 @@ public interface BlogService {
   //根据标签查找博客
   PageResult getBlogByTagId(PageRequest pageRequest,Long id);
 
-  int deleteBlog(Long id);
+  void deleteBlog(Long id);
 
   Blog findBlogById(Long id);
 
@@ -27,10 +27,10 @@ public interface BlogService {
 
   int insertBlog(Blog blog);
 
+  int deleteTags(Long id);
 
   //新增博客标签
-  int selectTags(Long id, List<Tag> tags);
+  int insertTags(Long id, List<Tag> tags);
 
-  //修改博客标签
-  int updateTags( Long id, List<Tag> tagId);
+
 }

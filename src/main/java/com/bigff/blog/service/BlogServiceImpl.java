@@ -39,8 +39,8 @@ public class BlogServiceImpl implements BlogService {
   }
 
   @Override
-  public int deleteBlog(Long id) {
-    return blogMapper.deleteBlog(id);
+  public void deleteBlog(Long id) {
+     blogMapper.deleteBlog(id);
   }
 
   @Override
@@ -59,14 +59,16 @@ public class BlogServiceImpl implements BlogService {
   }
 
   @Override
-  public int selectTags(Long id, List<Tag> tags) {
-    return blogMapper.selectTags(id,tags);
+  public int deleteTags(Long id) {
+    return blogMapper.deleteTags(id);
   }
 
   @Override
-  public int updateTags(Long id, List<Tag> tagId) {
-    return blogMapper.updateTags(id,tagId);
+  public int insertTags(Long id, List<Tag> tags) {
+    return blogMapper.insertTags(id,tags);
   }
+
+
 
   private PageInfo<Blog> getPageInfo(PageRequest pageRequest) {
     int pageNum = pageRequest.getPageNum();

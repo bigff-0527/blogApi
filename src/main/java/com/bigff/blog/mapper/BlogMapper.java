@@ -24,16 +24,18 @@ public interface BlogMapper {
   List<Blog> getBlogByTagId(Long id);
 
   @Select("delete from t_blog where id = #{id}")
-  int deleteBlog(Long id);
+  void deleteBlog(Long id);
 
   Blog findBlogById(Long id);
 
-  int updateBlog(Blog blog);
+  int updateBlog(@Param("blog") Blog blog);
 
   int insertBlog(@Param("blog") Blog blog);
 
+  int deleteTags(@Param("blog_id") Long id);
+
   //新增博客标签
-  int selectTags(@Param("blog_id") Long id, @Param("tags_id") List<Tag> tagId);
+  int insertTags(@Param("blog_id") Long id, @Param("tags_id") List<Tag> tagId);
 
   //修改博客标签
   int updateTags(@Param("blog_id") Long id, @Param("tags_id") List<Tag> tagId);
