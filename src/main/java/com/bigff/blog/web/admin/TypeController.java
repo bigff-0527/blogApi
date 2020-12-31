@@ -9,9 +9,7 @@ import com.bigff.blog.service.TypeService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -35,5 +33,29 @@ public class TypeController {
     List types =typeService.getTypeList();
     return ResultUtil.success(types);
 
+  }
+
+  @GetMapping("deleteType")
+  public Result deleteType(Long id){
+    if (typeService.deleteType(id)>0){
+      return ResultUtil.success();
+    }
+    return ResultUtil.error("删除失败");
+  }
+
+  @PostMapping("insertType")
+  public Result insertType(@RequestBody Type type){
+    if (typeService.insertType(type)>0){
+      return ResultUtil.success();
+    }
+    return ResultUtil.error("新增失败");
+  }
+
+  @PostMapping("updateType")
+  public Result updateType(@RequestBody Type type){
+    if (typeService.updateType(type)>0){
+      return ResultUtil.success();
+    }
+    return ResultUtil.error("修改失败");
   }
 }

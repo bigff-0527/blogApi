@@ -40,4 +40,6 @@ public interface BlogMapper {
   //修改博客标签
   int updateTags(@Param("blog_id") Long id, @Param("tags_id") List<Tag> tagId);
 
+  List<Blog> searchBlog(String title,Long typeId,boolean recommend);
+
 }

@@ -36,4 +36,13 @@ public interface TagMapper {
           @Result(property = "tagName",column = "tagname")
   })
   Tag findTagById();
+
+  @Delete("delete from t_tag where tagid = #{id}")
+  int deleteTag(Long id);
+
+  @Insert("insert into t_tag(tagname) values(#{tag.name})")
+  int insertTag(Tag tag);
+
+  @Update("update tag set tagname = #{tag.tagName} where tagid = #{tag.tagId} ")
+  int updateTag(Tag tag);
 }

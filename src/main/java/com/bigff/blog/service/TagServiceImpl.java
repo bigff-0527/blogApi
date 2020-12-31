@@ -20,4 +20,19 @@ public class TagServiceImpl implements TagService {
   public List<Tag> getTagList() {
     return tagMapper.getTagList();
   }
+
+  @Override
+  public int deleteTag(Long id) {
+    return tagMapper.deleteTag(id);
+  }
+
+  @Override
+  public int insertTag(Tag tag) {
+    return tagMapper.insertTag(tag);
+  }
+
+  @Override
+  public int updateTag(Tag tag) {
+    return tagMapper.updateTag(tag);
+  }
 }

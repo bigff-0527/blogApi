@@ -232,7 +232,7 @@
                where t.tagid = #{id}
     </select>
 
-    <select id="search"  resultMap="getBlogListMap">
+    <select id="searchBlog"  resultMap="getBlogListMap">
         SELECT b.*,ty.*,u.userid,u.username,u.avatar FROM
         t_blog  b INNER JOIN
         t_user  u on

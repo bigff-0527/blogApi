@@ -90,5 +90,13 @@ public  class BlogController {
     }
   }
 
+  @GetMapping("search")
+  public Result searchBlog(String title , Long typeId ,boolean recommend){
+    if (blogService.searchBlog(title,typeId,recommend)==null){
+      return ResultUtil.error("查询失败");
+    }
+    return ResultUtil.success(blogService.searchBlog(title,typeId,recommend));
+  }
+
 
 }

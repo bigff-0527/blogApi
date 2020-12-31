@@ -68,6 +68,10 @@ public class BlogServiceImpl implements BlogService {
     return blogMapper.insertTags(id,tags);
   }
 
+  @Override
+  public List<Blog> searchBlog(String title, Long typeId, boolean recommend) {
+    return blogMapper.searchBlog(title,typeId,recommend);
+  }
 
 
   private PageInfo<Blog> getPageInfo(PageRequest pageRequest) {

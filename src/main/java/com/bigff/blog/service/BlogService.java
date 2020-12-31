@@ -32,5 +32,7 @@ public interface BlogService {
   //新增博客标签
   int insertTags(Long id, List<Tag> tags);
 
+  //根据标题||类型||推荐查询博客
+  List<Blog> searchBlog(String title,Long typeId,boolean recommend);
 
 }

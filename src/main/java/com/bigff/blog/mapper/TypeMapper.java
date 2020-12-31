@@ -21,4 +21,13 @@ public interface TypeMapper {
                   fetchType = FetchType.LAZY)),
   })
   List<Type> getTypeList();
+
+  @Delete("delete from t_type where typeid = #{id}")
+  int deleteType(Long id);
+
+  @Insert("insert into t_type(typename) values(#{type.typeName})")
+  int insertType(Type type);
+
+  @Update("update t_type set typename = #{type.typeName} where typeid = #{type.typeId} ")
+  int updateType(Type type);
 }
