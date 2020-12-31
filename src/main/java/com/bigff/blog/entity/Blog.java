@@ -4,6 +4,9 @@ package com.bigff.blog.entity;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.gitee.sunchenbin.mybatis.actable.annotation.Column;
+import com.gitee.sunchenbin.mybatis.actable.annotation.Table;
+import com.gitee.sunchenbin.mybatis.actable.constants.MySqlTypeConstant;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,11 +23,19 @@ import java.util.List;
 @Setter
 @ToString   //生成tostring方法
 public class Blog {
+
     private Long id;
+
     private String title;
+
     private String content;
+
+
     private String first_picture;
+
+
     private String flag;
+
     private Integer views;
     private boolean appreciation;
     private boolean share_statement;

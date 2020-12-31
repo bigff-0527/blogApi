@@ -231,4 +231,24 @@
                b.type_id = ty.typeid
                where t.tagid = #{id}
     </select>
+
+    <select id="search"  resultMap="getBlogListMap">
+        SELECT b.*,ty.*,u.userid,u.username,u.avatar FROM
+        t_blog  b INNER JOIN
+        t_user  u on
+        b.user_id = u.userid  INNER JOIN
+        t_type ty ON
+        b.type_id = ty.typeid
+        <where>
+            <if test="title != null ">
+                b.title like %#{title}%
+            </if>
+            <if test="typeId != null">
+                and b.type_id = #{typeId}
+            </if>
+            <if test="recommend != 0">
+                and b.recommend = #{recommend}
+            </if>
+        </where>
+    </select>
 </mapper>
