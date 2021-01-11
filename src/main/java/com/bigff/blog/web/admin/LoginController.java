@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletResponse;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("admin")
 public  class LoginController{
   @Autowired
   private UserService userService;
@@ -45,7 +45,6 @@ public  class LoginController{
   @PostMapping("login")
   public Result login(@Validated @RequestBody LoginDto loginDto, HttpServletResponse response){
     User user = userService.checkUser(loginDto.getUsername());
-    System.out.println(loginDto);
     Assert.notNull(user,"用户不存在");
     if (user==null || !user.getPassword().equals(MD5utils.getMD5(loginDto.getPassword()))){
       return ResultUtil.error("密码不正确");

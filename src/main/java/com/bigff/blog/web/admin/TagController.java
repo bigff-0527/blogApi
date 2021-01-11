@@ -55,4 +55,25 @@ public class TagController {
     }
     return ResultUtil.error("修改失败");
   }
+
+  @GetMapping("checkTag")
+  public Result checkTag(String name){
+    if (tagService.checkTag(name)!=null)
+      return ResultUtil.error(300,"已存在");
+    return ResultUtil.success();
+  }
+
+  @GetMapping("findTag")
+  public Result findTag(Long id){
+    if (tagService.findTagById(id)!=null){
+      return ResultUtil.success(tagService.findTagById(id));
+    }
+    return ResultUtil.error(404,"不存在");
+  }
+
+  @GetMapping("getBlogAllTag")
+  public Result getBlogAllTag(){
+    List blog = tagService.getBlogAllTag();
+    return ResultUtil.success(blog);
+  }
 }

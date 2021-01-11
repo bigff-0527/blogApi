@@ -1,5 +1,6 @@
 package com.bigff.blog.service;
 
+import com.bigff.blog.common.dto.SearchDto;
 import com.bigff.blog.entity.Blog;
 import com.bigff.blog.entity.Tag;
 import com.bigff.blog.entity.util.PageRequest;
@@ -9,15 +10,16 @@ import java.util.List;
 
 public interface BlogService {
 
+  //blog列表
+  List<Blog> getBlogList(SearchDto searchDto);
 
-
-  List<Blog> getBlogList();
+  //
 
   //根据类型查找博客
   PageResult getBlogByTypeId(PageRequest pageRequest,Long id);
 
   //根据标签查找博客
-  PageResult getBlogByTagId(PageRequest pageRequest,Long id);
+  List<Blog> getBlogByTagId(Long id);
 
   void deleteBlog(Long id);
 
@@ -32,7 +34,16 @@ public interface BlogService {
   //新增博客标签
   int insertTags(Long id, List<Tag> tags);
 
-  //根据标题||类型||推荐查询博客
-  List<Blog> searchBlog(String title,Long typeId,boolean recommend);
+//  //根据标题||类型||标签查询博客
+//  List<Blog> searchBlog(SearchDto searchDto);
+
+  //views自增
+  int updateViews(Long id);
+
+  //查询浏览记录
+  Integer getAllViews();
+
+  //查询留言记录
+  Integer getAllComments();
 
 }

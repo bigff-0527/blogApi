@@ -40,5 +40,20 @@ public class TypeServiceImpl implements TypeService {
     return typeMapper.updateType(type);
   }
 
+  @Override
+  public Type checkType(String name) {
+    return typeMapper.checkType(name);
+  }
+
+  @Override
+  public Type findTypeById(Long id) {
+    return typeMapper.findTypeById(id);
+  }
+
+  @Override
+  public List<Type> getBlogAllType() {
+    return typeMapper.getBlogAllType();
+  }
+
 
 }

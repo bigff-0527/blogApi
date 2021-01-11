@@ -1,5 +1,6 @@
 package com.bigff.blog.mapper;
 
+import com.bigff.blog.common.dto.SearchDto;
 import com.bigff.blog.entity.Blog;
 import com.bigff.blog.entity.Tag;
 import org.apache.ibatis.annotations.*;
@@ -12,7 +13,7 @@ import java.util.List;
 @Repository
 public interface BlogMapper {
 
-  List getBlogList();
+  List getBlogList(SearchDto searchDto);
 
   List<Blog> getBlogByTypeId(Long id);
 
@@ -40,6 +41,15 @@ public interface BlogMapper {
   //修改博客标签
   int updateTags(@Param("blog_id") Long id, @Param("tags_id") List<Tag> tagId);
 
-  List<Blog> searchBlog(String title,Long typeId,boolean recommend);
+  //根据博客id查询出评论数量
+  int getCommentCountById(Long id);
 
+  //views自增
+  int updateViews(Long id);
+
+  //查询浏览记录
+  Integer getAllViews();
+
+  //查询留言记录
+  Integer getAllComments();
 }

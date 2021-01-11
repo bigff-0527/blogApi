@@ -4,6 +4,7 @@ import com.bigff.blog.entity.util.Result;
 import com.bigff.blog.entity.util.ResultUtil;
 
 
+import com.mysql.jdbc.exceptions.jdbc4.CommunicationsException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.ShiroException;
 import org.springframework.http.HttpStatus;
@@ -91,4 +92,12 @@ public class GlobalExceptionHandler {
     return ResultUtil.error(e.getMessage());
   }
 
+
+  //jdbc连接失败异常（没开启mysql）
+  @ResponseStatus(HttpStatus.BAD_REQUEST)
+  @ExceptionHandler(value = CommunicationsException.class)
+  public Result handler(CommunicationsException e){
+    log.info("CommunicationsException:------------------>{}");
+    return ResultUtil.error(e.getMessage());
+  }
 }

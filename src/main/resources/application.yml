@@ -21,3 +21,5 @@ bigff:
     expire: 604800
     header: Authorization
 
+comment.avatar: /images/avatar.jpg
+

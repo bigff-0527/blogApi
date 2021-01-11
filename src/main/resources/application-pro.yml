@@ -10,12 +10,14 @@ spring:
       ddl-auto: none
     show-sql: true
 
+
 logging:
   level:
     root: warn
     com.bigff.blog: info
   file:
     name: log/blog-dev.log
+
 
 
 

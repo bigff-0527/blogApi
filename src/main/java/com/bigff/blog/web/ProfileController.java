@@ -1,6 +1,7 @@
 package com.bigff.blog.web;
 
 
+import com.bigff.blog.common.dto.SearchDto;
 import com.bigff.blog.entity.Blog;
 import com.bigff.blog.entity.util.Result;
 import com.bigff.blog.entity.util.ResultUtil;
@@ -22,7 +23,7 @@ public class ProfileController {
   @GetMapping("/getProfileData")
   public Result getProfileData(int pageNum, int pageSize){
     PageHelper.startPage(pageNum,pageSize);
-    List blogs =blogService.getBlogList();
+    List blogs =blogService.getBlogList(new SearchDto());
     PageInfo<Blog> pageInfo = new PageInfo<Blog>(blogs);
     return ResultUtil.success(pageInfo);
   }

@@ -40,7 +40,7 @@ public class TagShowController {
     PageRequest pageQuery = new PageRequest();
     pageQuery.setPageNum(pageNum);
     pageQuery.setPageSize(pageSize);
-    return ResultUtil.success(blogService.getBlogByTagId(pageQuery,id));
+    return ResultUtil.success(blogService.getBlogByTagId(id));
   }
 
 

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bigff.blog.mapper.TagMapper">
+    <resultMap id="getTagMap" type="Tag">
+        <id column="tagid" property="tagId"></id>
+        <result column="tagname" property="tagName"></result>
+    </resultMap>
+    <select id="getTagByBlogId" resultMap="getTagMap">
+        select t.tagid,t.tagname from
+        t_blog_tags b_t INNER JOIN
+        t_tag t ON
+        b_t.tags_id = t.tagid
+        where b_t.blogs_id = #{id}
+    </select>
+    <resultMap id="getBlogAllTagMap" type="Tag">
+        <id column="tagid" property="tagId"></id>
+        <result column="tagname" property="tagName"></result>
+        <collection property="blogs" ofType="Blog">
+            <result column="blogs_id" property="id"></result>
+        </collection>
+    </resultMap>
+    <select id="getBlogAllTag" resultMap="getBlogAllTagMap">
+          select * FROM
+            t_blog_tags b_t LEFT JOIN
+            t_tag t ON
+            t.tagid = b_t.tags_id  LEFT JOIN
+            t_blog b ON
+            b.id = b_t.blogs_id
+    </select>
+</mapper>

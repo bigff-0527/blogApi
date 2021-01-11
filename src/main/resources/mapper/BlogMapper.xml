@@ -34,48 +34,42 @@
         </collection>
     </resultMap>
 
-      <resultMap id="getBlogListMap" type="com.bigff.blog.entity.Blog">
-          <id column="id" property="id" />
-          <result column="title" property="title" />
-          <result column="appreciation" property="appreciation" />
-          <result column="commentabled" property="commentabled" />
-          <result column="content" property="content" />
-          <result column="create_time" property="create_time" />
-          <result column="first_picture" property="first_picture" />
-          <result column="flag" property="flag" />
-          <result column="published" property="published" />
-          <result column="recommend" property="recommend" />
-          <result column="share_statement" property="share_statement" />
-          <result column="update_time" property="update_time" />
-          <result column="views" property="views" />
-          <result column="type_id" property="type_id" />
-          <result column="user_id" property="user_id" />
-          <result column="description" property="description" />
-          <collection ofType="com.bigff.blog.entity.Type" property="type">
-              <id column="type_id" property="typeId" />
-              <result column="typename" property="typeName" />
-          </collection>
-          <collection ofType="com.bigff.blog.entity.User" property="user">
-              <id column="user_id" property="userId" />
-              <result column="username" property="username" />
-              <result column="avatar" property="avatar" />
-          </collection>
+    <resultMap id="getBlogListMap" type="com.bigff.blog.entity.Blog">
+        <id column="id" property="id"/>
+        <result column="title" property="title"/>
+        <result column="appreciation" property="appreciation"/>
+        <result column="commentabled" property="commentabled"/>
+        <result column="content" property="content"/>
+        <result column="create_time" property="create_time"/>
+        <result column="first_picture" property="first_picture"/>
+        <result column="flag" property="flag"/>
+        <result column="published" property="published"/>
+        <result column="recommend" property="recommend"/>
+        <result column="share_statement" property="share_statement"/>
+        <result column="update_time" property="update_time"/>
+        <result column="views" property="views"/>
+        <result column="type_id" property="type_id"/>
+        <result column="user_id" property="user_id"/>
+        <result column="description" property="description"/>
+        <result column="comment_count" property="comment_count"/>
+        <collection  ofType="com.bigff.blog.entity.Type" property="type">
+            <id column="type_id" property="typeId"/>
+            <result column="typename" property="typeName"/>
+        </collection>
+        <collection ofType="com.bigff.blog.entity.User" property="user">
+            <id column="user_id" property="userId"/>
+            <result column="username" property="username"/>
+            <result column="avatar" property="avatar"/>
+        </collection>
 
-      </resultMap>
-      <select id="getBlogList" resultMap="getBlogListMap">
-         SELECT b.*,ty.*,u.userid,u.username,u.avatar FROM
-              t_blog  b INNER JOIN
-               t_user  u on
-               b.user_id = u.userid  INNER JOIN
-               t_type ty ON
-               b.type_id = ty.typeid
-               Order By b.create_time Desc
-      </select>
+    </resultMap>
 
 
 
-      <select id="findBlogById" parameterType="Long" resultMap="blogMap">
-      SELECT b.*,t.*,ty.*,u.userid,u.username,u.avatar FROM
+
+
+    <select id="findBlogById" parameterType="Long" resultMap="blogMap">
+      SELECT b.*,t.*,ty.*,u.userid,u.username FROM
               t_blog  b INNER JOIN
               t_blog_tags bt on
                b.id = bt.blogs_id  INNER JOIN
@@ -88,7 +82,7 @@
                where b.id = #{id}
       </select>
 
-      <update id="updateBlog" parameterType="com.bigff.blog.entity.Blog" >
+    <update id="updateBlog" parameterType="com.bigff.blog.entity.Blog">
           update t_blog set
            appreciation = #{blog.appreciation},
            commentabled = #{blog.commentabled},
@@ -113,7 +107,7 @@
         delete from t_blog_tags where blogs_id = #{blog_id}
     </delete>
 
-      <insert id="insertBlog" parameterType="com.bigff.blog.entity.Blog" useGeneratedKeys="true" keyProperty="id">
+    <insert id="insertBlog" parameterType="com.bigff.blog.entity.Blog" useGeneratedKeys="true" keyProperty="id">
 
           insert  into t_blog values(
         #{blog.id},
@@ -131,7 +125,8 @@
         #{blog.views},
         #{blog.type_id},
         #{blog.user_id},
-        #{blog.description}
+        #{blog.description},
+        #{blog.comment_count}
         )
       </insert>
 
@@ -146,33 +141,31 @@
     </insert>
 
 
-
-
     <resultMap id="getBlogByTypeIdMap" type="com.bigff.blog.entity.Blog">
-        <id column="id" property="id" />
-        <result column="title" property="title" />
-        <result column="appreciation" property="appreciation" />
-        <result column="commentabled" property="commentabled" />
-        <result column="content" property="content" />
-        <result column="create_time" property="create_time" />
-        <result column="first_picture" property="first_picture" />
-        <result column="flag" property="flag" />
-        <result column="published" property="published" />
-        <result column="recommend" property="recommend" />
-        <result column="share_statement" property="share_statement" />
-        <result column="update_time" property="update_time" />
-        <result column="views" property="views" />
-        <result column="type_id" property="type_id" />
-        <result column="user_id" property="user_id" />
-        <result column="description" property="description" />
+        <id column="id" property="id"/>
+        <result column="title" property="title"/>
+        <result column="appreciation" property="appreciation"/>
+        <result column="commentabled" property="commentabled"/>
+        <result column="content" property="content"/>
+        <result column="create_time" property="create_time"/>
+        <result column="first_picture" property="first_picture"/>
+        <result column="flag" property="flag"/>
+        <result column="published" property="published"/>
+        <result column="recommend" property="recommend"/>
+        <result column="share_statement" property="share_statement"/>
+        <result column="update_time" property="update_time"/>
+        <result column="views" property="views"/>
+        <result column="type_id" property="type_id"/>
+        <result column="user_id" property="user_id"/>
+        <result column="description" property="description"/>
         <collection ofType="com.bigff.blog.entity.Type" property="type">
-            <id column="type_id" property="typeId" />
-            <result column="typename" property="typeName" />
+            <id column="type_id" property="typeId"/>
+            <result column="typename" property="typeName"/>
         </collection>
         <collection ofType="com.bigff.blog.entity.User" property="user">
-            <id column="user_id" property="userId" />
-            <result column="username" property="username" />
-            <result column="avatar" property="avatar" />
+            <id column="user_id" property="userId"/>
+            <result column="username" property="username"/>
+            <result column="avatar" property="avatar"/>
         </collection>
     </resultMap>
 
@@ -188,33 +181,33 @@
 
 
     <resultMap id="getBlogByTagIdMap" type="com.bigff.blog.entity.Blog">
-        <id column="id" property="id" />
-        <result column="title" property="title" />
-        <result column="appreciation" property="appreciation" />
-        <result column="commentabled" property="commentabled" />
-        <result column="content" property="content" />
-        <result column="create_time" property="create_time" />
-        <result column="first_picture" property="first_picture" />
-        <result column="flag" property="flag" />
-        <result column="published" property="published" />
-        <result column="recommend" property="recommend" />
-        <result column="share_statement" property="share_statement" />
-        <result column="update_time" property="update_time" />
-        <result column="views" property="views" />
-        <result column="type_id" property="type_id" />
-        <result column="user_id" property="user_id" />
-        <result column="description" property="description" />
+        <id column="id" property="id"/>
+        <result column="title" property="title"/>
+        <result column="appreciation" property="appreciation"/>
+        <result column="commentabled" property="commentabled"/>
+        <result column="content" property="content"/>
+        <result column="create_time" property="create_time"/>
+        <result column="first_picture" property="first_picture"/>
+        <result column="flag" property="flag"/>
+        <result column="published" property="published"/>
+        <result column="recommend" property="recommend"/>
+        <result column="share_statement" property="share_statement"/>
+        <result column="update_time" property="update_time"/>
+        <result column="views" property="views"/>
+        <result column="type_id" property="type_id"/>
+        <result column="user_id" property="user_id"/>
+        <result column="description" property="description"/>
         <collection ofType="com.bigff.blog.entity.Type" property="type">
-            <id column="type_id" property="typeId" />
-            <result column="typename" property="typeName" />
+            <id column="type_id" property="typeId"/>
+            <result column="typename" property="typeName"/>
         </collection>
         <collection ofType="com.bigff.blog.entity.User" property="user">
-            <id column="user_id" property="userId" />
-            <result column="username" property="username" />
-            <result column="avatar" property="avatar" />
+            <id column="user_id" property="userId"/>
+            <result column="username" property="username"/>
+            <result column="avatar" property="avatar"/>
         </collection>
         <collection ofType="com.bigff.blog.entity.Tag" property="tags">
-            <id column="tagid" property="tagId" />
+            <id column="tagid" property="tagId"/>
         </collection>
     </resultMap>
 
@@ -232,23 +225,59 @@
                where t.tagid = #{id}
     </select>
 
-    <select id="searchBlog"  resultMap="getBlogListMap">
+
+    <select id="getBlogList" resultMap="getBlogListMap">
         SELECT b.*,ty.*,u.userid,u.username,u.avatar FROM
-        t_blog  b INNER JOIN
-        t_user  u on
-        b.user_id = u.userid  INNER JOIN
+        t_blog b INNER JOIN
+        t_user u on
+        b.user_id = u.userid INNER JOIN
         t_type ty ON
         b.type_id = ty.typeid
+        <if test="tagId != null">
+            INNER JOIN
+            t_blog_tags bt ON
+            b.id = bt.blogs_id INNER JOIN
+            t_tag t ON
+            t.tagid = bt.tags_id
+        </if>
+
         <where>
             <if test="title != null ">
-                b.title like %#{title}%
+                b.title like CONCAT('%',#{title},'%')
             </if>
             <if test="typeId != null">
                 and b.type_id = #{typeId}
             </if>
-            <if test="recommend != 0">
-                and b.recommend = #{recommend}
+            <if test="tagId != null">
+                and t.tagid  = #{tagId}
+            </if>
+            <if test="dateStart != null">
+                and b.update_time &gt;= #{dateStart}
+            </if>
+            <if test="dateEnd != null">
+                and b.update_time &lt;= #{dateEnd}
             </if>
         </where>
+        Order By b.create_time Desc
+    </select>
+
+    <!--文章访问自增-->
+    <update id="updateViews" parameterType="Blog">
+        update t_blog b set b.views = b.views+1 where b.id = #{id}
+    </update>
+
+    <!--查询出文章评论数量并更新-->
+    <update id="getCommentCountById" parameterType="Blog">
+        update t_blog b set b.comment_count = (
+        select count(*) from t_comment c where c.blog_id = #{id} and b.id = #{id}
+        ) WHERE b.id = #{id}
+    </update>
+
+    <select id="getAllViews" resultType="Integer">
+        select sum(views) FROM t_blog
+    </select>
+
+    <select id="getAllComments" resultType="Integer">
+        select sum(comment_count) FROM t_blog
     </select>
 </mapper>

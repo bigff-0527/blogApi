@@ -4,6 +4,7 @@ import com.bigff.blog.entity.Tag;
 import com.bigff.blog.entity.Type;
 import com.bigff.blog.entity.util.Result;
 import com.bigff.blog.entity.util.ResultUtil;
+import org.springframework.util.StringUtils;
 
 import com.bigff.blog.service.TypeService;
 import com.github.pagehelper.PageHelper;
@@ -57,5 +58,27 @@ public class TypeController {
       return ResultUtil.success();
     }
     return ResultUtil.error("修改失败");
+  }
+
+  @GetMapping("checkType")
+  public Result checkType(String name){
+    System.out.println(name);
+    if (typeService.checkType(name)!=null)
+      return ResultUtil.error(300,"已存在");
+    return ResultUtil.success();
+  }
+
+  @GetMapping("findType")
+  public Result findType(Long id){
+    if (typeService.findTypeById(id)!=null){
+      return ResultUtil.success(typeService.findTypeById(id));
+    }
+    return ResultUtil.error(404,"不存在");
+  }
+
+  @GetMapping("getBlogAllType")
+  public Result getBlogAllType(){
+    List blog = typeService.getBlogAllType();
+    return ResultUtil.success(blog);
   }
 }

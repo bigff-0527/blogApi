@@ -1,6 +1,7 @@
 package com.bigff.blog.service;
 
 
+import com.bigff.blog.common.dto.SearchDto;
 import com.bigff.blog.entity.Blog;
 import com.bigff.blog.entity.Tag;
 import com.bigff.blog.entity.util.PageRequest;
@@ -21,11 +22,9 @@ public class BlogServiceImpl implements BlogService {
   @Autowired
   private BlogMapper blogMapper;
 
-
-
   @Override
-  public List<Blog> getBlogList() {
-    return blogMapper.getBlogList();
+  public List<Blog> getBlogList(SearchDto searchDto) {
+    return blogMapper.getBlogList(searchDto);
   }
 
   @Override
@@ -34,8 +33,8 @@ public class BlogServiceImpl implements BlogService {
   }
 
   @Override
-  public PageResult getBlogByTagId(PageRequest pageRequest, Long id) {
-    return PageUtils.getPageResult( getPageInfoToTag(pageRequest,id));
+  public List<Blog> getBlogByTagId(Long id) {
+    return blogMapper.getBlogByTagId(id);
   }
 
   @Override
@@ -69,18 +68,24 @@ public class BlogServiceImpl implements BlogService {
   }
 
   @Override
-  public List<Blog> searchBlog(String title, Long typeId, boolean recommend) {
-    return blogMapper.searchBlog(title,typeId,recommend);
+  public int updateViews(Long id) {
+    return blogMapper.updateViews(id);
   }
 
-
-  private PageInfo<Blog> getPageInfo(PageRequest pageRequest) {
-    int pageNum = pageRequest.getPageNum();
-    int pageSize = pageRequest.getPageSize();
-    PageHelper.startPage(pageNum, pageSize);
-    List<Blog> blogs = blogMapper.getBlogList();
-    return new PageInfo<Blog>(blogs);
+  @Override
+  public Integer getAllViews() {
+    return blogMapper.getAllViews();
   }
+
+  @Override
+  public Integer getAllComments() {
+    return blogMapper.getAllComments();
+  }
+
+//  @Override
+//  public List<Blog> searchBlog(SearchDto searchDto) {
+//    return blogMapper.searchBlog(searchDto);
+//  }
 
   private PageInfo<Blog> getPageInfoToType(PageRequest pageRequest,Long id) {
     int pageNum = pageRequest.getPageNum();
@@ -90,12 +95,4 @@ public class BlogServiceImpl implements BlogService {
     return new PageInfo<Blog>(blogs);
   }
 
-
-  private PageInfo<Blog> getPageInfoToTag(PageRequest pageRequest,Long id) {
-    int pageNum = pageRequest.getPageNum();
-    int pageSize = pageRequest.getPageSize();
-    PageHelper.startPage(pageNum, pageSize);
-    List<Blog> blogs = blogMapper.getBlogByTagId(id);
-    return new PageInfo<Blog>(blogs);
-  }
 }

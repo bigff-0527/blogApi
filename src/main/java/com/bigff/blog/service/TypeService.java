@@ -13,4 +13,9 @@ public interface TypeService {
 
   int updateType(Type type);
 
+  Type checkType(String name);
+
+  Type findTypeById(Long id);
+
+  List<Type> getBlogAllType();
 }

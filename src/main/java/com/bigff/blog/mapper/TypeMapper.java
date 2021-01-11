@@ -10,8 +10,8 @@ import java.util.List;
 @Mapper
 @Repository
 public interface TypeMapper {
-  @Select("select id,name from t_type where id=#{id}")
-  Type findTypeById(Long id);
+//  @Select("select id,name from t_type where id=#{id}")
+//  Type findTypeById(Long id);
 
   @Select("select * from t_type ")
   @Results({
@@ -25,9 +25,17 @@ public interface TypeMapper {
   @Delete("delete from t_type where typeid = #{id}")
   int deleteType(Long id);
 
-  @Insert("insert into t_type(typename) values(#{type.typeName})")
+  @Insert("insert into t_type(typename) values(#{typeName})")
   int insertType(Type type);
 
-  @Update("update t_type set typename = #{type.typeName} where typeid = #{type.typeId} ")
+  @Update("update t_type set typename = #{typeName} where typeid = #{typeId} ")
   int updateType(Type type);
+
+  @Select("select typeid,typename from t_type where typename = #{name}")
+  Type checkType(String name);
+
+  @Select("select typeid,typename from t_type where typeid = #{id}")
+  Type findTypeById(Long id);
+
+  List<Type> getBlogAllType();
 }

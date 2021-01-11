@@ -17,7 +17,6 @@ import java.util.Map;
 
 
 @RestController
-@RequestMapping("front")
 public class TypeShowController {
 
   @Autowired

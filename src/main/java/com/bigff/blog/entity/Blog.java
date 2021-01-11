@@ -55,6 +55,8 @@ public class Blog {
     private Long user_id;
     private User user;
     private List<Comment> comments = new ArrayList<>();
+    private Integer comment_count;
+
     private String description;
     public Blog() {
     }

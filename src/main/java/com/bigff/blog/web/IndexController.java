@@ -1,6 +1,8 @@
 package com.bigff.blog.web;
 
+import com.bigff.blog.common.dto.SearchDto;
 import com.bigff.blog.entity.Blog;
+import com.bigff.blog.entity.util.PageRequest;
 import com.bigff.blog.entity.util.Result;
 import com.bigff.blog.entity.util.ResultUtil;
 import com.bigff.blog.service.BlogService;
@@ -11,17 +13,16 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("front")
 public class IndexController {
 
   @Autowired
   BlogService blogService;
 
   @RequestMapping(value="getIndexData")
-  public Result getIndexData(int pageNum ,int pageSize) {
-    PageHelper.startPage(pageNum,pageSize);
-    List blogs =blogService.getBlogList();
-    PageInfo<Blog> pageInfo = new PageInfo<Blog>(blogs);
-    return ResultUtil.success(pageInfo);
+  public Result getIndexData() {
+      List blogs = blogService.getBlogList(new SearchDto()).subList(0,3);
+
+//    List indexBlogs = blogs.subList(0,3);
+    return ResultUtil.success(blogs );
   }
 }

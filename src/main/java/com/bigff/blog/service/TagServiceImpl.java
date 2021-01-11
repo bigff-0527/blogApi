@@ -35,4 +35,24 @@ public class TagServiceImpl implements TagService {
   public int updateTag(Tag tag) {
     return tagMapper.updateTag(tag);
   }
+
+  @Override
+  public Tag findTagById(Long id) {
+    return tagMapper.findTagById(id);
+  }
+
+  @Override
+  public Tag checkTag(String name) {
+    return tagMapper.checkTag(name);
+  }
+
+  @Override
+  public List<Tag> getTagByBlogId(Long id) {
+    return tagMapper.getTagByBlogId(id);
+  }
+
+  @Override
+  public List<Tag> getBlogAllTag() {
+    return tagMapper.getBlogAllTag();
+  }
 }

@@ -17,4 +17,12 @@ public interface TagService {
   int insertTag(Tag tag);
 
   int updateTag(Tag tag);
+
+  Tag findTagById(Long id);
+
+  Tag checkTag(String name);
+
+  List<Tag> getTagByBlogId(Long id);
+
+  List<Tag> getBlogAllTag();
 }
