@@ -8,9 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-@Data   //生成set和get方法
-@ToString   //生成tostring方法
-@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
+@Data
+@ToString
 public class Tag {
 
     private Long tagId;

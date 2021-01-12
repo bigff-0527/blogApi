@@ -16,9 +16,8 @@ import java.util.Date;
 import java.util.List;
 
 
-@Getter
-@Setter
-@ToString   //生成tostring方法
+@Data
+@ToString
 public class Blog {
 
     private Long id;

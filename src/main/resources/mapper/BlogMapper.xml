@@ -67,7 +67,7 @@
 
 
 
-
+<!--    根据id查询博客-->
     <select id="findBlogById" parameterType="Long" resultMap="blogMap">
       SELECT b.*,t.*,ty.*,u.userid,u.username FROM
               t_blog  b INNER JOIN
@@ -82,6 +82,7 @@
                where b.id = #{id}
       </select>
 
+<!--    更新博客-->
     <update id="updateBlog" parameterType="com.bigff.blog.entity.Blog">
           update t_blog set
            appreciation = #{blog.appreciation},
@@ -103,10 +104,12 @@
       </update>
 
 
+<!--    删除对应博客的标签-->
     <delete id="deleteTags">
         delete from t_blog_tags where blogs_id = #{blog_id}
     </delete>
 
+<!--    新增博客-->
     <insert id="insertBlog" parameterType="com.bigff.blog.entity.Blog" useGeneratedKeys="true" keyProperty="id">
 
           insert  into t_blog values(
@@ -130,6 +133,7 @@
         )
       </insert>
 
+<!--    新增博客中的标签-->
     <insert id="insertTags">
         INSERT INTO t_blog_tags
         (blogs_id,tags_id)
@@ -169,6 +173,7 @@
         </collection>
     </resultMap>
 
+<!--    根据分类查找博客-->
     <select id="getBlogByTypeId" resultMap="getBlogByTypeIdMap" parameterType="Long">
          SELECT b.*,ty.*,u.userid,u.username,u.avatar FROM
               t_blog  b INNER JOIN
@@ -211,6 +216,7 @@
         </collection>
     </resultMap>
 
+<!--    根据标签查找博客-->
     <select id="getBlogByTagId" resultMap="getBlogByTagIdMap" parameterType="Long">
         SELECT b.*,t.*,ty.*,u.userid,u.username,u.avatar FROM
               t_blog  b INNER JOIN
@@ -225,7 +231,7 @@
                where t.tagid = #{id}
     </select>
 
-
+<!--    查询所有博客-->
     <select id="getBlogList" resultMap="getBlogListMap">
         SELECT b.*,ty.*,u.userid,u.username,u.avatar FROM
         t_blog b INNER JOIN
@@ -272,11 +278,12 @@
         select count(*) from t_comment c where c.blog_id = #{id} and b.id = #{id}
         ) WHERE b.id = #{id}
     </update>
-
+<!--    查询所有浏览数量-->
     <select id="getAllViews" resultType="Integer">
         select sum(views) FROM t_blog
     </select>
 
+<!--    查询所有评论数量-->
     <select id="getAllComments" resultType="Integer">
         select sum(comment_count) FROM t_blog
     </select>

@@ -10,7 +10,6 @@ import java.util.List;
 
 @Data   //生成set和get方法
 @ToString   //生成tostring方法
-@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
 public class Type {
     private Long typeId;
     private String typeName;

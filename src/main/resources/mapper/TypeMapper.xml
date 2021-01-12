@@ -9,6 +9,7 @@
         </collection>
     </resultMap>
 
+<!--    根据分类查询所有博客-->
     <select id="getBlogAllType" resultMap="getBlogAllTypeMAp">
         SELECT * FROM t_type t LEFT JOIN
             t_blog b ON

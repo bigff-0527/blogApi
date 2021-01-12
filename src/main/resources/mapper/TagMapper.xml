@@ -5,6 +5,7 @@
         <id column="tagid" property="tagId"></id>
         <result column="tagname" property="tagName"></result>
     </resultMap>
+<!--    根据博客id查找标签-->
     <select id="getTagByBlogId" resultMap="getTagMap">
         select t.tagid,t.tagname from
         t_blog_tags b_t INNER JOIN
@@ -19,6 +20,8 @@
             <result column="blogs_id" property="id"></result>
         </collection>
     </resultMap>
+
+<!--    根据标签查询所有博客数量-->
     <select id="getBlogAllTag" resultMap="getBlogAllTagMap">
           select * FROM
             t_blog_tags b_t LEFT JOIN
