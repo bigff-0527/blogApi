@@ -11,6 +11,7 @@ import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -18,7 +19,8 @@ import java.util.List;
 
 @Data
 @ToString
-public class Blog {
+@JsonIgnoreProperties({" hibernateLazyInitializer", "handler"})
+public class Blog implements Serializable {
 
     private Long id;
 

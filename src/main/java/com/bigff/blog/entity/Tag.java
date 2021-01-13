@@ -4,13 +4,15 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.ToString;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 
 @Data
 @ToString
-public class Tag {
+@JsonIgnoreProperties({" hibernateLazyInitializer", "handler"})
+public class Tag implements Serializable {
 
     private Long tagId;
     private String tagName;

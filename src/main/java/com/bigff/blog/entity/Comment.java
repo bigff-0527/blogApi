@@ -2,17 +2,20 @@ package com.bigff.blog.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @Data
 @ToString
-public class Comment {
+@JsonIgnoreProperties({" hibernateLazyInitializer", "handler"})
+public class Comment  implements Serializable {
     private Long id;
     private String nickname;
     private String email;

@@ -2,6 +2,7 @@ package com.bigff.blog.web;
 
 import com.bigff.blog.entity.Blog;
 import com.bigff.blog.entity.Comment;
+import com.bigff.blog.entity.util.RedisUtils;
 import com.bigff.blog.entity.util.Result;
 import com.bigff.blog.entity.util.ResultUtil;
 import com.bigff.blog.service.BlogService;
@@ -26,11 +27,19 @@ public class CommentController{
   @Value("${comment.avatar}")
   private String avatar;
 
+  @Autowired
+  RedisUtils redisUtils;
   //    查询评论列表
   @GetMapping("/comments")
   public Result comments(Long blogId) {
-    List<Comment> comments = commentService.listCommentByBlogId(blogId);
-//    model.addAttribute("comments", comments);
+    boolean haskey = redisUtils.hasKey("comments"+blogId);
+    List<Comment> comments;
+    if (haskey){
+      comments = (List<Comment>) redisUtils.get("comments"+blogId);
+    }else{
+      comments = commentService.listCommentByBlogId(blogId);
+      redisUtils.set("comments"+blogId,comments);
+    }
     return ResultUtil.success(comments);
   }
 
@@ -38,14 +47,6 @@ public class CommentController{
   @PostMapping("/commentsPost")
   public Result post(@RequestBody  Comment comment) {
     Long blogId = comment.getBlogId();
-//    User user = (User) session.getAttribute("user");
-//    if (user != null) {
-//      comment.setAvatar(user.getAvatar());
-//      comment.setAdminComment(true);
-//    } else {
-//      //设置头像
-//      comment.setAvatar(avatar);
-//    }
     comment.setAvatar(avatar);
     try {
       if (comment.getParentComment().getId() != null) {
@@ -54,10 +55,17 @@ public class CommentController{
     }catch (NullPointerException e){
 
     }
-
     commentService.saveComment(comment);
-    List<Comment> comments = commentService.listCommentByBlogId(blogId);
-//    model.addAttribute("comments", comments);
+    redisUtils.remove("commentsPost"+blogId);
+    redisUtils.remove("comments"+blogId);
+    boolean haskey = redisUtils.hasKey("commentsPost"+blogId);
+    List<Comment> comments;
+    if (haskey){
+      comments = (List<Comment>) redisUtils.get("commentsPost"+blogId);
+    }else{
+      comments = commentService.listCommentByBlogId(blogId);
+      redisUtils.set("commentsPost"+blogId,comments);
+    }
     return ResultUtil.success(comments);
   }
 
@@ -65,10 +73,7 @@ public class CommentController{
   @GetMapping("/comment/delete")
   public Result delete(Long blogId,Long id,Comment comment  ){
     commentService.deleteComment(comment,id);
-//    Blog blog = blogService.findBlogById(blogId);
     List<Comment> comments = commentService.listCommentByBlogId(blogId);
-//    model.addAttribute("blog", detailedBlog);
-//    model.addAttribute("comments", comments);
     return ResultUtil.success(comments);
   }
 }

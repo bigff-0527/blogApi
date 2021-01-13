@@ -3,6 +3,7 @@ package com.bigff.blog.web.admin;
 import com.bigff.blog.common.dto.SearchDto;
 import com.bigff.blog.entity.Blog;
 import com.bigff.blog.entity.Tag;
+import com.bigff.blog.entity.util.RedisUtils;
 import com.bigff.blog.entity.util.Result;
 import com.bigff.blog.entity.util.ResultUtil;
 
@@ -31,9 +32,16 @@ public  class BlogController {
   @Autowired
   TagService tagService;
 
+  @Autowired
+  RedisUtils redisUtils;
+
   @RequestMapping("delete")
   public Result deleteBlog(@ProbeParam("id") Long id){
-     blogService.deleteBlog(id);
+    blogService.deleteBlog(id);
+    boolean haskey = redisUtils.hasKey("queryBlogById"+id);
+    if (haskey){
+      redisUtils.remove("queryBlogById"+id);
+    }
       return ResultUtil.success();
 
   }
@@ -50,26 +58,32 @@ public  class BlogController {
   @PostMapping("blogList")
   public Result getBlogList(@RequestBody SearchDto searchDto) {
     PageHelper.startPage(searchDto.getPageNum(),searchDto.getPageSize());
-    List<Blog> blogs = blogService.getBlogList(searchDto);
-    for (Blog b : blogs){
-      Long id = b.getId();
-      List<Tag> tags = tagService.getTagByBlogId(id);
-      b.setTags(tags);
-    }
+    List<Blog> blogs  = blogService.getBlogList(searchDto);
+      for (Blog b : blogs){
+        Long id = b.getId();
+        List<Tag> tags = tagService.getTagByBlogId(id);
+        b.setTags(tags);
+      }
     PageInfo<Blog> pageInfo = new PageInfo<>(blogs);
     return ResultUtil.success(pageInfo);
   }
 
 
-  @RequestMapping("findBlogById")
-  public Result findBlogById(@RequestParam("id") Long id){
-    System.out.println(id);
-    if (blogService.findBlogById(id)!=null){
-      Blog blog = blogService.findBlogById(id);
-      return ResultUtil.success(blog);
+  @RequestMapping("queryBlogById")
+  public Result queryBlogById(Long id){
+    Blog blog;
+    boolean haskey = redisUtils.hasKey("queryBlogById"+id);
+    if (haskey){
+      Object blog1 = redisUtils.get("queryBlogById"+id);
+      blog = (Blog) blog1;
+    }else{
+      //从数据库中获取信息
+      blog = blogService.findBlogById(id);
+      redisUtils.set("queryBlogById"+id,blog);
     }
-    return ResultUtil.error(400,"查找失败");
+    return ResultUtil.success(blog);
   }
+
 
   @PostMapping(value = "Save")
   public Result Save(@RequestBody Blog blog){
@@ -83,6 +97,7 @@ public  class BlogController {
           tagIds.add(t.getTagId());
         }
         blogService.insertTags(blog.getId(),tagIds);
+        redisUtils.set("queryBlogById"+blog.getId(),blog);
         return ResultUtil.success();
       }
       else return ResultUtil.error(400,"操作失败");
@@ -100,6 +115,7 @@ public  class BlogController {
             tagIds.add(t.getTagId());
           }
           blogService.insertTags(blog.getId(),tagIds);
+          redisUtils.setRemove("queryBlogById"+blog.getId());
           return ResultUtil.success();
         }
         return ResultUtil.error("操作失败");

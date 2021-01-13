@@ -7,6 +7,7 @@ import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotBlank;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -14,7 +15,8 @@ import java.util.List;
 
 @Data
 @ToString
-public class User {
+@JsonIgnoreProperties({" hibernateLazyInitializer", "handler"})
+public class User implements Serializable {
 
     private Long userId;
     private String nickname;

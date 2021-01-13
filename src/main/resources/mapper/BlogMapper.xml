@@ -246,7 +246,6 @@
             t_tag t ON
             t.tagid = bt.tags_id
         </if>
-
         <where>
             <if test="title != null ">
                 b.title like CONCAT('%',#{title},'%')

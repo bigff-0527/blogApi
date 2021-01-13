@@ -1,12 +1,10 @@
 package com.bigff.blog.web;
 
+import com.alibaba.fastjson.JSON;
 import com.bigff.blog.common.dto.SearchDto;
 import com.bigff.blog.entity.Blog;
 import com.bigff.blog.entity.Tag;
-import com.bigff.blog.entity.util.PageRequest;
-import com.bigff.blog.entity.util.PageResult;
-import com.bigff.blog.entity.util.Result;
-import com.bigff.blog.entity.util.ResultUtil;
+import com.bigff.blog.entity.util.*;
 import com.bigff.blog.service.BlogService;
 import com.bigff.blog.service.TagService;
 import com.github.pagehelper.PageHelper;
@@ -27,36 +25,36 @@ public class BlogListController {
   @Autowired
   TagService tagService;
 
-//  @PostMapping("search")
-//  public Result searchBlog(@RequestBody SearchDto searchDto){
-//    PageHelper.startPage(searchDto.getPageNum(),searchDto.getPageSize());
-//    List<Blog> blogs = blogService.searchBlog(searchDto);
-////    List<Blog> blogByTagId = blogService.getBlogByTagId(searchDto.getTagId());
-////    for (Blog b : blogs){
-////      Long id = b.getId();
-////
-////    }
-////    PageInfo<Blog> pageInfo = new PageInfo<>(blogs);
-//    return ResultUtil.success(blogs);
-//  }
+  @Autowired
+  RedisUtils redisUtils;
 
   @PostMapping("blogList")
   public Result getBlogList(@RequestBody SearchDto searchDto) {
-    System.out.println(searchDto.getDateStart());
-      PageHelper.startPage(searchDto.getPageNum(),searchDto.getPageSize());
-      List<Blog> blogs = blogService.getBlogList(searchDto);
-      for (Blog b : blogs){
-          Long id = b.getId();
-        List<Tag> tags = tagService.getTagByBlogId(id);
-        b.setTags(tags);
-      }
-      PageInfo<Blog> pageInfo = new PageInfo<>(blogs);
+    PageHelper.startPage(searchDto.getPageNum(),searchDto.getPageSize());
+    List<Blog> blogs  = blogService.getBlogList(searchDto);
+    for (Blog b : blogs){
+      Long id = b.getId();
+      List<Tag> tags = tagService.getTagByBlogId(id);
+      b.setTags(tags);
+    }
+    PageInfo<Blog> pageInfo = new PageInfo<>(blogs);
     return ResultUtil.success(pageInfo);
   }
 
   @GetMapping("queryBlogById")
   public Result queryBlogById(Long id){
     blogService.updateViews(id);
-    return ResultUtil.success(blogService.findBlogById(id));
+//    Blog blog  = blogService.findBlogById(id);
+    Blog blog;
+    boolean haskey = redisUtils.hasKey("queryBlogById"+id);
+    if (haskey){
+       Object blog1 = redisUtils.get("queryBlogById"+id);
+       blog = (Blog) blog1;
+    }else{
+      //从数据库中获取信息
+      blog = blogService.findBlogById(id);
+      redisUtils.set("queryBlogById"+id,blog);
+    }
+    return ResultUtil.success(blog);
   }
 }

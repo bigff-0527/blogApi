@@ -21,7 +21,6 @@ public class IndexController {
   @RequestMapping(value="getIndexData")
   public Result getIndexData() {
       List blogs = blogService.getBlogList(new SearchDto()).subList(0,3);
-
 //    List indexBlogs = blogs.subList(0,3);
     return ResultUtil.success(blogs );
   }
